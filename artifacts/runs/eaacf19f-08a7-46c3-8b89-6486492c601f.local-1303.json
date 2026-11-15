@@ -1,0 +1,367 @@
+{
+  "arm": "local",
+  "candidate_sha256": "0688f852d31590f6a4d1aaf8eecaa525eee35dd38231e3910de2af18e281d34a",
+  "claimed_score": 56,
+  "command": [
+    "<solver>",
+    "--seed",
+    "1303",
+    "--iters",
+    "100000"
+  ],
+  "completed_at": "2026-11-15T21:59:04.736511+00:00",
+  "config": {
+    "backend": "modal",
+    "grid_size": 32,
+    "isolation": {
+      "block_network": true,
+      "cpu": 1.0,
+      "memory_mib": 512,
+      "mounts": [],
+      "runtime": "vm",
+      "secrets": [],
+      "timeout_seconds": 120
+    },
+    "iters": 100000,
+    "matches_preregistration": true,
+    "max_stdout_bytes": 1048576,
+    "sandbox_compile_command": [
+      "cc",
+      "-O2",
+      "-std=c99",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-o",
+      "solver",
+      "solver.c"
+    ],
+    "seeds": [
+      1300,
+      1301,
+      1302,
+      1303
+    ],
+    "timeout_seconds": 120,
+    "trial_definition": "one from-scratch seeded solver invocation, once per arm",
+    "workers": 4
+  },
+  "config_sha256": "c64cb07652aaa797aaabc15804512fc060700f4823c1b91fa62100206190f229",
+  "cost_usd": 0.0,
+  "cpu_seconds": 1.021995,
+  "detail": "",
+  "exit_code": 0,
+  "experiment_id": "02",
+  "failure_class": null,
+  "file_sha256": {
+    "benchmarks/no_isosceles_n32.json": "9bebfc52de362e80efc91d5455f2e20a103e766f191af8f665ee276907feb509",
+    "benchmarks/upstream/PROVENANCE.json": "f959a6a364c807b3e4f1bad76c38df85d58dcfaddb2adf011c7d15583993af6f",
+    "docs/P2_MODAL_CAUSAL_PLAN.md": "15421ea610dcb2d47c21fb661d0f75968b256e8a87bfb8385d08e6a730c04102",
+    "experiment/manifest.json": "77101b0ef264256921e8e3d2f761f76a64bad6400a060b357ceaff3645989daa",
+    "project.yaml": "e218526a57b085a7f36b3ffa2f61eae6ea1664e22d1c5b118bae41291f04e56f",
+    "solver/solver.c": "ab141274701608a6841eed4f98c0ddf12e8135baeb4de2227b0b41b4758d471c",
+    "src/tripathy_experiment/baseline.py": "95823e85856018db5fff71a263b0880cbf17e63b559ca85c984d3af3c8efa132",
+    "src/tripathy_experiment/cli.py": "3cd053f197f7556648735655d04f931b2cb56ce4337df5b2e4953be60cef4ccb",
+    "src/tripathy_experiment/modal_gateway.py": "49a071f8e6a7289d438b5d61789e204139c035172420e31443552050de22bc00",
+    "src/tripathy_experiment/no_isosceles.py": "4843790a2b7aa64502d4f580f356412f1d1e9247a260ce28377b1f3708ebf1ae",
+    "src/tripathy_experiment/parallel_comparison.py": "13d02d7b4964145f1b6d55ab24cc04e7d9a76c5aea64986b26e58c983da91196",
+    "src/tripathy_experiment/perpendicular_bisector_oracle.py": "c8c8dc944d924267ce62acb9ec2eca448bad277baed88b33103d8242efb2113f"
+  },
+  "git": {
+    "dirty": true,
+    "dirty_paths": 13,
+    "head": "8eff91e44d12cd06e060a5bb18bb7ebb2fbf9f3a"
+  },
+  "initialization": "empty state; the public 58-point certificate is never read",
+  "iters": 100000,
+  "kind": "p2-trial",
+  "linear_issue": "TRI-19",
+  "oracle_bisector": {
+    "reason": "bisector oracle passed",
+    "score": 56,
+    "valid": true,
+    "witness": null
+  },
+  "oracle_distance": {
+    "reason": "exact verifier passed",
+    "score": 56,
+    "valid": true,
+    "witness": null
+  },
+  "oracles_agree": true,
+  "points": [
+    [
+      0,
+      5
+    ],
+    [
+      0,
+      7
+    ],
+    [
+      0,
+      11
+    ],
+    [
+      0,
+      20
+    ],
+    [
+      0,
+      24
+    ],
+    [
+      0,
+      26
+    ],
+    [
+      1,
+      5
+    ],
+    [
+      1,
+      7
+    ],
+    [
+      1,
+      11
+    ],
+    [
+      1,
+      20
+    ],
+    [
+      1,
+      24
+    ],
+    [
+      1,
+      26
+    ],
+    [
+      4,
+      1
+    ],
+    [
+      4,
+      2
+    ],
+    [
+      4,
+      29
+    ],
+    [
+      4,
+      30
+    ],
+    [
+      8,
+      2
+    ],
+    [
+      8,
+      29
+    ],
+    [
+      10,
+      0
+    ],
+    [
+      10,
+      1
+    ],
+    [
+      10,
+      30
+    ],
+    [
+      10,
+      31
+    ],
+    [
+      14,
+      1
+    ],
+    [
+      14,
+      2
+    ],
+    [
+      14,
+      29
+    ],
+    [
+      14,
+      30
+    ],
+    [
+      17,
+      1
+    ],
+    [
+      17,
+      2
+    ],
+    [
+      17,
+      29
+    ],
+    [
+      17,
+      30
+    ],
+    [
+      21,
+      0
+    ],
+    [
+      21,
+      1
+    ],
+    [
+      21,
+      30
+    ],
+    [
+      21,
+      31
+    ],
+    [
+      23,
+      2
+    ],
+    [
+      23,
+      29
+    ],
+    [
+      27,
+      1
+    ],
+    [
+      27,
+      2
+    ],
+    [
+      27,
+      29
+    ],
+    [
+      27,
+      30
+    ],
+    [
+      29,
+      0
+    ],
+    [
+      29,
+      31
+    ],
+    [
+      30,
+      5
+    ],
+    [
+      30,
+      7
+    ],
+    [
+      30,
+      11
+    ],
+    [
+      30,
+      20
+    ],
+    [
+      30,
+      24
+    ],
+    [
+      30,
+      26
+    ],
+    [
+      31,
+      5
+    ],
+    [
+      31,
+      7
+    ],
+    [
+      31,
+      11
+    ],
+    [
+      31,
+      13
+    ],
+    [
+      31,
+      18
+    ],
+    [
+      31,
+      20
+    ],
+    [
+      31,
+      24
+    ],
+    [
+      31,
+      26
+    ]
+  ],
+  "record_claim": false,
+  "run_id": "eaacf19f-08a7-46c3-8b89-6486492c601f",
+  "runtime": {
+    "compiler": [
+      "Apple clang version 21.0.0 (clang-2100.1.1.101)"
+    ],
+    "cpu_brand": "Apple M5 Max",
+    "cpu_count": 18,
+    "machine": "arm64",
+    "platform": "macOS-26.5-arm64-arm-64bit",
+    "python": "3.12.13"
+  },
+  "schema_version": 1,
+  "score": 56,
+  "seed": 1303,
+  "solver_build": {
+    "binary": "/Users/shubhankar/Documents/OpenAlex/type_classification/iterate-ai-hackathon/tripathy-experiment-02/build/solver-ab141274701608a6",
+    "binary_sha256": "0d2ed03f43a2f520737b19f8157390f39767ec188ffb7bf32f6f0876f65c896b",
+    "compile_command": [
+      "cc",
+      "-O2",
+      "-std=c99",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-o",
+      "<binary>",
+      "solver/solver.c"
+    ],
+    "source": "solver/solver.c",
+    "source_sha256": "ab141274701608a6841eed4f98c0ddf12e8135baeb4de2227b0b41b4758d471c"
+  },
+  "solver_counters": {
+    "aspirations": 3,
+    "cardinality_raises": 11,
+    "construction_pair_adds": 18,
+    "final_working_pairs": 29,
+    "final_working_violations": 24,
+    "point_adds": 200058,
+    "point_removes": 200000,
+    "ruin_repair_moves": 100000
+  },
+  "solver_termination_reason": "iterations_exhausted",
+  "solver_version": "evohive-symtabu-c99-1 noise=20 tabu=3+rand10",
+  "started_at": "2026-11-15T21:59:03.701315+00:00",
+  "stdout_bytes": 820,
+  "stdout_sha256": "f67620fa9e164ad3ed46709ba5627f8341741a94f7c1cdc674c4948304473299",
+  "trial_id": "eaacf19f-08a7-46c3-8b89-6486492c601f.local-1303",
+  "wall_seconds": 1.0351865000557154
+}

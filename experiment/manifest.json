@@ -2,18 +2,17 @@
   "schema_version": 2,
   "experiment_id": "02",
   "linear_issue": "TRI-19",
-  "status": "running",
-  "phase": "P1 symmetry-breaking development iteration 3: final large-neighborhood test (destroy-eight / exact-repair-nine)",
-  "plan": "docs/P1_SYMMETRY_BREAKING_PLAN.md",
-  "question": "Does enlarging the destroy/exact-repair neighbourhood from four to eight removed points (nine exact additions, 200000 nodes per attempt) let the search leave the rigid neighbourhood of a from-scratch P0 58, reaching either a valid 59 or a one-violation 59-point working state?",
-  "hypothesis": "In the preregistered iteration-3 smoke (breaker seeds 1200..1207, 200000 fallback swaps per seed, destroy size 8, repair target 9 additions, 200000 exact-repair nodes per attempt, one attempt at startup and one after each 20000-swap stall restart, 8 workers, the same P0 parent bb6b15b0-c0b9-426f-a67d-464cdce1a551 and round-robin source policy), the infrastructure gate passes under the unchanged rules, with --destroy-size an explicit, validated and artifacted argument. The search hypothesis is that at least one trial reaches a persisted, dual- and upstream-verified 59 (development record candidate) or a working state with fewer than two violations (operator progress). It is rejected if no 59 is found and the minimum working violations remains 2.",
-  "primary_metric": "infrastructure gate status of the eight-trial smoke and the search-progress class (record candidate / operator progress / no progress); supporting metrics are verified 59 count, best valid score, minimum working violations per trial (recounted by the controller), exact-repair attempts, exhausted attempts, nodes, zero-cost pool sizes and deepest repair depth, the origin of each trial's best state (exact repair or swap), failure classes, oracle disagreements, wall and CPU seconds, and cost",
-  "baseline": "Immutable P0 baseline: Git commit 2914794, run bb6b15b0-c0b9-426f-a67d-464cdce1a551 (10 of 64 from-scratch trials reached a dual-verified 58 with solver/solver.c). P1 inputs are only that run's verified 58-point child artifacts, re-verified by both oracles before every breaker invocation. The public 58-point certificate is never read by the breaker or the controller.",
-  "trial_definition": "One trial is one seeded symmetry-breaker invocation on one verified P0 candidate in its own subprocess. Inner swaps are counted separately and are not trials.",
+  "status": "completed",
+  "phase": "P2 Modal causal parallelism: one preregistered local-vs-Modal comparison (systems evidence, not a record attempt)",
+  "plan": "docs/P2_MODAL_CAUSAL_PLAN.md",
+  "question": "For the frozen solver/solver.c, seeds 1300..1303 and 100000 iterations per seed, do four parallel network-blocked Modal VM Sandboxes return the same dual-verified candidates as four local subprocesses, and what are the measured wall-clock overheads?",
+  "hypothesis": "Each of the four Modal Sandboxes (runtime vm, block_network true, 1 CPU, 512 MiB, 120-second lifetime, no secrets, no mounts) compiles the exact local solver source with the frozen C99 flags and returns, for its seed, a candidate whose hash equals the local subprocess result, with zero controller-oracle disagreements, zero false accepts and every Sandbox terminated. Falsified by any oracle disagreement, any accepted invalid candidate, any unterminated Sandbox, or any unexplained same-seed candidate mismatch. No speedup is hypothesized when startup overhead dominates the roughly one-second solve.",
+  "primary_metric": "gate status of the comparison (infrastructure failures, isolation verification, same-seed candidate-hash agreement); supporting metrics are oracle disagreements, false accepts, per-arm failure counts, local parallel wall time, local serial-equivalent time, Modal wall time and per-phase Sandbox overhead. Cost is reported as unknown unless Modal exposes an authoritative figure.",
+  "baseline": "Local arm of the same run: four local subprocesses of solver/solver.c (SHA-256 ab141274701608a6841eed4f98c0ddf12e8135baeb4de2227b0b41b4758d471c, the P0 evidence version) on the same seeds and iteration budget, accepted only by both local oracles. P0 reference run bb6b15b0-c0b9-426f-a67d-464cdce1a551 is unchanged.",
+  "trial_definition": "One trial is one from-scratch seeded invocation of solver/solver.c at 100000 iterations in one arm: a local subprocess or one fresh Modal Sandbox. Each seed is run once per arm.",
   "budget_usd": 20,
-  "p1_smoke_cost_usd": 0.0,
-  "cost_model": "The P1 development smoke runs only on the local machine with no provider calls, so its marginal cost is 0.0 USD. The 20 USD figure is the ceiling for the whole experiment; none of it is authorized in this tranche.",
-  "stop_condition": "Run the eight-seed iteration-3 smoke once; do not tune after seeing results. Iteration 3 is the stopping boundary for the destroy/repair operator family: if the minimum working violations remains 2 and no 59 is verified, the family is closed as stopped, no further budget or parameter change is proposed for it, and no confirmatory seed is spent on it. A one-violation state would only justify a separately preregistered follow-up. Stop before the smoke if the breaker's incremental state disagrees with brute force; stop and preserve the artifact on any oracle disagreement. Seeds 64..127 stay untouched. record_claim stays false even if a 59 is verified. Both earlier P1 runs and every earlier artifact stay byte-for-byte unchanged. No sponsor integration or Modal run is part of this tranche.",
+  "cost_model": "P0 and P1 were local only (0.0 USD). The P2 Modal arm uses four 1-CPU / 512 MiB Sandboxes bounded at 120 seconds each plus one disclosed single-Sandbox gateway preflight. Modal exposes no authoritative per-Sandbox cost to this client, so the P2 cost is recorded as unknown (null), never as zero. budget_usd remains the ceiling for the whole experiment.",
+  "stop_condition": "Run the comparison once. Stop on any controller-oracle disagreement. Preserve partial artifacts on Modal errors; do not rerun to improve the numbers, do not modify the frozen solver or verifiers to make results agree, and make no mathematical improvement claim.",
   "dual_verification_gate": "A candidate is accepted only when the per-apex distance oracle (src/tripathy_experiment/no_isosceles.py) and the perpendicular-bisector oracle (src/tripathy_experiment/perpendicular_bisector_oracle.py) both accept it in the controller. Any disagreement is an infrastructure failure that is written to an artifact and makes the run exit nonzero. In P1 a 59 additionally counts only after a fresh process re-reads the persisted child artifact and both oracles plus the pinned upstream verify_construction accept it.",
   "record_claim": false,
   "dataset": {
@@ -23,29 +22,35 @@
     "license": "Apache-2.0 upstream; provenance and hashes in benchmarks/upstream/PROVENANCE.json"
   },
   "reproducibility": {
-    "command": "python -m tripathy_experiment.cli p1-smoke --parent-run bb6b15b0-c0b9-426f-a67d-464cdce1a551 --seeds 1200-1207 --iters 200000 --repair-nodes 200000 --destroy-size 8 --workers 8 --artifact-dir artifacts/runs",
-    "random_seeds": "1200..1207 (breaker seeds, development only; iterations 1 and 2 used 1000..1007 and 1100..1107)",
+    "command": "python -m tripathy_experiment.cli p2-compare --seeds 1300-1303 --iters 100000 --workers 4 --artifact-dir artifacts/runs",
+    "random_seeds": "1300..1303 (systems-evidence seeds; never used before this run)",
     "reserved_confirmatory_seeds": "64..127 (untouched; the controller refuses them)",
-    "iteration_budget": 200000,
-    "workers": 8,
-    "per_trial_timeout_seconds": 600,
-    "source_policy": "round-robin across distinct P0 58-point candidates, ordered by lowest P0 seed",
-    "search_parameters": "noise 20%, tabu 3 plus rand 10, restart after 20000 swaps without a new best (unchanged since iteration 1); destroy size 8 and node cap 200000 preregistered in docs/P1_SYMMETRY_BREAKING_PLAN.md iteration 3 before execution; nothing tuned on any seed. Before the smoke, one off-smoke determinism pair (seed 2201, 30000 swaps, published 58 as stdin) checked the build, timing and byte-identical replay; no parameter or code path was changed in response.",
+    "iteration_budget": 100000,
+    "workers": 4,
+    "per_trial_timeout_seconds": 120,
+    "sandbox_isolation": {
+      "runtime": "vm",
+      "block_network": true,
+      "cpu": 1.0,
+      "memory_mib": 512,
+      "timeout_seconds": 120,
+      "secrets": [],
+      "mounts": []
+    },
+    "sandbox_compile_command": "cc -O2 -std=c99 -Wall -Wextra -Werror -o solver solver.c",
     "artifact_directory": "artifacts/runs",
+    "requires": "an authenticated local Modal profile for the live arm; the fake-sandbox tests need no credentials",
+    "development_disclosure": "Before the preregistered run, one gateway preflight (run fc905c4a-ff66-4ce5-a12a-609eaef96478: off-experiment seed 1399, 1000 iterations, one Sandbox) checked the Modal API path and built the image. It passed execution and agreement but reported isolation_unverified because the controller's credential-name screen matched GPG_KEY, the public release-signing fingerprint name set by the upstream python base image. That exact name was then allowlisted (names only; no value is ever read). Nothing else changed and no result from seeds 1300..1303 existed at that point.",
     "git": {
-      "head": "29147943bd20726ee2dcd3237edeb4e297f748bf",
+      "head": "8eff91e44d12cd06e060a5bb18bb7ebb2fbf9f3a",
       "dirty": true,
-      "note": "P0 is committed at 2914794. All three P1 iterations are uncommitted (committing was not authorized), so each P1 artifact records HEAD, the dirty marker and SHA-256 hashes of the breaker, controller, oracles, manifest, plan and benchmark files as they were at run time."
+      "note": "At execution time the P2 code was uncommitted; each immutable artifact records base HEAD 8eff91e, the dirty marker and SHA-256 hashes of the solver, controller, gateway, oracles, manifest and plan exactly as executed. The implementation and artifacts were preserved together after the run."
     },
     "pinned_sha256": {
       "benchmarks/no_isosceles_n32.json": "9bebfc52de362e80efc91d5455f2e20a103e766f191af8f665ee276907feb509",
       "benchmarks/upstream/verify_construction.py.txt": "226370ddce5130a4e247ac1b1718bb4b120218d231507b1249137fd10e4eceaf",
       "src/tripathy_experiment/no_isosceles.py": "4843790a2b7aa64502d4f580f356412f1d1e9247a260ce28377b1f3708ebf1ae"
-    },
-    "repair_nodes_per_attempt": 200000,
-    "destroy_size": 8,
-    "repair_additions": 9,
-    "repair_attempt_schedule": "once at startup and after each 20000-swap stall restart"
+    }
   },
   "completed_phases": {
     "p0": {
@@ -142,6 +147,113 @@
         "repair_attempt_schedule": "once at startup and after each 20000-swap stall restart"
       },
       "result": "infrastructure gate passed, search progress 'no progress': run ff52f29c-b4e5-4620-993d-5236b324991e, 0 verified 59s, minimum working violations 2 in every trial; all 80 destroy-four attempts enumerated their whole space (1398 nodes, cap never reached), deepest depth 4 of 5, zero-cost pools of 4 or 5 cells. Its source is kept in solver/rejected/symmetry_breaker_iter2.c (SHA-256 95e9dc3e9e1c2932efcf98df67e57bc57bf0ce41608993e3c7824ffab25616ec, as recorded in the run's artifacts)."
+    },
+    "p1_iteration_3": {
+      "phase": "P1 symmetry-breaking development iteration 3: final large-neighborhood test (destroy-eight / exact-repair-nine)",
+      "question": "Does enlarging the destroy/exact-repair neighbourhood from four to eight removed points (nine exact additions, 200000 nodes per attempt) let the search leave the rigid neighbourhood of a from-scratch P0 58, reaching either a valid 59 or a one-violation 59-point working state?",
+      "hypothesis": "In the preregistered iteration-3 smoke (breaker seeds 1200..1207, 200000 fallback swaps per seed, destroy size 8, repair target 9 additions, 200000 exact-repair nodes per attempt, one attempt at startup and one after each 20000-swap stall restart, 8 workers, the same P0 parent bb6b15b0-c0b9-426f-a67d-464cdce1a551 and round-robin source policy), the infrastructure gate passes under the unchanged rules, with --destroy-size an explicit, validated and artifacted argument. The search hypothesis is that at least one trial reaches a persisted, dual- and upstream-verified 59 (development record candidate) or a working state with fewer than two violations (operator progress). It is rejected if no 59 is found and the minimum working violations remains 2.",
+      "primary_metric": "infrastructure gate status of the eight-trial smoke and the search-progress class (record candidate / operator progress / no progress); supporting metrics are verified 59 count, best valid score, minimum working violations per trial (recounted by the controller), exact-repair attempts, exhausted attempts, nodes, zero-cost pool sizes and deepest repair depth, the origin of each trial's best state (exact repair or swap), failure classes, oracle disagreements, wall and CPU seconds, and cost",
+      "trial_definition": "One trial is one seeded symmetry-breaker invocation on one verified P0 candidate in its own subprocess. Inner swaps are counted separately and are not trials.",
+      "stop_condition": "Run the eight-seed iteration-3 smoke once; do not tune after seeing results. Iteration 3 is the stopping boundary for the destroy/repair operator family: if the minimum working violations remains 2 and no 59 is verified, the family is closed as stopped, no further budget or parameter change is proposed for it, and no confirmatory seed is spent on it. A one-violation state would only justify a separately preregistered follow-up. Stop before the smoke if the breaker's incremental state disagrees with brute force; stop and preserve the artifact on any oracle disagreement. Seeds 64..127 stay untouched. record_claim stays false even if a 59 is verified. Both earlier P1 runs and every earlier artifact stay byte-for-byte unchanged. No sponsor integration or Modal run is part of this tranche.",
+      "reproducibility": {
+        "command": "python -m tripathy_experiment.cli p1-smoke --parent-run bb6b15b0-c0b9-426f-a67d-464cdce1a551 --seeds 1200-1207 --iters 200000 --repair-nodes 200000 --destroy-size 8 --workers 8 --artifact-dir artifacts/runs",
+        "random_seeds": "1200..1207 (breaker seeds, development only; iterations 1 and 2 used 1000..1007 and 1100..1107)",
+        "reserved_confirmatory_seeds": "64..127 (untouched; the controller refuses them)",
+        "iteration_budget": 200000,
+        "workers": 8,
+        "per_trial_timeout_seconds": 600,
+        "source_policy": "round-robin across distinct P0 58-point candidates, ordered by lowest P0 seed",
+        "search_parameters": "noise 20%, tabu 3 plus rand 10, restart after 20000 swaps without a new best (unchanged since iteration 1); destroy size 8 and node cap 200000 preregistered in docs/P1_SYMMETRY_BREAKING_PLAN.md iteration 3 before execution; nothing tuned on any seed. Before the smoke, one off-smoke determinism pair (seed 2201, 30000 swaps, published 58 as stdin) checked the build, timing and byte-identical replay; no parameter or code path was changed in response.",
+        "artifact_directory": "artifacts/runs",
+        "git": {
+          "head": "29147943bd20726ee2dcd3237edeb4e297f748bf",
+          "dirty": true,
+          "note": "P0 is committed at 2914794. All three P1 iterations are uncommitted (committing was not authorized), so each P1 artifact records HEAD, the dirty marker and SHA-256 hashes of the breaker, controller, oracles, manifest, plan and benchmark files as they were at run time."
+        },
+        "pinned_sha256": {
+          "benchmarks/no_isosceles_n32.json": "9bebfc52de362e80efc91d5455f2e20a103e766f191af8f665ee276907feb509",
+          "benchmarks/upstream/verify_construction.py.txt": "226370ddce5130a4e247ac1b1718bb4b120218d231507b1249137fd10e4eceaf",
+          "src/tripathy_experiment/no_isosceles.py": "4843790a2b7aa64502d4f580f356412f1d1e9247a260ce28377b1f3708ebf1ae"
+        },
+        "repair_nodes_per_attempt": 200000,
+        "destroy_size": 8,
+        "repair_additions": 9,
+        "repair_attempt_schedule": "once at startup and after each 20000-swap stall restart"
+      },
+      "plan": "docs/P1_SYMMETRY_BREAKING_PLAN.md",
+      "result": "Run e46d5be6-98e0-43ae-848b-3a439246c249 (seeds 1200..1207): infrastructure gate passed, no 59 verified, minimum working violations stayed 2, zero oracle disagreements; the destroy/repair operator family is closed as stopped. Preserved in evidence commit 3402f10.",
+      "p1_smoke_cost_usd": 0.0
     }
+  },
+  "p2_cost_usd": null,
+  "p2_result": {
+    "run_id": "eaacf19f-08a7-46c3-8b89-6486492c601f",
+    "gate_status": "passed",
+    "matches_preregistration": true,
+    "trials": 8,
+    "accepted_trials": 8,
+    "score_counts": {
+      "local": {
+        "54": 2,
+        "56": 2
+      },
+      "modal": {
+        "54": 2,
+        "56": 2
+      }
+    },
+    "failure_counts": {
+      "local": {},
+      "modal": {}
+    },
+    "oracle_disagreements": 0,
+    "false_accepts": 0,
+    "candidate_hash_agree": "4/4",
+    "stdout_byte_identical": "4/4",
+    "per_seed_scores": {
+      "1300": 54,
+      "1301": 56,
+      "1302": 54,
+      "1303": 56
+    },
+    "local_parallel_wall_seconds": 1.067,
+    "local_serial_equivalent_seconds": 4.162,
+    "modal_wall_seconds": 5.903,
+    "modal_prepare_seconds": 1.618,
+    "modal_solve_seconds_mean": 2.472,
+    "modal_overhead_seconds_mean": 2.945,
+    "modal_phase_seconds_mean": {
+      "compile": 0.471,
+      "create": 0.318,
+      "probe": 0.409,
+      "readback": 0.552,
+      "solve": 2.472,
+      "terminate": 0.221,
+      "time_to_result": 4.786,
+      "upload": 0.972
+    },
+    "startup_overhead_dominates": true,
+    "modal_faster_than_local_serial": false,
+    "modal_faster_than_local_parallel": false,
+    "speedup_claim": "none: Modal was slower than both local parallel and local serial-equivalent at this budget",
+    "sandbox_ids": [
+      "sb-01M7GKH7K1988B24PY234TGPJA",
+      "sb-01M7GKH7K18JHHSXF1Z57NXXNZ",
+      "sb-01M7GKH7K19XG3CR8TGD8YWC2Q",
+      "sb-01M7GKH7K1GKQDJAAJ677MFWGV"
+    ],
+    "isolation": "all four Sandboxes: runtime vm requested and accepted, block_network true, 1 CPU, 512 MiB, 120 s lifetime, no secrets, no mounts; in-Sandbox probe reported network blocked and no credential-like env names; source read-back hash matched; each terminated in finally (exit 137); zero live Sandboxes in the app afterwards",
+    "cost_usd": null,
+    "cost_status": "unknown: the provider exposes no authoritative per-sandbox cost to this client",
+    "record_claim": false,
+    "mathematical_claim": "none",
+    "limits_of_the_evidence": [
+      "One run of four seeds: no variance estimate, and no claim about scale beyond four Sandboxes.",
+      "The isolation probe runs inside the untrusted Sandbox and is self-reported: three outbound attempts (two TCP connects, one DNS lookup) failed. VM runtime rests on Modal accepting runtime='vm' and a non-gVisor kernel string; there is no provider-side attestation in the artifacts.",
+      "No-secrets rests on the gateway having no code path that attaches a Secret, Volume, mount or env, plus a names-only env screen. GPG_KEY (the public release-signing fingerprint name set by the upstream python base image) is allowlisted by exact name; its value was never read.",
+      "local_serial_equivalent_seconds is the sum of per-trial wall times under the parallel local run, not a separate serial run. In-Sandbox CPU time is not observable and is null.",
+      "sandbox_prepare_seconds (1.62 s) reflects an image cached by the disclosed preflight; the preflight's cold prepare took 11.13 s.",
+      "The Sandbox 'solve' phase (2.47 s mean) includes the exec round trip, so it is not a pure CPU comparison with the 1.04 s local trials."
+    ]
   }
 }

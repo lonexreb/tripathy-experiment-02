@@ -266,13 +266,12 @@ def run_process(
     return record, stdout
 
 
-def run_trial(binary: str, seed: int, iters: int, timeout_seconds: float) -> dict[str, Any]:
-    """Run one isolated solver process and classify the outcome. Never raises."""
-    command = [binary, "--seed", str(seed), "--iters", str(iters)]
-    record: dict[str, Any] = {
+def empty_trial(seed: int, iters: int) -> dict[str, Any]:
+    """The trial record before any process ran: nothing is accepted yet."""
+    return {
         "seed": seed,
         "iters": iters,
-        "command": ["<solver>", *command[1:]],
+        "command": ["<solver>", "--seed", str(seed), "--iters", str(iters)],
         "score": None,
         "claimed_score": None,
         "points": None,
@@ -284,11 +283,13 @@ def run_trial(binary: str, seed: int, iters: int, timeout_seconds: float) -> dic
         "solver_counters": None,
         "solver_version": None,
     }
-    process, stdout = run_process(command, timeout_seconds)
-    record.update(process)
-    if record["failure_class"] is not None:
-        return record
 
+
+def judge_stdout(record: dict[str, Any], stdout: bytes, seed: int, iters: int) -> dict[str, Any]:
+    """Parse untrusted solver stdout and accept it only if both oracles agree.
+
+    Shared by every execution backend so there is one acceptance rule.
+    """
     try:
         payload = parse_candidate(stdout, seed, iters)
     except (ValueError, UnicodeDecodeError) as error:
@@ -319,6 +320,16 @@ def run_trial(binary: str, seed: int, iters: int, timeout_seconds: float) -> dic
     else:
         record["score"] = len(points)  # accepted: both oracles agree it is valid
     return record
+
+
+def run_trial(binary: str, seed: int, iters: int, timeout_seconds: float) -> dict[str, Any]:
+    """Run one isolated solver process and classify the outcome. Never raises."""
+    record = empty_trial(seed, iters)
+    process, stdout = run_process([binary, *record["command"][1:]], timeout_seconds)
+    record.update(process)
+    if record["failure_class"] is not None:
+        return record
+    return judge_stdout(record, stdout, seed, iters)
 
 
 def run_baseline(

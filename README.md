@@ -82,6 +82,8 @@ Every run records:
 - `src/tripathy_experiment/swarm.py`: evolving multi-agent research loop.
 - `src/tripathy_experiment/adapters.py`: Exa, past.dev, local, and Modal boundaries.
 - `docs/adr/0002-evohive-anchored-rsi.md`: architecture and safety decision.
+- `src/tripathy_experiment/parallel_comparison.py`: provider-independent P2 local-vs-sandbox controller.
+- `src/tripathy_experiment/modal_gateway.py`: the narrow Modal gateway used by P2.
 
 ## Current scope
 
@@ -159,3 +161,48 @@ Earlier solver versions are kept unchanged in `solver/rejected/` (`symmetry_brea
 `symmetry_breaker_iter2.c`); their SHA-256 hashes match the ones recorded in runs `418e67a9` and
 `ff52f29c`. Replaying those runs byte-for-byte needs those sources, because the command line and
 output schema changed between iterations.
+
+## P2 Modal causal comparison (TRI-19) — systems evidence, no speedup
+
+Preregistered in `docs/P2_MODAL_CAUSAL_PLAN.md` and run once. The frozen `solver/solver.c`
+ran seeds 1300..1303 at 100000 iterations in four local subprocesses and in four independent
+Modal Sandboxes (`runtime="vm"`, `block_network=True`, 1 CPU, 512 MiB, 120-second lifetime, no
+Secrets, no mounts). Each Sandbox received the source as data, compiled it with the frozen C99
+flags and ran one seed. Its stdout was treated as untrusted and accepted only by both local
+oracles. This is not a record attempt and makes no mathematical claim.
+
+```bash
+python -m tripathy_experiment.cli p2-compare --seeds 1300-1303 --iters 100000 --workers 4 \
+  --artifact-dir artifacts/runs
+```
+
+The live arm needs an authenticated local Modal profile. The tests use fake sandboxes and need
+no credentials.
+
+Run `eaacf19f-08a7-46c3-8b89-6486492c601f` (execution-time base HEAD `8eff91e`,
+dirty worktree recorded honestly, exact file hashes in every artifact):
+
+| Metric | Result |
+|---|---|
+| Gate status | passed |
+| Trials accepted | 8 of 8 (4 local, 4 Modal) |
+| Scores by seed (both arms) | 1300: 54, 1301: 56, 1302: 54, 1303: 56 |
+| Same-seed candidate hashes agree | 4 of 4 (stdout byte-identical 4 of 4) |
+| Oracle disagreements / false accepts | 0 / 0 |
+| Failures | none in either arm |
+| Local parallel wall time | 1.07 s |
+| Local serial-equivalent time | 4.16 s (sum of per-trial wall times, not a separate serial run) |
+| Modal wall time, four Sandboxes | 5.90 s, plus 1.62 s prepare with a cached image |
+| Modal per-Sandbox mean | 2.47 s solve, 2.94 s overhead (create, upload, read-back, compile, probe, terminate) |
+| Sandboxes created / terminated | 4 / 4, none left running |
+| Cost | unknown: Modal exposes no authoritative per-Sandbox cost to this client |
+
+Modal was slower than both local arms here: startup overhead dominates a one-second solve, so
+no speedup is claimed. What the run does show is that isolated Sandboxes reproduce the local
+results exactly and that the controller, not the Sandbox, decides acceptance.
+
+Limits: one run of four seeds; the isolation probe (network blocked, no credential-like
+environment names) is reported from inside the untrusted Sandbox, with no provider-side
+attestation; `GPG_KEY`, a public fingerprint name from the python base image, is allowlisted by
+name and its value is never read. One gateway preflight on off-experiment seed 1399 (run
+`fc905c4a-ff66-4ce5-a12a-609eaef96478`) preceded the run and is kept as an artifact.

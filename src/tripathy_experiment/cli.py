@@ -14,8 +14,10 @@ from .adapters import (
     PastSharedMemory,
 )
 from .baseline import parse_seeds, run_baseline, sha256_file
+from .modal_gateway import ModalSandboxGateway
 from .model import ExperimentManifest, ValidationError
 from .no_isosceles import Candidate, greedy_seed, load_public_baseline, verify
+from .parallel_comparison import PREREGISTERED, run_comparison
 from .runner import ExperimentRunner, run_evohive
 from .swarm import SwarmConfig
 from .symmetry_breaking import run_smoke
@@ -58,7 +60,8 @@ def verify_benchmark(path: Path | None) -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="EvoHive verification-first autoresearch runner")
-    parser.add_argument("command", choices=("validate", "run", "verify", "baseline", "p1-smoke")
+    parser.add_argument(
+        "command", choices=("validate", "run", "verify", "baseline", "p1-smoke", "p2-compare")
     )
     parser.add_argument("benchmark", nargs="?", type=Path, help="benchmark JSON for verify")
     parser.add_argument("--seeds", default="0-63", help="baseline seeds, e.g. 0-63")
@@ -146,6 +149,34 @@ def main() -> int:
             report = {key: summary[key] for key in smoke_keys}
             print(json.dumps({**report, "artifact": str(summary_path)}, sort_keys=True))
             return 2 if summary["gate_status"] == "infrastructure_failure" else 0
+
+        if args.command == "p2-compare":
+            manifest.validate()
+            if args.iters is None:
+                raise ValidationError("p2-compare requires --iters")
+            seeds = parse_seeds(args.seeds)
+            requested = {"seeds": seeds, "iters": args.iters, "workers": args.workers}
+            if requested != PREREGISTERED:
+                raise ValidationError(
+                    "p2-compare is frozen to --seeds 1300-1303 --iters 100000 --workers 4"
+                )
+            summary, summary_path = run_comparison(
+                gateway=ModalSandboxGateway(),
+                seeds=seeds,
+                iters=args.iters,
+                workers=args.workers,
+                artifact_dir=args.artifact_dir,
+                linear_issue=manifest.linear_issue,
+                experiment_id=manifest.experiment_id,
+            )
+            compare_keys = (
+                "run_id", "gate_status", "trials", "accepted_trials", "score_counts",
+                "failure_counts", "oracle_disagreements", "false_accepts", "agreement",
+                "isolation", "latency", "cost_usd", "cost_status", "record_claim",
+            )
+            report = {key: summary[key] for key in compare_keys}
+            print(json.dumps({**report, "artifact": str(summary_path)}, sort_keys=True))
+            return 0 if summary["gate_status"].startswith("passed") else 2
 
         if args.dry_run:
             result = ExperimentRunner().run(manifest, dry_run=True)

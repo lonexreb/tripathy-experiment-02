@@ -3,10 +3,10 @@
   "experiment_id": "02",
   "status": "complete",
   "active_linear_issue": "TRI-19",
-  "git_sha": "3402f102c94cc8bacf452062a97c0656dc6f57d4",
-  "git_dirty": false,
-  "git_note": "P1 implementation, rejected solver variants and all three negative run families are preserved in evidence commit 3402f10. The immutable run artifacts retain their original base HEAD 2914794, dirty marker and exact file hashes, reflecting the state in which they actually executed.",
-  "objective": "TRI-19 outcome: preserve the dual-verified P0 reproduction and close the P1 local destroy/repair family after its preregistered negative stopping boundary",
+  "git_sha": "8eff91e44d12cd06e060a5bb18bb7ebb2fbf9f3a",
+  "git_dirty": true,
+  "git_note": "The P2 artifacts record execution-time base HEAD 8eff91e, dirty=true and SHA-256 hashes of every file as executed. The controller, gateway, audit hardening, tests, docs and 16 new artifacts are preserved together in this evidence snapshot.",
+  "objective": "TRI-19 P2 judge-readiness tranche (docs/P2_MODAL_CAUSAL_PLAN.md): provider-independent comparison controller with a narrow Modal gateway, and one preregistered local-vs-Modal run on seeds 1300..1303",
   "subagents": [],
   "runs": [
     {
@@ -334,6 +334,60 @@
       "evidence": "artifacts/runs/e46d5be6-98e0-43ae-848b-3a439246c249.json",
       "child_evidence_pattern": "artifacts/runs/e46d5be6-98e0-43ae-848b-3a439246c249.trial-<seed>.json",
       "parent_artifact_sha256": "5296e7e7de204bb3fc3d7b86aa056d88d5959292242b0f2d1323287f3b876fe1"
+    },
+    {
+      "linear_issue": "TRI-19",
+      "git_sha": "8eff91e44d12cd06e060a5bb18bb7ebb2fbf9f3a",
+      "git_dirty": true,
+      "workers_per_arm": 1,
+      "run_id": "fc905c4a-ff66-4ce5-a12a-609eaef96478",
+      "mode": "p2-gateway-preflight (development, off-experiment seed)",
+      "seeds": "1399",
+      "iters_per_trial": 1000,
+      "trials": 2,
+      "child_artifacts": 2,
+      "gate_status": "isolation_unverified",
+      "note": "Execution and agreement passed (score 52 in both arms, byte-identical stdout). The gate reported isolation_unverified only because the names-only env screen matched GPG_KEY from the python base image; that exact name was then allowlisted. Sandbox sb-01M7GKEVSB41GYND4JF7X6DG6W was terminated. Cost unknown.",
+      "cost_usd": null,
+      "artifact": "artifacts/runs/fc905c4a-ff66-4ce5-a12a-609eaef96478.json"
+    },
+    {
+      "linear_issue": "TRI-19",
+      "git_sha": "8eff91e44d12cd06e060a5bb18bb7ebb2fbf9f3a",
+      "git_dirty": true,
+      "workers_per_arm": 4,
+      "run_id": "eaacf19f-08a7-46c3-8b89-6486492c601f",
+      "mode": "p2-modal-causal-comparison (preregistered, run once)",
+      "seeds": "1300..1303",
+      "iters_per_trial": 100000,
+      "trials": 8,
+      "child_artifacts": 8,
+      "parent_artifacts": 3,
+      "artifact": "artifacts/runs/eaacf19f-08a7-46c3-8b89-6486492c601f.json",
+      "gate_status": "passed",
+      "score_counts": {
+        "local": {
+          "54": 2,
+          "56": 2
+        },
+        "modal": {
+          "54": 2,
+          "56": 2
+        }
+      },
+      "failure_counts": {
+        "local": {},
+        "modal": {}
+      },
+      "oracle_disagreements": 0,
+      "false_accepts": 0,
+      "candidate_hash_agree": "4/4",
+      "stdout_byte_identical": "4/4",
+      "local_parallel_wall_seconds": 1.067,
+      "local_serial_equivalent_seconds": 4.162,
+      "modal_wall_seconds": 5.903,
+      "cost_usd": null,
+      "cost_status": "unknown: the provider exposes no authoritative per-sandbox cost to this client"
     }
   ],
   "implementation": {
@@ -540,9 +594,9 @@
       }
     }
   },
-  "cost_usd": 0.0,
-  "cost_note": "The P0 tranche made no provider calls. The earlier Modal smoke run's cost was never recorded and is not included.",
-  "latency_seconds": 3.0725109172053635,
+  "cost_usd": null,
+  "cost_note": "P0 and P1 made no provider calls (0.0 USD). P2 used five Modal Sandboxes (one preflight, four preregistered; about 24 Sandbox-seconds at 1 CPU / 512 MiB in total) plus one image build. Modal exposes no authoritative per-Sandbox cost to this client, so the total is unknown, not zero. The earlier Modal smoke run's cost was also never recorded.",
+  "latency_seconds": 5.902771708089858,
   "blockers": [
     "The P1 destroy/repair operator family is closed as stopped with no 59 found; there is no candidate algorithm to freeze, so the confirmatory run has nothing to confirm.",
     "The immutable P1 run artifacts cite their execution-time base HEAD 2914794 with dirty=true plus file hashes; the exact implementation, rejected variants and artifacts are now preserved together in evidence commit 3402f10.",
@@ -552,10 +606,14 @@
     "The older swarm path is unchanged: it still seeds from the public certificate, hardcodes TRI-18, and uses same-algorithm sandbox verification.",
     "CI configuration has been corrected locally but has not yet run on the remote P1 commit.",
     "Local interpreter is Python 3.12.13 while pyproject targets 3.11.",
-    "Exa, past.dev and Modal remain untested and were not called. No Linear or Slack update was posted (external writes were not authorized)."
+    "The submitted P2 evidence commit still needs a green remote CI run.",
+    "P2 Modal cost is unknown: no authoritative per-Sandbox cost is exposed to this client.",
+    "P2 showed no Modal speedup: startup overhead dominates the ~1 s solve at 100000 iterations.",
+    "P2 isolation evidence is requested configuration plus an in-Sandbox self-report; there is no provider-side attestation.",
+    "Exa and past.dev remain untested and were not called. No Linear or Slack update was posted (external writes were not authorized)."
   ],
-  "next_decision": "TRI-19 is locally complete with 58 as the reproduced, dual-verified result and a documented negative P1. Any further 59 search must be a structurally different approach that does not start from a P0 58 and must receive a new preregistered objective before seeds 64..127 are used.",
-  "updated_at": "2026-11-15T13:46:56-08:00",
+  "next_decision": "P2 acceptance gate is met locally. Next: commit the P2 tranche so CI runs the 22 new tests at a clean SHA, then build the judge evidence view from artifacts. Modal gave no speedup at 100000 iterations; a throughput claim would need a new preregistered run at a budget where solve time exceeds the ~3 s per-Sandbox overhead.",
+  "updated_at": "2026-11-15T14:00:22-08:00",
   "p0_objective": "TRI-19 P0: replace the public-certificate replay with a from-scratch, deterministic, dual-verified baseline for AlphaEvolve Problem 59 and record one 64-trial reproduction gate (passed, committed at 2914794)",
   "p1_implementation": {
     "files_added": [
@@ -625,7 +683,7 @@
     "post_smoke_audit": "All 8 child artifacts were reloaded in a fresh process: both local oracles and the pinned upstream verify_construction accept every emitted set (each is the unchanged 58-point source); both oracles reject every 59-point closest-approach state and an independent recount equals the breaker's claimed 2 in all 8; 0 failures, 0 oracle disagreements; seed 1000 replayed to an identical stdout hash.",
     "development_disclosure": "Two off-smoke breaker invocations were made before the smoke with the published 58 as stdin (seed 2000 at 60000 swaps, seed 2001 at 30000 swaps twice) to check the build, timing and determinism. No parameter was changed after seeing any output. The unit test also uses the published 58 as stdin data with seeds 7 and 8."
   },
-  "latency_note": "latency_seconds is the iteration-3 smoke wall time; iterations 1 and 2 took 2.86 s and 3.68 s and the P0 gate 109.31 s (see runs).",
+  "latency_note": "latency_seconds is the P2 Modal arm wall time (create through terminate for four parallel Sandboxes, excluding 1.62 s prepare). Same run: local parallel 1.07 s, local serial-equivalent 4.16 s. Earlier: P1 smokes 2.86 s, 3.68 s and 3.07 s; P0 gate 109.31 s.",
   "p1_iteration_1_objective": "TRI-19 P1 development iteration 1: separate symmetry-breaking solver and provider-independent controller on top of the frozen P0 baseline; smoke 418e67a9 passed as infrastructure and found no 59",
   "p1_iteration_2_implementation": {
     "files_added": [
@@ -755,5 +813,135 @@
     "post_smoke_audit": "All 8 child artifacts were reloaded in a fresh process: both local oracles and the pinned upstream verify_construction accept every emitted set (each is the unchanged 58-point source); both oracles reject every 59-point closest-approach state and an independent recount equals the claimed 2 in all 8; every child records destroy_size 8 in its command, echo and counters; repair attempts equal restarts + 1 in all 8; 0 failures, 0 oracle disagreements; seed 1200 replayed to an identical stdout hash.",
     "development_disclosure": "Before the smoke, one off-smoke determinism pair (seed 2201, 30000 swaps, destroy size 8, published 58 as stdin) checked the build, timing and replay, plus small 3-point inputs in the tests. Its output already showed pools of 8 or 9 cells and depth 8. Nothing was changed in response: destroy size, node cap, schedule and seeds are exactly as preregistered.",
     "limits_of_the_evidence": "Completeness of the depth-first enumeration rests on code reading and the solver's internal invariant checks, not on an independent enumerator; the controller cannot re-derive the destroyed bases from the output, so 'exhausted' is the solver's own report."
+  },
+  "p2_result": {
+    "run_id": "eaacf19f-08a7-46c3-8b89-6486492c601f",
+    "gate_status": "passed",
+    "matches_preregistration": true,
+    "trials": 8,
+    "accepted_trials": 8,
+    "score_counts": {
+      "local": {
+        "54": 2,
+        "56": 2
+      },
+      "modal": {
+        "54": 2,
+        "56": 2
+      }
+    },
+    "failure_counts": {
+      "local": {},
+      "modal": {}
+    },
+    "oracle_disagreements": 0,
+    "false_accepts": 0,
+    "candidate_hash_agree": "4/4",
+    "stdout_byte_identical": "4/4",
+    "per_seed_scores": {
+      "1300": 54,
+      "1301": 56,
+      "1302": 54,
+      "1303": 56
+    },
+    "local_parallel_wall_seconds": 1.067,
+    "local_serial_equivalent_seconds": 4.162,
+    "modal_wall_seconds": 5.903,
+    "modal_prepare_seconds": 1.618,
+    "modal_solve_seconds_mean": 2.472,
+    "modal_overhead_seconds_mean": 2.945,
+    "modal_phase_seconds_mean": {
+      "compile": 0.471,
+      "create": 0.318,
+      "probe": 0.409,
+      "readback": 0.552,
+      "solve": 2.472,
+      "terminate": 0.221,
+      "time_to_result": 4.786,
+      "upload": 0.972
+    },
+    "startup_overhead_dominates": true,
+    "modal_faster_than_local_serial": false,
+    "modal_faster_than_local_parallel": false,
+    "speedup_claim": "none: Modal was slower than both local parallel and local serial-equivalent at this budget",
+    "sandbox_ids": [
+      "sb-01M7GKH7K1988B24PY234TGPJA",
+      "sb-01M7GKH7K18JHHSXF1Z57NXXNZ",
+      "sb-01M7GKH7K19XG3CR8TGD8YWC2Q",
+      "sb-01M7GKH7K1GKQDJAAJ677MFWGV"
+    ],
+    "isolation": "all four Sandboxes: runtime vm requested and accepted, block_network true, 1 CPU, 512 MiB, 120 s lifetime, no secrets, no mounts; in-Sandbox probe reported network blocked and no credential-like env names; source read-back hash matched; each terminated in finally (exit 137); zero live Sandboxes in the app afterwards",
+    "cost_usd": null,
+    "cost_status": "unknown: the provider exposes no authoritative per-sandbox cost to this client",
+    "record_claim": false,
+    "mathematical_claim": "none",
+    "limits_of_the_evidence": [
+      "One run of four seeds: no variance estimate, and no claim about scale beyond four Sandboxes.",
+      "The isolation probe runs inside the untrusted Sandbox and is self-reported: three outbound attempts (two TCP connects, one DNS lookup) failed. VM runtime rests on Modal accepting runtime='vm' and a non-gVisor kernel string; there is no provider-side attestation in the artifacts.",
+      "No-secrets rests on the gateway having no code path that attaches a Secret, Volume, mount or env, plus a names-only env screen. GPG_KEY (the public release-signing fingerprint name set by the upstream python base image) is allowlisted by exact name; its value was never read.",
+      "local_serial_equivalent_seconds is the sum of per-trial wall times under the parallel local run, not a separate serial run. In-Sandbox CPU time is not observable and is null.",
+      "sandbox_prepare_seconds (1.62 s) reflects an image cached by the disclosed preflight; the preflight's cold prepare took 11.13 s.",
+      "The Sandbox 'solve' phase (2.47 s mean) includes the exec round trip, so it is not a pure CPU comparison with the 1.04 s local trials."
+    ]
+  },
+  "p2_implementation": {
+    "files_added": [
+      "src/tripathy_experiment/parallel_comparison.py (provider-independent controller: SandboxGateway port, per-trial sandbox lifecycle with terminate in finally, arm and comparison artifacts)",
+      "src/tripathy_experiment/modal_gateway.py (the only module that touches Modal; lazy import; no Secrets, Volumes, mounts or env)",
+      "tests/test_parallel_comparison.py (25 tests: fake-sandbox outcome classes, isolation-probe defects, oracle disagreement, deterministic replay through a real local compile, partial-artifact failures, seed guards and frozen-CLI guard)"
+    ],
+    "files_changed": [
+      "src/tripathy_experiment/baseline.py (run_trial split into empty_trial + judge_stdout so both backends share one acceptance rule; behaviour unchanged, existing tests pass)",
+      "src/tripathy_experiment/cli.py (p2-compare command)",
+      "experiment/manifest.json (P1 iteration 3 moved to completed_phases; P2 definition frozen before the run; p2_result added after)",
+      "project.yaml, README.md, docs/JUDGE_READINESS.md, artifacts/session-summary.json"
+    ],
+    "preserved_byte_for_byte": "At live-run completion, solver/solver.c, solver/symmetry_breaker.c, solver/rejected/ (2 files), both oracle modules, benchmarks/ (3 files), docs/P2_MODAL_CAUSAL_PLAN.md and all 95 pre-existing files under artifacts/runs matched 105 pre-run SHA-256 hashes. The P2 plan was then annotated with its outcome; solvers, oracles, benchmarks and prior run artifacts remain unchanged.",
+    "file_sha256_at_run": {
+      "benchmarks/no_isosceles_n32.json": "9bebfc52de362e80efc91d5455f2e20a103e766f191af8f665ee276907feb509",
+      "benchmarks/upstream/PROVENANCE.json": "f959a6a364c807b3e4f1bad76c38df85d58dcfaddb2adf011c7d15583993af6f",
+      "docs/P2_MODAL_CAUSAL_PLAN.md": "15421ea610dcb2d47c21fb661d0f75968b256e8a87bfb8385d08e6a730c04102",
+      "experiment/manifest.json": "77101b0ef264256921e8e3d2f761f76a64bad6400a060b357ceaff3645989daa",
+      "project.yaml": "e218526a57b085a7f36b3ffa2f61eae6ea1664e22d1c5b118bae41291f04e56f",
+      "solver/solver.c": "ab141274701608a6841eed4f98c0ddf12e8135baeb4de2227b0b41b4758d471c",
+      "src/tripathy_experiment/baseline.py": "95823e85856018db5fff71a263b0880cbf17e63b559ca85c984d3af3c8efa132",
+      "src/tripathy_experiment/cli.py": "3cd053f197f7556648735655d04f931b2cb56ce4337df5b2e4953be60cef4ccb",
+      "src/tripathy_experiment/modal_gateway.py": "49a071f8e6a7289d438b5d61789e204139c035172420e31443552050de22bc00",
+      "src/tripathy_experiment/no_isosceles.py": "4843790a2b7aa64502d4f580f356412f1d1e9247a260ce28377b1f3708ebf1ae",
+      "src/tripathy_experiment/parallel_comparison.py": "13d02d7b4964145f1b6d55ab24cc04e7d9a76c5aea64986b26e58c983da91196",
+      "src/tripathy_experiment/perpendicular_bisector_oracle.py": "c8c8dc944d924267ce62acb9ec2eca448bad277baed88b33103d8242efb2113f"
+    },
+    "checks": [
+      {
+        "command": ".venv/bin/python -m pytest -q",
+        "outcome": "63 passed after independent audit hardening"
+      },
+      {
+        "command": ".venv/bin/python -m ruff check .",
+        "outcome": "All checks passed"
+      },
+      {
+        "command": ".venv/bin/python -m mypy",
+        "outcome": "no issues in 13 source files"
+      },
+      {
+        "command": ".venv/bin/python -m tripathy_experiment.cli validate",
+        "outcome": "valid"
+      },
+      {
+        "command": "python -m tripathy_experiment.cli p2-compare --seeds 1300-1303 --iters 100000 --workers 4 --artifact-dir artifacts/runs",
+        "outcome": "exit 0, gate passed, run eaacf19f-08a7-46c3-8b89-6486492c601f"
+      }
+    ],
+    "post_run_audit": "All 8 child artifacts were reloaded in a fresh process: both local oracles accept every point set, each score equals the point count, same-seed candidate and stdout hashes are equal, every Modal child has network_blocked true, no credential-like env names (22 names reported, below the 200-name cap), matching source read-back hash and termination ok. Modal Sandbox.list for the app returned no live Sandboxes. Post-run hardening now records the total environment-name count, makes a truncated screen fail isolation verification, refuses empty seed lists, and prevents the P2 CLI from launching any non-preregistered configuration; these changes did not cause a rerun or alter immutable evidence.",
+    "development_disclosure": "Before the preregistered run, one gateway preflight (run fc905c4a-ff66-4ce5-a12a-609eaef96478: off-experiment seed 1399, 1000 iterations, one Sandbox) checked the Modal API path and built the image. It passed execution and agreement but reported isolation_unverified because the controller's credential-name screen matched GPG_KEY, the public release-signing fingerprint name set by the upstream python base image. That exact name was then allowlisted (names only; no value is ever read). Nothing else changed and no result from seeds 1300..1303 existed at that point.",
+    "limits_of_the_evidence": [
+      "One run of four seeds: no variance estimate, and no claim about scale beyond four Sandboxes.",
+      "The isolation probe runs inside the untrusted Sandbox and is self-reported: three outbound attempts (two TCP connects, one DNS lookup) failed. VM runtime rests on Modal accepting runtime='vm' and a non-gVisor kernel string; there is no provider-side attestation in the artifacts.",
+      "No-secrets rests on the gateway having no code path that attaches a Secret, Volume, mount or env, plus a names-only env screen. GPG_KEY (the public release-signing fingerprint name set by the upstream python base image) is allowlisted by exact name; its value was never read.",
+      "local_serial_equivalent_seconds is the sum of per-trial wall times under the parallel local run, not a separate serial run. In-Sandbox CPU time is not observable and is null.",
+      "sandbox_prepare_seconds (1.62 s) reflects an image cached by the disclosed preflight; the preflight's cold prepare took 11.13 s.",
+      "The Sandbox 'solve' phase (2.47 s mean) includes the exec round trip, so it is not a pure CPU comparison with the 1.04 s local trials."
+    ]
   }
 }

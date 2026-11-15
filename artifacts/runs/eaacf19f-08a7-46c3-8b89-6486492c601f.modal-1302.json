@@ -1,0 +1,440 @@
+{
+  "arm": "modal",
+  "candidate_sha256": "bcda77cad13182f50c1a4f84f00fa3f7bba233a0a4f5eac42b657be9731f9ec8",
+  "claimed_score": 54,
+  "command": [
+    "<solver>",
+    "--seed",
+    "1302",
+    "--iters",
+    "100000"
+  ],
+  "completed_at": "2026-11-15T21:59:12.130582+00:00",
+  "config": {
+    "backend": "modal",
+    "grid_size": 32,
+    "isolation": {
+      "block_network": true,
+      "cpu": 1.0,
+      "memory_mib": 512,
+      "mounts": [],
+      "runtime": "vm",
+      "secrets": [],
+      "timeout_seconds": 120
+    },
+    "iters": 100000,
+    "matches_preregistration": true,
+    "max_stdout_bytes": 1048576,
+    "sandbox_compile_command": [
+      "cc",
+      "-O2",
+      "-std=c99",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-o",
+      "solver",
+      "solver.c"
+    ],
+    "seeds": [
+      1300,
+      1301,
+      1302,
+      1303
+    ],
+    "timeout_seconds": 120,
+    "trial_definition": "one from-scratch seeded solver invocation, once per arm",
+    "workers": 4
+  },
+  "config_sha256": "c64cb07652aaa797aaabc15804512fc060700f4823c1b91fa62100206190f229",
+  "cost_status": "unknown: the provider exposes no authoritative per-sandbox cost to this client",
+  "cost_usd": null,
+  "cpu_seconds": null,
+  "detail": "",
+  "exit_code": 0,
+  "experiment_id": "02",
+  "failure_class": null,
+  "file_sha256": {
+    "benchmarks/no_isosceles_n32.json": "9bebfc52de362e80efc91d5455f2e20a103e766f191af8f665ee276907feb509",
+    "benchmarks/upstream/PROVENANCE.json": "f959a6a364c807b3e4f1bad76c38df85d58dcfaddb2adf011c7d15583993af6f",
+    "docs/P2_MODAL_CAUSAL_PLAN.md": "15421ea610dcb2d47c21fb661d0f75968b256e8a87bfb8385d08e6a730c04102",
+    "experiment/manifest.json": "77101b0ef264256921e8e3d2f761f76a64bad6400a060b357ceaff3645989daa",
+    "project.yaml": "e218526a57b085a7f36b3ffa2f61eae6ea1664e22d1c5b118bae41291f04e56f",
+    "solver/solver.c": "ab141274701608a6841eed4f98c0ddf12e8135baeb4de2227b0b41b4758d471c",
+    "src/tripathy_experiment/baseline.py": "95823e85856018db5fff71a263b0880cbf17e63b559ca85c984d3af3c8efa132",
+    "src/tripathy_experiment/cli.py": "3cd053f197f7556648735655d04f931b2cb56ce4337df5b2e4953be60cef4ccb",
+    "src/tripathy_experiment/modal_gateway.py": "49a071f8e6a7289d438b5d61789e204139c035172420e31443552050de22bc00",
+    "src/tripathy_experiment/no_isosceles.py": "4843790a2b7aa64502d4f580f356412f1d1e9247a260ce28377b1f3708ebf1ae",
+    "src/tripathy_experiment/parallel_comparison.py": "13d02d7b4964145f1b6d55ab24cc04e7d9a76c5aea64986b26e58c983da91196",
+    "src/tripathy_experiment/perpendicular_bisector_oracle.py": "c8c8dc944d924267ce62acb9ec2eca448bad277baed88b33103d8242efb2113f"
+  },
+  "git": {
+    "dirty": true,
+    "dirty_paths": 13,
+    "head": "8eff91e44d12cd06e060a5bb18bb7ebb2fbf9f3a"
+  },
+  "initialization": "empty state; the public 58-point certificate is never read",
+  "isolation_probe": {
+    "allowlisted_env_names": [
+      "GPG_KEY"
+    ],
+    "credential_like_env_names": [],
+    "env_names": [
+      "CFLAGS",
+      "GPG_KEY",
+      "HOME",
+      "LANG",
+      "MODAL_CLOUD_PROVIDER",
+      "MODAL_CONTAINER_ARGUMENTS_PATH",
+      "MODAL_IMAGE_ID",
+      "MODAL_REGION",
+      "MODAL_SANDBOX_ID",
+      "MODAL_TASK_ID",
+      "PATH",
+      "PIP_DEFAULT_TIMEOUT",
+      "PIP_NO_CACHE_DIR",
+      "PIP_ROOT_USER_ACTION",
+      "PYTHONHASHSEED",
+      "PYTHONPATH",
+      "PYTHON_SHA256",
+      "PYTHON_VERSION",
+      "SOURCE_DATE_EPOCH",
+      "SSL_CERT_DIR",
+      "TERM",
+      "UV_BREAK_SYSTEM_PACKAGES"
+    ],
+    "kernel": "Linux version 7.3.4 (runch@modal.com/careers) (gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, GNU ld (GNU Binutils for Ubuntu) 2.42) #5995674df796 SMP PREEMPT Wed Nov 11 19:04:21 UTC 2026\n",
+    "mount_points": [
+      "/",
+      "/dev",
+      "/proc",
+      "/sys",
+      "/dev/pts",
+      "/run",
+      "/dev/shm",
+      "/sys/fs/cgroup",
+      "/__modal/.debug_shell"
+    ],
+    "network_blocked": true
+  },
+  "isolation_requested": {
+    "block_network": true,
+    "cpu": 1.0,
+    "memory_mib": 512,
+    "mounts": [],
+    "runtime": "vm",
+    "secrets": [],
+    "timeout_seconds": 120
+  },
+  "isolation_verified": true,
+  "iters": 100000,
+  "kind": "p2-trial",
+  "linear_issue": "TRI-19",
+  "oracle_bisector": {
+    "reason": "bisector oracle passed",
+    "score": 54,
+    "valid": true,
+    "witness": null
+  },
+  "oracle_distance": {
+    "reason": "exact verifier passed",
+    "score": 54,
+    "valid": true,
+    "witness": null
+  },
+  "oracles_agree": true,
+  "phase_seconds": {
+    "compile": 0.4738353749271482,
+    "create": 0.37350558303296566,
+    "probe": 0.36121883406303823,
+    "readback": 0.627450207946822,
+    "solve": 2.363278958015144,
+    "terminate": 0.21769783413037658,
+    "time_to_result": 5.161904959008098,
+    "upload": 1.3237934580538422
+  },
+  "points": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      8
+    ],
+    [
+      0,
+      23
+    ],
+    [
+      0,
+      30
+    ],
+    [
+      1,
+      10
+    ],
+    [
+      1,
+      21
+    ],
+    [
+      2,
+      10
+    ],
+    [
+      2,
+      14
+    ],
+    [
+      2,
+      17
+    ],
+    [
+      2,
+      21
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      3,
+      14
+    ],
+    [
+      3,
+      17
+    ],
+    [
+      3,
+      27
+    ],
+    [
+      5,
+      1
+    ],
+    [
+      5,
+      30
+    ],
+    [
+      8,
+      0
+    ],
+    [
+      8,
+      1
+    ],
+    [
+      8,
+      30
+    ],
+    [
+      8,
+      31
+    ],
+    [
+      12,
+      0
+    ],
+    [
+      12,
+      1
+    ],
+    [
+      12,
+      30
+    ],
+    [
+      12,
+      31
+    ],
+    [
+      14,
+      0
+    ],
+    [
+      14,
+      1
+    ],
+    [
+      14,
+      30
+    ],
+    [
+      14,
+      31
+    ],
+    [
+      19,
+      0
+    ],
+    [
+      19,
+      31
+    ],
+    [
+      21,
+      0
+    ],
+    [
+      21,
+      1
+    ],
+    [
+      21,
+      30
+    ],
+    [
+      21,
+      31
+    ],
+    [
+      25,
+      0
+    ],
+    [
+      25,
+      1
+    ],
+    [
+      25,
+      30
+    ],
+    [
+      25,
+      31
+    ],
+    [
+      27,
+      1
+    ],
+    [
+      27,
+      30
+    ],
+    [
+      28,
+      6
+    ],
+    [
+      28,
+      13
+    ],
+    [
+      28,
+      18
+    ],
+    [
+      28,
+      25
+    ],
+    [
+      29,
+      8
+    ],
+    [
+      29,
+      23
+    ],
+    [
+      30,
+      8
+    ],
+    [
+      30,
+      14
+    ],
+    [
+      30,
+      17
+    ],
+    [
+      30,
+      23
+    ],
+    [
+      31,
+      4
+    ],
+    [
+      31,
+      13
+    ],
+    [
+      31,
+      18
+    ],
+    [
+      31,
+      27
+    ]
+  ],
+  "provider": {
+    "app_name": "evohive-track1",
+    "client_version": "1.6.4",
+    "image": "debian_slim(python 3.11) + apt gcc libc6-dev",
+    "prepare_error": null,
+    "prepare_seconds": 1.6179909170605242,
+    "provider": "modal",
+    "workdir": "/tmp"
+  },
+  "record_claim": false,
+  "run_id": "eaacf19f-08a7-46c3-8b89-6486492c601f",
+  "runtime": {
+    "compiler": [
+      "Apple clang version 21.0.0 (clang-2100.1.1.101)"
+    ],
+    "cpu_brand": "Apple M5 Max",
+    "cpu_count": 18,
+    "machine": "arm64",
+    "platform": "macOS-26.5-arm64-arm-64bit",
+    "python": "3.12.13"
+  },
+  "sandbox_id": "sb-01M7GKH7K19XG3CR8TGD8YWC2Q",
+  "schema_version": 1,
+  "score": 54,
+  "seed": 1302,
+  "solver_build": {
+    "binary": "/Users/shubhankar/Documents/OpenAlex/type_classification/iterate-ai-hackathon/tripathy-experiment-02/build/solver-ab141274701608a6",
+    "binary_sha256": "0d2ed03f43a2f520737b19f8157390f39767ec188ffb7bf32f6f0876f65c896b",
+    "compile_command": [
+      "cc",
+      "-O2",
+      "-std=c99",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-o",
+      "<binary>",
+      "solver/solver.c"
+    ],
+    "source": "solver/solver.c",
+    "source_sha256": "ab141274701608a6841eed4f98c0ddf12e8135baeb4de2227b0b41b4758d471c"
+  },
+  "solver_counters": {
+    "aspirations": 5,
+    "cardinality_raises": 9,
+    "construction_pair_adds": 19,
+    "final_working_pairs": 28,
+    "final_working_violations": 20,
+    "point_adds": 200056,
+    "point_removes": 200000,
+    "ruin_repair_moves": 100000
+  },
+  "solver_termination_reason": "iterations_exhausted",
+  "solver_version": "evohive-symtabu-c99-1 noise=20 tabu=3+rand10",
+  "source_readback_sha256": "ab141274701608a6841eed4f98c0ddf12e8135baeb4de2227b0b41b4758d471c",
+  "started_at": "2026-11-15T21:59:06.389688+00:00",
+  "stdout_bytes": 804,
+  "stdout_sha256": "454aa550c3ba26051ffd60a607efa8bc832c3a6d38fb34947c413e38c61379d3",
+  "termination": {
+    "attempted": true,
+    "detail": "",
+    "exit_code": 137,
+    "ok": true
+  },
+  "trial_id": "eaacf19f-08a7-46c3-8b89-6486492c601f.modal-1302",
+  "wall_seconds": 5.7408538749441504
+}

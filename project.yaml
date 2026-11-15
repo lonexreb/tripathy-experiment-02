@@ -21,7 +21,7 @@ experiment:
     - Exa
     - past.dev
     - Modal
-  phase: P1 local symmetry-breaking development closed by preregistered stop rule
+  phase: P2 Modal causal comparison completed (systems evidence); P1 closed by preregistered stop rule
   trial_definition: one seeded symmetry-breaker invocation on one dual-verified P0 candidate
   development_seeds:
     - 1000..1007
@@ -32,6 +32,7 @@ experiment:
   best_dual_verified_score: 58
   p0_cost_usd: 0.0
   p1_cost_usd: 0.0
+  p2_cost_usd: unknown (Modal exposes no authoritative per-Sandbox cost)
   dual_verification_gate: distance oracle and perpendicular-bisector oracle must both accept
   operator_family: single-point swaps plus bounded destroy/exact-repair from a P0 58
   operator_family_status: stopped after three negative development iterations
@@ -39,9 +40,15 @@ experiment:
     - 418e67a9-dca8-4d0d-ac3d-1b5355bf6a45
     - ff52f29c-b4e5-4620-993d-5236b324991e
     - e46d5be6-98e0-43ae-848b-3a439246c249
+    - eaacf19f-08a7-46c3-8b89-6486492c601f
+  p2_preflight_run: fc905c4a-ff66-4ce5-a12a-609eaef96478
+  p2_seeds: 1300..1303
+  p2_result: gate passed; 4/4 same-seed candidate hashes agree; 0 oracle disagreements; no Modal speedup
   stop_condition: met; no verified 59 and minimum working violations remained 2
   git:
     base_head: 29147943bd20726ee2dcd3237edeb4e297f748bf
     evidence_commit: 3402f102c94cc8bacf452062a97c0656dc6f57d4
-    dirty: false
+    p2_execution_dirty: true
+    p2_base_head: 8eff91e44d12cd06e060a5bb18bb7ebb2fbf9f3a
+    p2_note: immutable P2 artifacts retain their execution-time dirty marker and exact hashes; controller, gateway, tests and artifacts are preserved in the evidence snapshot
     note: P1 implementation, rejected variants and all three negative runs are preserved in the evidence commit

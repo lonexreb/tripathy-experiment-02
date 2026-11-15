@@ -1,0 +1,269 @@
+{
+  "accepted_trials": 8,
+  "agreement": {
+    "candidate_hash_agree": 4,
+    "candidate_hash_mismatch": 0,
+    "not_comparable": 0,
+    "seeds": 4,
+    "stdout_byte_identical": 4
+  },
+  "arm_artifacts": {
+    "local": "artifacts/runs/eaacf19f-08a7-46c3-8b89-6486492c601f.local.json",
+    "modal": "artifacts/runs/eaacf19f-08a7-46c3-8b89-6486492c601f.modal.json"
+  },
+  "billable_inputs": {
+    "cpu_cores_requested": 1.0,
+    "memory_mib_requested": 512,
+    "sandbox_seconds_total": 21.66793858166784
+  },
+  "completed_at": "2026-11-15T21:59:12.295668+00:00",
+  "config": {
+    "backend": "modal",
+    "grid_size": 32,
+    "isolation": {
+      "block_network": true,
+      "cpu": 1.0,
+      "memory_mib": 512,
+      "mounts": [],
+      "runtime": "vm",
+      "secrets": [],
+      "timeout_seconds": 120
+    },
+    "iters": 100000,
+    "matches_preregistration": true,
+    "max_stdout_bytes": 1048576,
+    "sandbox_compile_command": [
+      "cc",
+      "-O2",
+      "-std=c99",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-o",
+      "solver",
+      "solver.c"
+    ],
+    "seeds": [
+      1300,
+      1301,
+      1302,
+      1303
+    ],
+    "timeout_seconds": 120,
+    "trial_definition": "one from-scratch seeded solver invocation, once per arm",
+    "workers": 4
+  },
+  "config_sha256": "c64cb07652aaa797aaabc15804512fc060700f4823c1b91fa62100206190f229",
+  "cost_status": "unknown: the provider exposes no authoritative per-sandbox cost to this client",
+  "cost_usd": null,
+  "experiment_id": "02",
+  "failure_counts": {
+    "local": {},
+    "modal": {}
+  },
+  "false_accepts": 0,
+  "file_sha256": {
+    "benchmarks/no_isosceles_n32.json": "9bebfc52de362e80efc91d5455f2e20a103e766f191af8f665ee276907feb509",
+    "benchmarks/upstream/PROVENANCE.json": "f959a6a364c807b3e4f1bad76c38df85d58dcfaddb2adf011c7d15583993af6f",
+    "docs/P2_MODAL_CAUSAL_PLAN.md": "15421ea610dcb2d47c21fb661d0f75968b256e8a87bfb8385d08e6a730c04102",
+    "experiment/manifest.json": "77101b0ef264256921e8e3d2f761f76a64bad6400a060b357ceaff3645989daa",
+    "project.yaml": "e218526a57b085a7f36b3ffa2f61eae6ea1664e22d1c5b118bae41291f04e56f",
+    "solver/solver.c": "ab141274701608a6841eed4f98c0ddf12e8135baeb4de2227b0b41b4758d471c",
+    "src/tripathy_experiment/baseline.py": "95823e85856018db5fff71a263b0880cbf17e63b559ca85c984d3af3c8efa132",
+    "src/tripathy_experiment/cli.py": "3cd053f197f7556648735655d04f931b2cb56ce4337df5b2e4953be60cef4ccb",
+    "src/tripathy_experiment/modal_gateway.py": "49a071f8e6a7289d438b5d61789e204139c035172420e31443552050de22bc00",
+    "src/tripathy_experiment/no_isosceles.py": "4843790a2b7aa64502d4f580f356412f1d1e9247a260ce28377b1f3708ebf1ae",
+    "src/tripathy_experiment/parallel_comparison.py": "13d02d7b4964145f1b6d55ab24cc04e7d9a76c5aea64986b26e58c983da91196",
+    "src/tripathy_experiment/perpendicular_bisector_oracle.py": "c8c8dc944d924267ce62acb9ec2eca448bad277baed88b33103d8242efb2113f"
+  },
+  "gate_status": "passed",
+  "git": {
+    "dirty": true,
+    "dirty_paths": 13,
+    "head": "8eff91e44d12cd06e060a5bb18bb7ebb2fbf9f3a"
+  },
+  "infrastructure_failure_classes": [],
+  "initialization": "empty state; the public 58-point certificate is never read",
+  "isolation": {
+    "all_trials_verified": true,
+    "evidence": "per-trial isolation_probe and termination in each sandbox child artifact",
+    "requested": {
+      "block_network": true,
+      "cpu": 1.0,
+      "memory_mib": 512,
+      "mounts": [],
+      "runtime": "vm",
+      "secrets": [],
+      "timeout_seconds": 120
+    },
+    "sandboxes_created": 4,
+    "sandboxes_terminated": 4
+  },
+  "kind": "p2-comparison",
+  "latency": {
+    "local_build_seconds": 0.00015658303163945675,
+    "local_cpu_seconds_total": 4.110951,
+    "local_parallel_wall_seconds": 1.067424459150061,
+    "local_serial_equivalent_note": "sum of per-trial wall seconds measured under the parallel local run; no separate serial run was executed",
+    "local_serial_equivalent_seconds": 4.162247624946758,
+    "sandbox_cpu_seconds_total": null,
+    "sandbox_faster_than_local_parallel": false,
+    "sandbox_faster_than_local_serial": false,
+    "sandbox_overhead_seconds_mean": 2.94485136406729,
+    "sandbox_phase_seconds_mean": {
+      "compile": 0.47147011442575604,
+      "create": 0.31831433321349323,
+      "probe": 0.40947389602661133,
+      "readback": 0.5516487080021761,
+      "solve": 2.47213328134967,
+      "terminate": 0.22145526052918285,
+      "time_to_result": 4.786021239415277,
+      "upload": 0.9723053750349209
+    },
+    "sandbox_prepare_seconds": 1.6179909170605242,
+    "sandbox_solve_seconds_mean": 2.47213328134967,
+    "sandbox_wall_note": "create through terminate for all sandboxes, excluding prepare",
+    "sandbox_wall_seconds": 5.902771708089858,
+    "startup_overhead_dominates": true
+  },
+  "linear_issue": "TRI-19",
+  "mathematical_claim": "none; this is systems evidence",
+  "oracle_disagreements": 0,
+  "pairs": [
+    {
+      "candidate_agreement": true,
+      "local": {
+        "artifact": "artifacts/runs/eaacf19f-08a7-46c3-8b89-6486492c601f.local-1300.json",
+        "candidate_sha256": "3eccc139ad3fca715563a29ad6b640a658e4489fcc289d7f9b23a31321bd60b2",
+        "failure_class": null,
+        "score": 54,
+        "stdout_sha256": "8f59f331a8f7c6e60026d81dc4b1ac048030c1ba88f26f9bb7ca1d85da9005bf",
+        "trial_id": "eaacf19f-08a7-46c3-8b89-6486492c601f.local-1300"
+      },
+      "modal": {
+        "artifact": "artifacts/runs/eaacf19f-08a7-46c3-8b89-6486492c601f.modal-1300.json",
+        "candidate_sha256": "3eccc139ad3fca715563a29ad6b640a658e4489fcc289d7f9b23a31321bd60b2",
+        "failure_class": null,
+        "score": 54,
+        "stdout_sha256": "8f59f331a8f7c6e60026d81dc4b1ac048030c1ba88f26f9bb7ca1d85da9005bf",
+        "trial_id": "eaacf19f-08a7-46c3-8b89-6486492c601f.modal-1300"
+      },
+      "seed": 1300,
+      "stdout_byte_identical": true
+    },
+    {
+      "candidate_agreement": true,
+      "local": {
+        "artifact": "artifacts/runs/eaacf19f-08a7-46c3-8b89-6486492c601f.local-1301.json",
+        "candidate_sha256": "3f9a1a494be264ea306493af30e71157879c8ee6c5eb25b0f3a1396275047163",
+        "failure_class": null,
+        "score": 56,
+        "stdout_sha256": "09577806e680eddc49bcbe0017ef2cbd3f07d582c251036b3db8be26c044a7b9",
+        "trial_id": "eaacf19f-08a7-46c3-8b89-6486492c601f.local-1301"
+      },
+      "modal": {
+        "artifact": "artifacts/runs/eaacf19f-08a7-46c3-8b89-6486492c601f.modal-1301.json",
+        "candidate_sha256": "3f9a1a494be264ea306493af30e71157879c8ee6c5eb25b0f3a1396275047163",
+        "failure_class": null,
+        "score": 56,
+        "stdout_sha256": "09577806e680eddc49bcbe0017ef2cbd3f07d582c251036b3db8be26c044a7b9",
+        "trial_id": "eaacf19f-08a7-46c3-8b89-6486492c601f.modal-1301"
+      },
+      "seed": 1301,
+      "stdout_byte_identical": true
+    },
+    {
+      "candidate_agreement": true,
+      "local": {
+        "artifact": "artifacts/runs/eaacf19f-08a7-46c3-8b89-6486492c601f.local-1302.json",
+        "candidate_sha256": "bcda77cad13182f50c1a4f84f00fa3f7bba233a0a4f5eac42b657be9731f9ec8",
+        "failure_class": null,
+        "score": 54,
+        "stdout_sha256": "454aa550c3ba26051ffd60a607efa8bc832c3a6d38fb34947c413e38c61379d3",
+        "trial_id": "eaacf19f-08a7-46c3-8b89-6486492c601f.local-1302"
+      },
+      "modal": {
+        "artifact": "artifacts/runs/eaacf19f-08a7-46c3-8b89-6486492c601f.modal-1302.json",
+        "candidate_sha256": "bcda77cad13182f50c1a4f84f00fa3f7bba233a0a4f5eac42b657be9731f9ec8",
+        "failure_class": null,
+        "score": 54,
+        "stdout_sha256": "454aa550c3ba26051ffd60a607efa8bc832c3a6d38fb34947c413e38c61379d3",
+        "trial_id": "eaacf19f-08a7-46c3-8b89-6486492c601f.modal-1302"
+      },
+      "seed": 1302,
+      "stdout_byte_identical": true
+    },
+    {
+      "candidate_agreement": true,
+      "local": {
+        "artifact": "artifacts/runs/eaacf19f-08a7-46c3-8b89-6486492c601f.local-1303.json",
+        "candidate_sha256": "0688f852d31590f6a4d1aaf8eecaa525eee35dd38231e3910de2af18e281d34a",
+        "failure_class": null,
+        "score": 56,
+        "stdout_sha256": "f67620fa9e164ad3ed46709ba5627f8341741a94f7c1cdc674c4948304473299",
+        "trial_id": "eaacf19f-08a7-46c3-8b89-6486492c601f.local-1303"
+      },
+      "modal": {
+        "artifact": "artifacts/runs/eaacf19f-08a7-46c3-8b89-6486492c601f.modal-1303.json",
+        "candidate_sha256": "0688f852d31590f6a4d1aaf8eecaa525eee35dd38231e3910de2af18e281d34a",
+        "failure_class": null,
+        "score": 56,
+        "stdout_sha256": "f67620fa9e164ad3ed46709ba5627f8341741a94f7c1cdc674c4948304473299",
+        "trial_id": "eaacf19f-08a7-46c3-8b89-6486492c601f.modal-1303"
+      },
+      "seed": 1303,
+      "stdout_byte_identical": true
+    }
+  ],
+  "provider": {
+    "app_name": "evohive-track1",
+    "client_version": "1.6.4",
+    "image": "debian_slim(python 3.11) + apt gcc libc6-dev",
+    "prepare_error": null,
+    "prepare_seconds": 1.6179909170605242,
+    "provider": "modal",
+    "workdir": "/tmp"
+  },
+  "record_claim": false,
+  "run_id": "eaacf19f-08a7-46c3-8b89-6486492c601f",
+  "runtime": {
+    "compiler": [
+      "Apple clang version 21.0.0 (clang-2100.1.1.101)"
+    ],
+    "cpu_brand": "Apple M5 Max",
+    "cpu_count": 18,
+    "machine": "arm64",
+    "platform": "macOS-26.5-arm64-arm-64bit",
+    "python": "3.12.13"
+  },
+  "schema_version": 1,
+  "score_counts": {
+    "local": {
+      "54": 2,
+      "56": 2
+    },
+    "modal": {
+      "54": 2,
+      "56": 2
+    }
+  },
+  "solver_build": {
+    "binary": "/Users/shubhankar/Documents/OpenAlex/type_classification/iterate-ai-hackathon/tripathy-experiment-02/build/solver-ab141274701608a6",
+    "binary_sha256": "0d2ed03f43a2f520737b19f8157390f39767ec188ffb7bf32f6f0876f65c896b",
+    "compile_command": [
+      "cc",
+      "-O2",
+      "-std=c99",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-o",
+      "<binary>",
+      "solver/solver.c"
+    ],
+    "source": "solver/solver.c",
+    "source_sha256": "ab141274701608a6841eed4f98c0ddf12e8135baeb4de2227b0b41b4758d471c"
+  },
+  "started_at": "2026-11-15T21:59:03.655351+00:00",
+  "trials": 8
+}

@@ -1,0 +1,115 @@
+{
+  "accepted_trials": 1,
+  "arm": "local",
+  "children": [
+    {
+      "artifact": "artifacts/runs/fc905c4a-ff66-4ce5-a12a-609eaef96478.local-1399.json",
+      "candidate_sha256": "ef390d23d68aba2c347d0c2fb71ab44488026f1eb5cafdfd6812c0cffb64c801",
+      "cpu_seconds": 0.011373999999999999,
+      "failure_class": null,
+      "score": 52,
+      "seed": 1399,
+      "stdout_sha256": "725d5b7fb0cc1caa9acb02f2ab1c261f38297657eb40d9ad2e82693988852ae1",
+      "trial_id": "fc905c4a-ff66-4ce5-a12a-609eaef96478.local-1399",
+      "wall_seconds": 0.013870083959773183
+    }
+  ],
+  "config": {
+    "backend": "modal",
+    "grid_size": 32,
+    "isolation": {
+      "block_network": true,
+      "cpu": 1.0,
+      "memory_mib": 512,
+      "mounts": [],
+      "runtime": "vm",
+      "secrets": [],
+      "timeout_seconds": 120
+    },
+    "iters": 1000,
+    "matches_preregistration": false,
+    "max_stdout_bytes": 1048576,
+    "sandbox_compile_command": [
+      "cc",
+      "-O2",
+      "-std=c99",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-o",
+      "solver",
+      "solver.c"
+    ],
+    "seeds": [
+      1399
+    ],
+    "timeout_seconds": 120,
+    "trial_definition": "one from-scratch seeded solver invocation, once per arm",
+    "workers": 1
+  },
+  "config_sha256": "94ebc4a1a27547775b227f63223ceb4564bf070e652a452a9b150a47b2268070",
+  "experiment_id": "02",
+  "failure_counts": {},
+  "false_accepts": 0,
+  "file_sha256": {
+    "benchmarks/no_isosceles_n32.json": "9bebfc52de362e80efc91d5455f2e20a103e766f191af8f665ee276907feb509",
+    "benchmarks/upstream/PROVENANCE.json": "f959a6a364c807b3e4f1bad76c38df85d58dcfaddb2adf011c7d15583993af6f",
+    "docs/P2_MODAL_CAUSAL_PLAN.md": "15421ea610dcb2d47c21fb661d0f75968b256e8a87bfb8385d08e6a730c04102",
+    "experiment/manifest.json": "32c853693af605270b730be7cc507bccb2f5fa0f054672516843661ff4abd676",
+    "project.yaml": "e218526a57b085a7f36b3ffa2f61eae6ea1664e22d1c5b118bae41291f04e56f",
+    "solver/solver.c": "ab141274701608a6841eed4f98c0ddf12e8135baeb4de2227b0b41b4758d471c",
+    "src/tripathy_experiment/baseline.py": "95823e85856018db5fff71a263b0880cbf17e63b559ca85c984d3af3c8efa132",
+    "src/tripathy_experiment/cli.py": "3cd053f197f7556648735655d04f931b2cb56ce4337df5b2e4953be60cef4ccb",
+    "src/tripathy_experiment/modal_gateway.py": "49a071f8e6a7289d438b5d61789e204139c035172420e31443552050de22bc00",
+    "src/tripathy_experiment/no_isosceles.py": "4843790a2b7aa64502d4f580f356412f1d1e9247a260ce28377b1f3708ebf1ae",
+    "src/tripathy_experiment/parallel_comparison.py": "d2dfae868006daddde2adfeb4c2bcb4b78b0496814258dbfbd187806334deb94",
+    "src/tripathy_experiment/perpendicular_bisector_oracle.py": "c8c8dc944d924267ce62acb9ec2eca448bad277baed88b33103d8242efb2113f"
+  },
+  "git": {
+    "dirty": true,
+    "dirty_paths": 7,
+    "head": "8eff91e44d12cd06e060a5bb18bb7ebb2fbf9f3a"
+  },
+  "infrastructure_failure_classes": [],
+  "initialization": "empty state; the public 58-point certificate is never read",
+  "kind": "p2-arm-summary",
+  "linear_issue": "TRI-19",
+  "oracle_disagreements": 0,
+  "record_claim": false,
+  "run_id": "fc905c4a-ff66-4ce5-a12a-609eaef96478",
+  "runtime": {
+    "compiler": [
+      "Apple clang version 21.0.0 (clang-2100.1.1.101)"
+    ],
+    "cpu_brand": "Apple M5 Max",
+    "cpu_count": 18,
+    "machine": "arm64",
+    "platform": "macOS-26.5-arm64-arm-64bit",
+    "python": "3.12.13"
+  },
+  "schema_version": 1,
+  "score_counts": {
+    "52": 1
+  },
+  "solver_build": {
+    "binary": "/Users/shubhankar/Documents/OpenAlex/type_classification/iterate-ai-hackathon/tripathy-experiment-02/build/solver-ab141274701608a6",
+    "binary_sha256": "0d2ed03f43a2f520737b19f8157390f39767ec188ffb7bf32f6f0876f65c896b",
+    "compile_command": [
+      "cc",
+      "-O2",
+      "-std=c99",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-o",
+      "<binary>",
+      "solver/solver.c"
+    ],
+    "source": "solver/solver.c",
+    "source_sha256": "ab141274701608a6841eed4f98c0ddf12e8135baeb4de2227b0b41b4758d471c"
+  },
+  "started_at": "2026-11-15T21:57:37.640742+00:00",
+  "trial_wall_seconds_sum": 0.013870083959773183,
+  "trials": 1,
+  "wall_seconds": 0.022805500077083707
+}
