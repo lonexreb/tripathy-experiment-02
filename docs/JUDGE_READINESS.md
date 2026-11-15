@@ -1,8 +1,8 @@
 # EvoHive Judge-Readiness Ledger
 
 Updated: 2026-11-15
-Current evidence commit: `bdac57b` (P0–P3 implementation, live evidence and generated report)
-Current CI: GitHub Actions run `43769286544`, passed on `bdac57b`
+Current submission commit: `a92affb` (P0–P3 evidence, generated report, demo and submission package)
+Current CI: GitHub Actions run `43769531638`, passed on `a92affb`
 Claim policy: a capability receives credit here only when a persisted run demonstrates it
 
 ## Executive verdict
@@ -27,7 +27,7 @@ Core readiness: **19/25**. The main limiting dimension is mathematical results.
 
 | Sponsor | Current | Evidence | Required next proof |
 |---|---:|---|---|
-| Modal | 4/5 | P2 run `eaacf19f-08a7-46c3-8b89-6486492c601f`: four parallel network-blocked VM Sandboxes, 4/4 same-seed candidate hashes equal to local, 0 oracle disagreements, 0 failures, 4/4 terminated; evidence commit `bdac57b` has green CI | A budget where Modal improves throughput (here it was slower: 5.90 s vs 1.07 s local parallel); authoritative cost; provider-side isolation attestation |
+| Modal | 4/5 | P2 run `eaacf19f-08a7-46c3-8b89-6486492c601f`: four parallel network-blocked VM Sandboxes, 4/4 same-seed candidate hashes equal to local, 0 oracle disagreements, 0 failures, 4/4 terminated; submission commit `a92affb` has green CI | A budget where Modal improves throughput (here it was slower: 5.90 s vs 1.07 s local parallel); authoritative cost; provider-side isolation attestation |
 | Exa | 0/5 | Adapter and tests only; no credential and no live run | A sourced research event that changes a later experiment and is visible in lineage |
 | past.dev | 0/5 | Adapter and tests only; no credential and no live run | At least two roles write/read memory, with a recorded later action that changes because of recalled evidence |
 

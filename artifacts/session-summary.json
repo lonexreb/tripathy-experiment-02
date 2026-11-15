@@ -3,9 +3,9 @@
   "experiment_id": "02",
   "status": "complete",
   "active_linear_issue": "TRI-19",
-  "git_sha": "9c8b91988779374bc6be09d014f559de2dd60f90",
+  "git_sha": "a92affb4c95879134bbe0385dc78300adda54d1e",
   "git_dirty": false,
-  "git_note": "P2 implementation and all 16 new artifacts are preserved at evidence commit 9c8b919, with green CI run 43767285572. The immutable P2 run artifacts retain their execution-time base HEAD 8eff91e, dirty=true and exact file hashes.",
+  "git_note": "P0-P3 live evidence is preserved through commit bdac57b. Submission commit a92affb adds the one-command judge demo, honest README, rubric-mapped submission and timed Q&A; CI run 43769531638 passed. Immutable run artifacts retain their execution-time base SHAs, dirty markers and exact file hashes.",
   "objective": "TRI-19 P2 judge-readiness tranche (docs/P2_MODAL_CAUSAL_PLAN.md): provider-independent comparison controller with a narrow Modal gateway, and one preregistered local-vs-Modal run on seeds 1300..1303",
   "subagents": [],
   "runs": [
@@ -610,8 +610,8 @@
     "P2 isolation evidence is requested configuration plus an in-Sandbox self-report; there is no provider-side attestation.",
     "Exa and past.dev remain untested and were not called. No Linear or Slack update was posted (external writes were not authorized)."
   ],
-  "next_decision": "P3 demonstrated one causal evidence-to-decision-to-action transition and a safe rollback. Next: commit the live evidence and obtain green CI, then freeze the submission narrative and demo. Exa and past.dev remain unclaimed without credentials; mathematical improvement above 58 remains the largest evidence gap.",
-  "updated_at": "2026-11-15T14:06:30-08:00",
+  "next_decision": "The core submission is packaged and green at a92affb. Further work should be treated as a separately preregistered extension: either a stronger asymmetric solver/second benchmark, or live Exa/past.dev causal proofs after credentials exist. Do not tune the stopped P1 family, spend reserved seeds, or broaden sponsor claims in the submitted evidence.",
+  "updated_at": "2026-11-15T14:29:57-08:00",
   "p0_objective": "TRI-19 P0: replace the public-certificate replay with a from-scratch, deterministic, dual-verified baseline for AlphaEvolve Problem 59 and record one 64-trial reproduction gate (passed, committed at 2914794)",
   "p1_implementation": {
     "files_added": [

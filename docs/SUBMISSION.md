@@ -81,7 +81,7 @@ python -m tripathy_experiment.cli judge-demo
 The command follows `experiment/evidence-index.json`, rejects path escapes or
 inconsistent parent/child links, recomputes counts, reruns both oracles over 100
 candidates, hashes 110 artifacts, checks the committed report, and prints the
-judge view. CI run `43769286544` is green at evidence commit `bdac57b`.
+judge view. CI run `43769531638` is green at submission commit `a92affb`.
 
 ## Judging-criteria map
 
