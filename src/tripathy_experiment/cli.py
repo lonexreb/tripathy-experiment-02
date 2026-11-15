@@ -16,7 +16,7 @@ from .adapters import (
 from .autonomy import PREREGISTERED as P3_PREREGISTERED
 from .autonomy import run_autonomy_transition
 from .baseline import parse_seeds, run_baseline, sha256_file
-from .judge_report import build_report, write_report
+from .judge_report import build_report, render_markdown, write_report
 from .modal_gateway import ModalSandboxGateway
 from .model import ExperimentManifest, ValidationError
 from .no_isosceles import Candidate, greedy_seed, load_public_baseline, verify
@@ -73,6 +73,7 @@ def main() -> int:
             "p1-smoke",
             "p2-compare",
             "judge-report",
+            "judge-demo",
             "p3-autonomy",
         ),
     )
@@ -129,6 +130,12 @@ def main() -> int:
                     sort_keys=True,
                 )
             )
+            return 0
+
+        if args.command == "judge-demo":
+            report = build_report(artifact_dir=args.artifact_dir)
+            write_report(report, args.report_dir, check=True)
+            print(render_markdown(report), end="")
             return 0
 
         if args.command == "baseline":

@@ -1,47 +1,67 @@
 # EvoHive
 
-EvoHive is a verification-first autoresearch swarm for Iterate AI Research Hackathon Track 1. It borrows the useful parts of the other tracks without diluting the entry:
+EvoHive is a verification-first autoresearch framework for Iterate AI Research Hackathon Track 1.
+It treats the verifier, evidence ledger, budgets and rollback rules as the stable substrate while
+search operators are allowed to fail, be rejected and be replaced.
 
-- **Track 1 is the scored objective:** beat a public mathematical construction.
-- **Track 2 contributes bounded recursive self-improvement:** the outer loop updates its search-operator policy from trial evidence; the model and verifier stay frozen.
-- **Track 3 contributes the swarm:** scouts, proposers, experimenters, and critics share accepted and negative results.
-- **Exa is the live research feed:** every generation searches for newer bounds, constructions, and search methods, and source URLs are attached to proposals.
-- **past.dev is multiplayer memory:** every worker recalls other workers' evidence before proposing and writes its own outcome afterward.
-- **Modal is the containment layer:** each candidate evaluation runs in a fresh, network-blocked Sandbox with bounded CPU, memory, and lifetime. The controller re-verifies the result.
+What is demonstrated—not merely scaffolded:
+
+| Capability | Persisted evidence |
+|---|---|
+| From-scratch research result | Public score 58 reproduced in 10/64 fixed-budget trials; no 59 found |
+| Safe evaluation | 100 accepted candidates freshly pass two structurally independent exact oracles |
+| Failure-driven adaptation | Three stopped P1 operators caused P3 to select a structurally different canary |
+| Recursive-improvement safety | P3 decision preceded action; underperforming best 40 rolled back; incumbent hash unchanged |
+| Modal | Four independent network-blocked VM Sandboxes matched local candidates 4/4 and terminated 4/4 |
+| Reproducibility | 110 linked artifacts, source/config hashes, immutable failures, green CI |
+
+Exa and past.dev adapters and fixture tests exist, but there is **no live Exa or past.dev run** in
+the evidence set, so the submission does not claim those sponsor integrations. Modal is the only
+live sponsor proof. Modal was slower at this short budget, so no speedup or known-cost claim is made.
 
 The first benchmark is [AlphaEvolve Problem 59](https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/10): find the largest subset of the `32 x 32` integer grid containing no isosceles triangle. The frozen public baseline is a verifier-valid 58-point certificate.
 
-## Why this plan is competitive
+## Why this is competitive
 
-The novelty is not “more agents.” It is an **anchored self-improvement loop**:
+The novelty is not “more agents.” It is an **anchored self-improvement loop** with causal evidence:
 
-1. Exa refreshes the system's view of the record and relevant methods.
-2. Multiple agents recall one another's successful and failed experiments.
-3. Each agent proposes a candidate from a distinct search operator.
-4. Modal isolates evaluation; the candidate has no provider credentials or network.
-5. A trusted controller-side verifier independently checks every result.
-6. Only strict improvements enter the incumbent lineage.
-7. The meta-policy changes which operators receive compute next generation.
+1. A compiled search starts from an empty grid under a frozen budget.
+2. Two independent controller-side oracles decide acceptance outside the optimized program.
+3. Positive and negative trials become immutable, content-hashed evidence.
+4. A preregistered policy reads only registered evidence fields and persists its decision first.
+5. The emitted experiment must match the executed config exactly.
+6. Promotion is gated; an underperforming operator rolls back without touching the incumbent.
+7. Modal can isolate parallel workloads, but never decides whether a candidate is valid.
 
-That directly addresses the judging criteria: a real benchmark, measurable results, autonomy, transparent decisions, reproducibility, and honest negative evidence.
+This directly addresses rigor, autonomy, interpretability and reproducibility while keeping the
+mathematical claim honest: EvoHive reproduced 58; it did not discover 59.
 
 ## Quick start
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-python -m pip install -e '.[dev,modal]'
-pytest
-python -m tripathy_experiment.cli validate
-python -m tripathy_experiment.cli run --grid-size 12 --generations 3 --agents 3
+python -m pip install -e '.[dev]'
+python -m tripathy_experiment.cli judge-demo
 ```
 
-The local command requires no credentials and writes a complete JSON evidence bundle under `artifacts/runs/`.
-
-Use the public 58-point seed:
+That one command rebuilds the evidence graph, freshly runs both oracles over all 100 accepted
+candidates, verifies the committed report is current, and prints the two-minute judge view. It
+requires no provider credentials. Full checks:
 
 ```bash
-python -m tripathy_experiment.cli run --grid-size 32 --generations 4 --agents 3
+pytest
+ruff check .
+mypy src
+python -m tripathy_experiment.cli validate
+python -m tripathy_experiment.cli judge-report --check-report
+```
+
+The older generational swarm path remains available for development, but is not the source of
+the P0–P3 claims:
+
+```bash
+python -m tripathy_experiment.cli run --grid-size 12 --generations 3 --agents 3
 ```
 
 Run candidate evaluations in Modal Sandboxes:
@@ -50,7 +70,8 @@ Run candidate evaluations in Modal Sandboxes:
 python -m tripathy_experiment.cli run --grid-size 12 --generations 1 --agents 2 --backend modal
 ```
 
-Enable sponsor adapters only after setting controller-side secrets:
+Optional sponsor adapters can be exercised only after setting controller-side secrets; doing so
+creates new evidence and does not retroactively make them part of the submitted P0–P3 runs:
 
 ```bash
 EXA_API_KEY=... PAST_API_KEY=... \
@@ -59,18 +80,18 @@ python -m tripathy_experiment.cli run \
   --backend modal --search exa --memory past
 ```
 
-Never pass these keys to a Sandbox. For a production version, put them in named Modal Secrets and use Modal's outbound secret-injection policy; the untrusted workload should never be able to read raw values.
+Never pass these keys to a Sandbox. The submitted Modal gateway has no code path for attaching
+Secrets, Volumes, mounts or environment values.
 
 ## Evidence contract
 
-Every run records:
+Across P0–P3, the evidence schemas record:
 
-- run ID, seed, grid size, trial budget, and provider modes;
-- every proposal's parent, agent, strategy, sources, and inherited memory;
-- sandbox and independent-verifier results;
-- accepted and rejected candidates;
-- search-policy weights before and after feedback;
-- wall-clock latency and explicit provider failures.
+- run/decision IDs, seeds, fixed budgets, source/config hashes and runtime fingerprints;
+- untrusted stdout classifications and both independent-verifier results;
+- accepted, rejected, crashed, timed-out and rolled-back outcomes;
+- decision inputs, rejected alternatives, emitted action specs and promotion rules;
+- Modal isolation requests/probes, lifecycle phases, terminations and explicit cost uncertainty.
 
 `artifacts/runs/<run-id>.json` is the machine-readable source of truth. Failed experiments are retained.
 
@@ -81,17 +102,22 @@ Every run records:
 - `src/tripathy_experiment/no_isosceles.py`: independent exact-integer verifier.
 - `src/tripathy_experiment/swarm.py`: evolving multi-agent research loop.
 - `src/tripathy_experiment/adapters.py`: Exa, past.dev, local, and Modal boundaries.
+- `src/tripathy_experiment/autonomy.py`: P3 evidence policy, persisted decision and rollback.
+- `src/tripathy_experiment/judge_report.py`: artifact-graph reconstruction and fresh verification.
 - `docs/adr/0002-evohive-anchored-rsi.md`: architecture and safety decision.
+- `docs/SUBMISSION.md`: rubric-mapped submission narrative.
+- `docs/DEMO_SCRIPT.md`: timed demo and judge Q&A.
 - `src/tripathy_experiment/parallel_comparison.py`: provider-independent P2 local-vs-sandbox controller.
 - `src/tripathy_experiment/modal_gateway.py`: the narrow Modal gateway used by P2.
 
 ## Current scope
 
-This starter deliberately evolves search policy and candidate constructions, not foundation-model weights. That is a stronger hackathon claim: it is bounded, testable, cheap enough to reproduce, and its evaluator remains outside the object being optimized.
+EvoHive evolves search policy and candidate constructions, not foundation-model weights. That is
+a bounded, testable claim: the evaluator remains outside the object being optimized.
 
 ## P0 from-scratch baseline (TRI-19)
 
-The `run --grid-size 32` command above starts from the public 58-point certificate, so it is a
+The legacy `run --grid-size 32` path starts from the public 58-point certificate, so it is a
 replay, not a reproduction. Its "independent" sandbox check runs the same per-apex algorithm as
 the controller. The P0 baseline replaces both:
 
@@ -232,7 +258,7 @@ python -m tripathy_experiment.cli judge-report
 python -m tripathy_experiment.cli judge-report --check-report
 ```
 
-The generator follows `experiment/evidence-index.json`, reloads and hashes all 103 linked
-artifacts, and freshly runs both local oracles over all 96 accepted candidates. It refuses
+The generator follows `experiment/evidence-index.json`, reloads and hashes all 110 linked
+artifacts, and freshly runs both local oracles over all 100 accepted candidates. It refuses
 missing, escaped or inconsistent artifact references. No result metric is copied from the
 index. Generated views live in `artifacts/judge/` and CI checks that they are current.

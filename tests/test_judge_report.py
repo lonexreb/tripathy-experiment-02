@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pytest
 
+from tripathy_experiment import cli
 from tripathy_experiment.judge_report import (
     EvidenceError,
     build_report,
@@ -62,3 +63,14 @@ def test_missing_indexed_run_fails_closed(tmp_path: Path) -> None:
     path.write_text(json.dumps(index), encoding="utf-8")
     with pytest.raises(EvidenceError, match="cannot read"):
         build_report(index_path=path)
+
+
+def test_judge_demo_prints_only_reconstructed_current_evidence(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    monkeypatch.setattr("sys.argv", ["evohive", "judge-demo"])
+    assert cli.main() == 0
+    output = capsys.readouterr().out
+    assert output.startswith("# EvoHive: Judge Evidence Report")
+    assert "P3 `67bec1d8`" in output
+    assert "No verified 59-point construction" in output
