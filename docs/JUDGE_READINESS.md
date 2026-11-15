@@ -64,3 +64,7 @@ Sponsor claims must be removed or qualified in the pitch until these proofs exis
 - Every sponsor claim points to a live run, not an adapter or fixture.
 - The demo can be reproduced from a clean checkout with documented commands.
 - A judge can distinguish reproduction, negative evidence, and new discovery immediately.
+
+Clean-checkout audit: passed under CPython 3.12.13 using the documented `uv`
+setup—75 tests, Ruff, mypy, manifest validation, dual-oracle public benchmark,
+judge-report staleness check and `judge-demo`; final worktree remained clean.

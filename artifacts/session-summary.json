@@ -971,5 +971,18 @@
     "cost_usd": 0.0,
     "record_claim": false,
     "post_run_audit": "Fresh process reloaded all four action children; both oracles accepted every set and scores matched 39,39,40,39. Decision input hashes and plan/policy/source hashes matched. The decision was written from clean commit 14f7012 about 20 ms before action start. Protected incumbent, oracles, benchmarks and prior solvers remain unchanged."
+  },
+  "clean_checkout_audit": {
+    "python": "CPython 3.12.13 via uv",
+    "install": "uv venv --python 3.12 .venv; uv pip install -e '.[dev]'",
+    "judge_demo": "passed; reconstructed 110 artifacts and freshly dual-verified 100 candidates",
+    "pytest": "75 passed",
+    "ruff": "passed",
+    "mypy": "passed for 15 source files",
+    "manifest": "valid",
+    "public_benchmark": "accepted by both local oracles",
+    "report_check": "current",
+    "git_status": "clean",
+    "onboarding_findings": "The first audit attempt exposed system Python 3.9 and pip 21.2; documentation now requires Python 3.11+ and uses uv with Python 3.12 rather than relying on system defaults."
   }
 }

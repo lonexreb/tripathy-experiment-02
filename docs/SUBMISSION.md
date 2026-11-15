@@ -74,7 +74,9 @@ causal run exists, so this submission makes no sponsor claim for them.
 ## Two-minute verification
 
 ```bash
-python -m pip install -e '.[dev]'
+uv venv --python 3.12 .venv
+source .venv/bin/activate
+uv pip install -e '.[dev]'
 python -m tripathy_experiment.cli judge-demo
 ```
 
@@ -82,6 +84,9 @@ The command follows `experiment/evidence-index.json`, rejects path escapes or
 inconsistent parent/child links, recomputes counts, reruns both oracles over 100
 candidates, hashes 110 artifacts, checks the committed report, and prints the
 judge view. CI run `43769531638` is green at submission commit `a92affb`.
+The same flow was also executed successfully from a fresh local clone under
+CPython 3.12.13; all 75 tests, Ruff, mypy, manifest validation, benchmark
+verification and report staleness checks passed with a clean worktree.
 
 ## Judging-criteria map
 

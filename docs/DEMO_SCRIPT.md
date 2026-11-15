@@ -3,6 +3,10 @@
 Target length: 3 minutes. Do not improvise a 59, Modal speedup, cost, Exa or
 past.dev claim.
 
+Before the session, use the README's `uv` setup with Python 3.12 and run the
+command once from a clean checkout. The live demo itself makes no network or
+provider call.
+
 ## 0:00–0:25 — Hook
 
 “Most self-improving research agents can edit the thing that judges them.

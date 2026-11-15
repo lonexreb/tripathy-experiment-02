@@ -38,10 +38,13 @@ mathematical claim honest: EvoHive reproduced 58; it did not discover 59.
 
 ## Quick start
 
+Prerequisites: Python 3.11+ and a C compiler. The reproducible path uses
+[uv](https://docs.astral.sh/uv/) so it does not depend on an older system Python or pip:
+
 ```bash
-python -m venv .venv
+uv venv --python 3.12 .venv
 source .venv/bin/activate
-python -m pip install -e '.[dev]'
+uv pip install -e '.[dev]'
 python -m tripathy_experiment.cli judge-demo
 ```
 
