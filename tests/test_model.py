@@ -1,6 +1,7 @@
 import pytest
 
 from tripathy_experiment.model import ExperimentManifest, ValidationError
+from tripathy_experiment.no_isosceles import Candidate
 
 
 def test_placeholder_manifest_is_blocked() -> None:
@@ -23,3 +24,9 @@ def test_complete_manifest_passes() -> None:
         }
     )
     manifest.validate()
+
+
+def test_candidate_identity_depends_only_on_construction() -> None:
+    left = Candidate(points=((0, 0), (1, 2)), agent_id="a", strategy="first")
+    right = Candidate(points=((0, 0), (1, 2)), agent_id="b", strategy="second")
+    assert left.candidate_id == right.candidate_id

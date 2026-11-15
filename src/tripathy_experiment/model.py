@@ -18,6 +18,7 @@ class ExperimentManifest:
     baseline: str
     budget_usd: float
     stop_condition: str
+    linear_issue: str = ""
 
     @classmethod
     def from_dict(cls, payload: dict[str, Any]) -> ExperimentManifest:
@@ -30,6 +31,7 @@ class ExperimentManifest:
             baseline=str(payload.get("baseline", "")),
             budget_usd=float(payload.get("budget_usd", 0)),
             stop_condition=str(payload.get("stop_condition", "")),
+            linear_issue=str(payload.get("linear_issue", "")),
         )
 
     def validate(self) -> None:

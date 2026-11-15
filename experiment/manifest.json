@@ -1,22 +1,42 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "experiment_id": "02",
-  "status": "awaiting-idea",
-  "question": "",
-  "hypothesis": "",
-  "primary_metric": "",
-  "baseline": "",
-  "budget_usd": 0,
-  "stop_condition": "",
+  "linear_issue": "TRI-19",
+  "status": "running",
+  "phase": "P0 reproducibility gate",
+  "question": "Can a deterministic compiled local search that starts from an empty 32 x 32 grid reproduce the public 58-point no-isosceles result for AlphaEvolve Problem 59 under a fixed, declared iteration budget, with every result accepted only by two structurally independent exact oracles?",
+  "hypothesis": "At a fixed budget of 1000000 ruin/repair iterations per trial, at least one of the 64 from-scratch trials with seeds 0..63 of the mirror-symmetric baseline solver (solver/solver.c) reaches a dual-verified 58-point set, with zero oracle disagreements. The hypothesis is rejected if 0 of 64 trials reach 58.",
+  "primary_metric": "number of the 64 trials whose dual-verified cardinality reaches 58, reported with a 95% exact binomial interval; secondary metrics are best dual-verified cardinality, score distribution, wall and CPU seconds per trial, failure classes, and oracle disagreement count",
+  "baseline": "From-scratch deterministic C99 solver (solver/solver.c), symmetric under y -> 31-y, one seeded invocation per trial. The public 58-point certificate from google-deepmind/alphaevolve_repository_of_problems issue 10 is the external target only and is never used as solver initialization.",
+  "trial_definition": "One trial is one from-scratch seeded solver invocation in its own subprocess. Inner ruin/repair iterations are counted separately and are not trials.",
+  "budget_usd": 20,
+  "p0_cost_usd": 0.0,
+  "cost_model": "P0 runs only on the local machine with no provider calls, so its marginal cost is 0.0 USD. The 20 USD figure is the ceiling for the whole experiment; none of it is authorized in P0.",
+  "stop_condition": "P0 stops after the single 64-trial gate. If the solver fails deterministic replay or the two oracles disagree, stop before the gate and preserve the failing fixture. If 0 of 64 trials reach 58, record a failed reproduction gate and stop without tuning on seeds 0..63. If at least one trial reaches 58, record a passed gate and stop; no 59-point record search is part of P0. If the gate would exceed 15 minutes of wall-clock time, lower the iteration budget and label the run a screening gate.",
+  "dual_verification_gate": "A candidate is accepted only when the per-apex distance oracle (src/tripathy_experiment/no_isosceles.py) and the perpendicular-bisector oracle (src/tripathy_experiment/perpendicular_bisector_oracle.py) both accept it in the controller. Any disagreement is an infrastructure failure that is written to an artifact and makes the run exit nonzero.",
   "dataset": {
-    "name": "",
-    "version": "",
-    "cutoff": "",
-    "license": ""
+    "name": "AlphaEvolve repository Problem 59: no isosceles triangles",
+    "version": "upstream commit 8f447457957deac61e28bf1676746f0753b3b2f8; public 58-point set_a from issue 10",
+    "cutoff": "2026-11-15T12:30:00-08:00",
+    "license": "Apache-2.0 upstream; provenance and hashes in benchmarks/upstream/PROVENANCE.json"
   },
   "reproducibility": {
-    "command": "python -m tripathy_experiment.cli run --dry-run",
-    "random_seeds": [],
-    "artifact_directory": "artifacts/runs"
+    "command": "python -m tripathy_experiment.cli baseline --seeds 0-63 --iters 1000000 --workers 8 --artifact-dir artifacts/runs",
+    "random_seeds": "0..63",
+    "iteration_budget": 1000000,
+    "iteration_budget_calibration": "Chosen on off-gate seeds 1000..1015 only: about 13 seconds per trial with 8 workers on an Apple M5 Max. Wall time is measured per trial as a secondary quantity.",
+    "workers": 8,
+    "per_trial_timeout_seconds": 600,
+    "artifact_directory": "artifacts/runs",
+    "git": {
+      "head": "cc69b3953b8c5f29580bc903c1fc9373a28f94d2",
+      "dirty": true,
+      "note": "The tree is not clean and nothing in this tranche is committed. Each run artifact records HEAD, the dirty marker and SHA-256 hashes of the solver, oracles, controller, manifest and benchmark files as they were at run time."
+    },
+    "pinned_sha256": {
+      "benchmarks/no_isosceles_n32.json": "9bebfc52de362e80efc91d5455f2e20a103e766f191af8f665ee276907feb509",
+      "benchmarks/upstream/verify_construction.py.txt": "226370ddce5130a4e247ac1b1718bb4b120218d231507b1249137fd10e4eceaf",
+      "src/tripathy_experiment/no_isosceles.py": "4843790a2b7aa64502d4f580f356412f1d1e9247a260ce28377b1f3708ebf1ae"
+    }
   }
 }

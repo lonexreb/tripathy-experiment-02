@@ -1,0 +1,402 @@
+{
+  "candidate_sha256": "bb7833589ce6e285d37d9cb8386bfff0561fe6d91a6111b29ba2ea1a408d0b62",
+  "claimed_score": 56,
+  "command": [
+    "<solver>",
+    "--seed",
+    "32",
+    "--iters",
+    "1000000"
+  ],
+  "completed_at": "2026-11-15T21:16:07.766136+00:00",
+  "config": {
+    "gate_label": "reproduction",
+    "grid_size": 32,
+    "iters": 1000000,
+    "max_stdout_bytes": 1048576,
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63
+    ],
+    "target_score": 58,
+    "timeout_seconds": 600.0,
+    "trial_definition": "one from-scratch seeded solver invocation in its own subprocess",
+    "workers": 8
+  },
+  "config_sha256": "cc566874555f98233d4ade569d25acf373081cd87d268da7ee3c6d81b32d40b9",
+  "cost_usd": 0.0,
+  "cpu_seconds": 12.590018,
+  "detail": "",
+  "exit_code": 0,
+  "experiment_id": "02",
+  "failure_class": null,
+  "file_sha256": {
+    "benchmarks/no_isosceles_n32.json": "9bebfc52de362e80efc91d5455f2e20a103e766f191af8f665ee276907feb509",
+    "benchmarks/upstream/PROVENANCE.json": "f959a6a364c807b3e4f1bad76c38df85d58dcfaddb2adf011c7d15583993af6f",
+    "experiment/manifest.json": "14be24a32944c53a9d94f2fa401c23c652a80dd62da5f3373a673ab0230c09ec",
+    "project.yaml": "ef5a4edeb2fde7a0ef6c332c01aca379750c97b8f6698e0c4bc11681e67ef9ad",
+    "solver/solver.c": "ab141274701608a6841eed4f98c0ddf12e8135baeb4de2227b0b41b4758d471c",
+    "src/tripathy_experiment/baseline.py": "e5100b9ca15553018ee6487ce8d774deb70335bb9dd0fa3d7103a6c51c1b7340",
+    "src/tripathy_experiment/cli.py": "4d03334a256d28de692204c543c4f091aecdc8aa4f15f648797103dd216fde15",
+    "src/tripathy_experiment/no_isosceles.py": "4843790a2b7aa64502d4f580f356412f1d1e9247a260ce28377b1f3708ebf1ae",
+    "src/tripathy_experiment/perpendicular_bisector_oracle.py": "c8c8dc944d924267ce62acb9ec2eca448bad277baed88b33103d8242efb2113f"
+  },
+  "git": {
+    "dirty": true,
+    "dirty_paths": 28,
+    "head": "cc69b3953b8c5f29580bc903c1fc9373a28f94d2"
+  },
+  "initialization": "empty state; the public 58-point certificate is never read",
+  "iters": 1000000,
+  "kind": "baseline-trial",
+  "linear_issue": "TRI-19",
+  "oracle_bisector": {
+    "reason": "bisector oracle passed",
+    "score": 56,
+    "valid": true,
+    "witness": null
+  },
+  "oracle_distance": {
+    "reason": "exact verifier passed",
+    "score": 56,
+    "valid": true,
+    "witness": null
+  },
+  "oracles_agree": true,
+  "points": [
+    [
+      0,
+      10
+    ],
+    [
+      0,
+      21
+    ],
+    [
+      1,
+      4
+    ],
+    [
+      1,
+      10
+    ],
+    [
+      1,
+      14
+    ],
+    [
+      1,
+      17
+    ],
+    [
+      1,
+      21
+    ],
+    [
+      1,
+      27
+    ],
+    [
+      2,
+      4
+    ],
+    [
+      2,
+      14
+    ],
+    [
+      2,
+      17
+    ],
+    [
+      2,
+      27
+    ],
+    [
+      5,
+      0
+    ],
+    [
+      5,
+      1
+    ],
+    [
+      5,
+      30
+    ],
+    [
+      5,
+      31
+    ],
+    [
+      7,
+      0
+    ],
+    [
+      7,
+      1
+    ],
+    [
+      7,
+      30
+    ],
+    [
+      7,
+      31
+    ],
+    [
+      11,
+      0
+    ],
+    [
+      11,
+      1
+    ],
+    [
+      11,
+      30
+    ],
+    [
+      11,
+      31
+    ],
+    [
+      13,
+      0
+    ],
+    [
+      13,
+      1
+    ],
+    [
+      13,
+      30
+    ],
+    [
+      13,
+      31
+    ],
+    [
+      18,
+      0
+    ],
+    [
+      18,
+      31
+    ],
+    [
+      20,
+      0
+    ],
+    [
+      20,
+      1
+    ],
+    [
+      20,
+      30
+    ],
+    [
+      20,
+      31
+    ],
+    [
+      24,
+      0
+    ],
+    [
+      24,
+      1
+    ],
+    [
+      24,
+      30
+    ],
+    [
+      24,
+      31
+    ],
+    [
+      26,
+      0
+    ],
+    [
+      26,
+      1
+    ],
+    [
+      26,
+      30
+    ],
+    [
+      26,
+      31
+    ],
+    [
+      29,
+      4
+    ],
+    [
+      29,
+      8
+    ],
+    [
+      29,
+      14
+    ],
+    [
+      29,
+      17
+    ],
+    [
+      29,
+      23
+    ],
+    [
+      29,
+      27
+    ],
+    [
+      30,
+      4
+    ],
+    [
+      30,
+      10
+    ],
+    [
+      30,
+      14
+    ],
+    [
+      30,
+      17
+    ],
+    [
+      30,
+      21
+    ],
+    [
+      30,
+      27
+    ],
+    [
+      31,
+      10
+    ],
+    [
+      31,
+      21
+    ]
+  ],
+  "run_id": "bb6b15b0-c0b9-426f-a67d-464cdce1a551",
+  "runtime": {
+    "compiler": [
+      "Apple clang version 21.0.0 (clang-2100.1.1.101)"
+    ],
+    "cpu_brand": "Apple M5 Max",
+    "cpu_count": 18,
+    "machine": "arm64",
+    "platform": "macOS-26.5-arm64-arm-64bit",
+    "python": "3.12.13"
+  },
+  "schema_version": 2,
+  "score": 56,
+  "seed": 32,
+  "solver_build": {
+    "binary": "/Users/shubhankar/Documents/OpenAlex/type_classification/iterate-ai-hackathon/tripathy-experiment-02/build/solver-ab141274701608a6",
+    "binary_sha256": "0d2ed03f43a2f520737b19f8157390f39767ec188ffb7bf32f6f0876f65c896b",
+    "compile_command": [
+      "cc",
+      "-O2",
+      "-std=c99",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-o",
+      "<binary>",
+      "solver/solver.c"
+    ],
+    "source": "solver/solver.c",
+    "source_sha256": "ab141274701608a6841eed4f98c0ddf12e8135baeb4de2227b0b41b4758d471c"
+  },
+  "solver_counters": {
+    "aspirations": 10,
+    "cardinality_raises": 13,
+    "construction_pair_adds": 16,
+    "final_working_pairs": 29,
+    "final_working_violations": 26,
+    "point_adds": 2000058,
+    "point_removes": 2000000,
+    "ruin_repair_moves": 1000000
+  },
+  "solver_termination_reason": "iterations_exhausted",
+  "solver_version": "evohive-symtabu-c99-1 noise=20 tabu=3+rand10",
+  "started_at": "2026-11-15T21:15:55.033587+00:00",
+  "stdout_bytes": 824,
+  "stdout_sha256": "d01ae08f20b0c6c52bd0fc1553061d3ea60de221cda24d5663a767eaf080f932",
+  "trial_id": "bb6b15b0-c0b9-426f-a67d-464cdce1a551.trial-0032",
+  "wall_seconds": 12.732452624943107
+}

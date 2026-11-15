@@ -1,16 +1,34 @@
 schema_version: 1
 experiment_id: 02
-name: Tripathy Experiment 02
-status: awaiting-idea
+name: EvoHive — Track 1 Autoresearch
+status: running
 owner: Claude session 02
 systems:
   github: https://github.com/lonexreb/tripathy-experiment-02
   linear_project: https://linear.app/tripathy/project/tripathy-experiment-02-awaiting-idea-0b6a8f9d9d84/overview
   slack_channel: https://app.slack.com/client/T0CHM33JRDH/C0CJN646HME
   vercel_project: not-linked
-  modal_app: tripathy-experiment-02
+  modal_app: evohive-track1
 controls:
   primary_branch: main
   protected_artifacts: true
   secrets_in_repo: forbidden
   human_readability_required: true
+experiment:
+  linear_issue: https://linear.app/tripathy/issue/TRI-19
+  track: "Track 1: Build Your Own Autoresearch Framework"
+  sponsor_challenges:
+    - Exa
+    - past.dev
+    - Modal
+  phase: P0 reproducibility gate
+  trial_definition: one from-scratch seeded solver invocation
+  baseline_seeds: 0..63
+  iteration_budget: 1000000
+  external_target: public 58-point certificate, never used as solver initialization
+  p0_cost_usd: 0.0
+  dual_verification_gate: distance oracle and perpendicular-bisector oracle must both accept
+  stop_condition: one 64-trial gate; stop on oracle disagreement, replay failure, or 0 of 64 reaching 58
+  git:
+    head: cc69b3953b8c5f29580bc903c1fc9373a28f94d2
+    dirty: true

@@ -1,0 +1,2189 @@
+{
+  "beat_target": false,
+  "best": {
+    "agent_id": "public-baseline",
+    "candidate_id": "203d5103442d5299",
+    "inherited_from_agent": null,
+    "parent_id": null,
+    "points": [
+      [
+        0,
+        4
+      ],
+      [
+        0,
+        5
+      ],
+      [
+        0,
+        26
+      ],
+      [
+        0,
+        27
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        29
+      ],
+      [
+        3,
+        0
+      ],
+      [
+        3,
+        11
+      ],
+      [
+        3,
+        20
+      ],
+      [
+        3,
+        31
+      ],
+      [
+        6,
+        0
+      ],
+      [
+        6,
+        11
+      ],
+      [
+        6,
+        20
+      ],
+      [
+        6,
+        31
+      ],
+      [
+        7,
+        0
+      ],
+      [
+        7,
+        11
+      ],
+      [
+        7,
+        20
+      ],
+      [
+        7,
+        31
+      ],
+      [
+        8,
+        1
+      ],
+      [
+        8,
+        30
+      ],
+      [
+        9,
+        1
+      ],
+      [
+        9,
+        30
+      ],
+      [
+        11,
+        4
+      ],
+      [
+        11,
+        5
+      ],
+      [
+        11,
+        8
+      ],
+      [
+        11,
+        23
+      ],
+      [
+        11,
+        26
+      ],
+      [
+        11,
+        27
+      ],
+      [
+        12,
+        1
+      ],
+      [
+        12,
+        30
+      ],
+      [
+        19,
+        1
+      ],
+      [
+        19,
+        30
+      ],
+      [
+        20,
+        4
+      ],
+      [
+        20,
+        5
+      ],
+      [
+        20,
+        8
+      ],
+      [
+        20,
+        23
+      ],
+      [
+        20,
+        26
+      ],
+      [
+        20,
+        27
+      ],
+      [
+        22,
+        1
+      ],
+      [
+        22,
+        30
+      ],
+      [
+        23,
+        1
+      ],
+      [
+        23,
+        30
+      ],
+      [
+        24,
+        0
+      ],
+      [
+        24,
+        11
+      ],
+      [
+        24,
+        20
+      ],
+      [
+        24,
+        31
+      ],
+      [
+        25,
+        0
+      ],
+      [
+        25,
+        11
+      ],
+      [
+        25,
+        20
+      ],
+      [
+        25,
+        31
+      ],
+      [
+        28,
+        0
+      ],
+      [
+        28,
+        11
+      ],
+      [
+        28,
+        20
+      ],
+      [
+        28,
+        31
+      ],
+      [
+        31,
+        4
+      ],
+      [
+        31,
+        5
+      ],
+      [
+        31,
+        26
+      ],
+      [
+        31,
+        27
+      ]
+    ],
+    "score": 58,
+    "source_urls": [],
+    "strategy": "certificate"
+  },
+  "completed_at": "2026-11-15T20:33:21.811565+00:00",
+  "config": {
+    "agents": 3,
+    "backend": "local",
+    "generations": 2,
+    "grid_size": 32,
+    "memory_mode": "local",
+    "search_mode": "fixture",
+    "seed": 7,
+    "target_score": 58
+  },
+  "events": [
+    {
+      "accepted": false,
+      "agent_id": "agent-1",
+      "candidate": {
+        "agent_id": "agent-1",
+        "candidate_id": "203d5103442d5299",
+        "inherited_from_agent": null,
+        "parent_id": "203d5103442d5299",
+        "points": [
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            26
+          ],
+          [
+            0,
+            27
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            29
+          ],
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            11
+          ],
+          [
+            3,
+            20
+          ],
+          [
+            3,
+            31
+          ],
+          [
+            6,
+            0
+          ],
+          [
+            6,
+            11
+          ],
+          [
+            6,
+            20
+          ],
+          [
+            6,
+            31
+          ],
+          [
+            7,
+            0
+          ],
+          [
+            7,
+            11
+          ],
+          [
+            7,
+            20
+          ],
+          [
+            7,
+            31
+          ],
+          [
+            8,
+            1
+          ],
+          [
+            8,
+            30
+          ],
+          [
+            9,
+            1
+          ],
+          [
+            9,
+            30
+          ],
+          [
+            11,
+            4
+          ],
+          [
+            11,
+            5
+          ],
+          [
+            11,
+            8
+          ],
+          [
+            11,
+            23
+          ],
+          [
+            11,
+            26
+          ],
+          [
+            11,
+            27
+          ],
+          [
+            12,
+            1
+          ],
+          [
+            12,
+            30
+          ],
+          [
+            19,
+            1
+          ],
+          [
+            19,
+            30
+          ],
+          [
+            20,
+            4
+          ],
+          [
+            20,
+            5
+          ],
+          [
+            20,
+            8
+          ],
+          [
+            20,
+            23
+          ],
+          [
+            20,
+            26
+          ],
+          [
+            20,
+            27
+          ],
+          [
+            22,
+            1
+          ],
+          [
+            22,
+            30
+          ],
+          [
+            23,
+            1
+          ],
+          [
+            23,
+            30
+          ],
+          [
+            24,
+            0
+          ],
+          [
+            24,
+            11
+          ],
+          [
+            24,
+            20
+          ],
+          [
+            24,
+            31
+          ],
+          [
+            25,
+            0
+          ],
+          [
+            25,
+            11
+          ],
+          [
+            25,
+            20
+          ],
+          [
+            25,
+            31
+          ],
+          [
+            28,
+            0
+          ],
+          [
+            28,
+            11
+          ],
+          [
+            28,
+            20
+          ],
+          [
+            28,
+            31
+          ],
+          [
+            31,
+            4
+          ],
+          [
+            31,
+            5
+          ],
+          [
+            31,
+            26
+          ],
+          [
+            31,
+            27
+          ]
+        ],
+        "score": 58,
+        "source_urls": [
+          "https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/10"
+        ],
+        "strategy": "ruin_one"
+      },
+      "executor_error": null,
+      "generation": 0,
+      "inherited_from_agent": null,
+      "policy_after_feedback": {
+        "greedy_add": 1.0,
+        "ruin_one": 0.95,
+        "ruin_three": 1.0,
+        "symmetric_ruin": 1.0
+      },
+      "research_sources": [
+        {
+          "text": "mirror symmetry local search exact-integer verifier",
+          "title": "Public 58-point certificate uses mirror symmetry and exact checks",
+          "url": "https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/10"
+        }
+      ],
+      "sandbox": {
+        "backend": "local",
+        "latency_seconds": 0.0002686248626559973,
+        "reason": "exact verifier passed",
+        "score": 58,
+        "valid": true
+      },
+      "sandbox_agrees": true,
+      "trusted_verifier": {
+        "reason": "exact verifier passed",
+        "score": 58,
+        "valid": true,
+        "witness": null
+      }
+    },
+    {
+      "accepted": false,
+      "agent_id": "agent-2",
+      "candidate": {
+        "agent_id": "agent-2",
+        "candidate_id": "203d5103442d5299",
+        "inherited_from_agent": "agent-1",
+        "parent_id": "203d5103442d5299",
+        "points": [
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            26
+          ],
+          [
+            0,
+            27
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            29
+          ],
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            11
+          ],
+          [
+            3,
+            20
+          ],
+          [
+            3,
+            31
+          ],
+          [
+            6,
+            0
+          ],
+          [
+            6,
+            11
+          ],
+          [
+            6,
+            20
+          ],
+          [
+            6,
+            31
+          ],
+          [
+            7,
+            0
+          ],
+          [
+            7,
+            11
+          ],
+          [
+            7,
+            20
+          ],
+          [
+            7,
+            31
+          ],
+          [
+            8,
+            1
+          ],
+          [
+            8,
+            30
+          ],
+          [
+            9,
+            1
+          ],
+          [
+            9,
+            30
+          ],
+          [
+            11,
+            4
+          ],
+          [
+            11,
+            5
+          ],
+          [
+            11,
+            8
+          ],
+          [
+            11,
+            23
+          ],
+          [
+            11,
+            26
+          ],
+          [
+            11,
+            27
+          ],
+          [
+            12,
+            1
+          ],
+          [
+            12,
+            30
+          ],
+          [
+            19,
+            1
+          ],
+          [
+            19,
+            30
+          ],
+          [
+            20,
+            4
+          ],
+          [
+            20,
+            5
+          ],
+          [
+            20,
+            8
+          ],
+          [
+            20,
+            23
+          ],
+          [
+            20,
+            26
+          ],
+          [
+            20,
+            27
+          ],
+          [
+            22,
+            1
+          ],
+          [
+            22,
+            30
+          ],
+          [
+            23,
+            1
+          ],
+          [
+            23,
+            30
+          ],
+          [
+            24,
+            0
+          ],
+          [
+            24,
+            11
+          ],
+          [
+            24,
+            20
+          ],
+          [
+            24,
+            31
+          ],
+          [
+            25,
+            0
+          ],
+          [
+            25,
+            11
+          ],
+          [
+            25,
+            20
+          ],
+          [
+            25,
+            31
+          ],
+          [
+            28,
+            0
+          ],
+          [
+            28,
+            11
+          ],
+          [
+            28,
+            20
+          ],
+          [
+            28,
+            31
+          ],
+          [
+            31,
+            4
+          ],
+          [
+            31,
+            5
+          ],
+          [
+            31,
+            26
+          ],
+          [
+            31,
+            27
+          ]
+        ],
+        "score": 58,
+        "source_urls": [
+          "https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/10"
+        ],
+        "strategy": "symmetric_ruin"
+      },
+      "executor_error": null,
+      "generation": 0,
+      "inherited_from_agent": "agent-1",
+      "policy_after_feedback": {
+        "greedy_add": 1.0,
+        "ruin_one": 0.95,
+        "ruin_three": 1.0,
+        "symmetric_ruin": 0.95
+      },
+      "research_sources": [
+        {
+          "text": "mirror symmetry local search exact-integer verifier",
+          "title": "Public 58-point certificate uses mirror symmetry and exact checks",
+          "url": "https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/10"
+        }
+      ],
+      "sandbox": {
+        "backend": "local",
+        "latency_seconds": 0.0002986670006066561,
+        "reason": "exact verifier passed",
+        "score": 58,
+        "valid": true
+      },
+      "sandbox_agrees": true,
+      "trusted_verifier": {
+        "reason": "exact verifier passed",
+        "score": 58,
+        "valid": true,
+        "witness": null
+      }
+    },
+    {
+      "accepted": false,
+      "agent_id": "agent-3",
+      "candidate": {
+        "agent_id": "agent-3",
+        "candidate_id": "203d5103442d5299",
+        "inherited_from_agent": "agent-1",
+        "parent_id": "203d5103442d5299",
+        "points": [
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            26
+          ],
+          [
+            0,
+            27
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            29
+          ],
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            11
+          ],
+          [
+            3,
+            20
+          ],
+          [
+            3,
+            31
+          ],
+          [
+            6,
+            0
+          ],
+          [
+            6,
+            11
+          ],
+          [
+            6,
+            20
+          ],
+          [
+            6,
+            31
+          ],
+          [
+            7,
+            0
+          ],
+          [
+            7,
+            11
+          ],
+          [
+            7,
+            20
+          ],
+          [
+            7,
+            31
+          ],
+          [
+            8,
+            1
+          ],
+          [
+            8,
+            30
+          ],
+          [
+            9,
+            1
+          ],
+          [
+            9,
+            30
+          ],
+          [
+            11,
+            4
+          ],
+          [
+            11,
+            5
+          ],
+          [
+            11,
+            8
+          ],
+          [
+            11,
+            23
+          ],
+          [
+            11,
+            26
+          ],
+          [
+            11,
+            27
+          ],
+          [
+            12,
+            1
+          ],
+          [
+            12,
+            30
+          ],
+          [
+            19,
+            1
+          ],
+          [
+            19,
+            30
+          ],
+          [
+            20,
+            4
+          ],
+          [
+            20,
+            5
+          ],
+          [
+            20,
+            8
+          ],
+          [
+            20,
+            23
+          ],
+          [
+            20,
+            26
+          ],
+          [
+            20,
+            27
+          ],
+          [
+            22,
+            1
+          ],
+          [
+            22,
+            30
+          ],
+          [
+            23,
+            1
+          ],
+          [
+            23,
+            30
+          ],
+          [
+            24,
+            0
+          ],
+          [
+            24,
+            11
+          ],
+          [
+            24,
+            20
+          ],
+          [
+            24,
+            31
+          ],
+          [
+            25,
+            0
+          ],
+          [
+            25,
+            11
+          ],
+          [
+            25,
+            20
+          ],
+          [
+            25,
+            31
+          ],
+          [
+            28,
+            0
+          ],
+          [
+            28,
+            11
+          ],
+          [
+            28,
+            20
+          ],
+          [
+            28,
+            31
+          ],
+          [
+            31,
+            4
+          ],
+          [
+            31,
+            5
+          ],
+          [
+            31,
+            26
+          ],
+          [
+            31,
+            27
+          ]
+        ],
+        "score": 58,
+        "source_urls": [
+          "https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/10"
+        ],
+        "strategy": "ruin_one"
+      },
+      "executor_error": null,
+      "generation": 0,
+      "inherited_from_agent": "agent-1",
+      "policy_after_feedback": {
+        "greedy_add": 1.0,
+        "ruin_one": 0.9025,
+        "ruin_three": 1.0,
+        "symmetric_ruin": 0.95
+      },
+      "research_sources": [
+        {
+          "text": "mirror symmetry local search exact-integer verifier",
+          "title": "Public 58-point certificate uses mirror symmetry and exact checks",
+          "url": "https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/10"
+        }
+      ],
+      "sandbox": {
+        "backend": "local",
+        "latency_seconds": 0.0002747918479144573,
+        "reason": "exact verifier passed",
+        "score": 58,
+        "valid": true
+      },
+      "sandbox_agrees": true,
+      "trusted_verifier": {
+        "reason": "exact verifier passed",
+        "score": 58,
+        "valid": true,
+        "witness": null
+      }
+    },
+    {
+      "accepted": false,
+      "agent_id": "agent-1",
+      "candidate": {
+        "agent_id": "agent-1",
+        "candidate_id": "203d5103442d5299",
+        "inherited_from_agent": "agent-2",
+        "parent_id": "203d5103442d5299",
+        "points": [
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            26
+          ],
+          [
+            0,
+            27
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            29
+          ],
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            11
+          ],
+          [
+            3,
+            20
+          ],
+          [
+            3,
+            31
+          ],
+          [
+            6,
+            0
+          ],
+          [
+            6,
+            11
+          ],
+          [
+            6,
+            20
+          ],
+          [
+            6,
+            31
+          ],
+          [
+            7,
+            0
+          ],
+          [
+            7,
+            11
+          ],
+          [
+            7,
+            20
+          ],
+          [
+            7,
+            31
+          ],
+          [
+            8,
+            1
+          ],
+          [
+            8,
+            30
+          ],
+          [
+            9,
+            1
+          ],
+          [
+            9,
+            30
+          ],
+          [
+            11,
+            4
+          ],
+          [
+            11,
+            5
+          ],
+          [
+            11,
+            8
+          ],
+          [
+            11,
+            23
+          ],
+          [
+            11,
+            26
+          ],
+          [
+            11,
+            27
+          ],
+          [
+            12,
+            1
+          ],
+          [
+            12,
+            30
+          ],
+          [
+            19,
+            1
+          ],
+          [
+            19,
+            30
+          ],
+          [
+            20,
+            4
+          ],
+          [
+            20,
+            5
+          ],
+          [
+            20,
+            8
+          ],
+          [
+            20,
+            23
+          ],
+          [
+            20,
+            26
+          ],
+          [
+            20,
+            27
+          ],
+          [
+            22,
+            1
+          ],
+          [
+            22,
+            30
+          ],
+          [
+            23,
+            1
+          ],
+          [
+            23,
+            30
+          ],
+          [
+            24,
+            0
+          ],
+          [
+            24,
+            11
+          ],
+          [
+            24,
+            20
+          ],
+          [
+            24,
+            31
+          ],
+          [
+            25,
+            0
+          ],
+          [
+            25,
+            11
+          ],
+          [
+            25,
+            20
+          ],
+          [
+            25,
+            31
+          ],
+          [
+            28,
+            0
+          ],
+          [
+            28,
+            11
+          ],
+          [
+            28,
+            20
+          ],
+          [
+            28,
+            31
+          ],
+          [
+            31,
+            4
+          ],
+          [
+            31,
+            5
+          ],
+          [
+            31,
+            26
+          ],
+          [
+            31,
+            27
+          ]
+        ],
+        "score": 58,
+        "source_urls": [
+          "https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/10"
+        ],
+        "strategy": "ruin_three"
+      },
+      "executor_error": null,
+      "generation": 1,
+      "inherited_from_agent": "agent-2",
+      "policy_after_feedback": {
+        "greedy_add": 1.0,
+        "ruin_one": 0.9025,
+        "ruin_three": 0.95,
+        "symmetric_ruin": 0.95
+      },
+      "research_sources": [
+        {
+          "text": "mirror symmetry local search exact-integer verifier",
+          "title": "Public 58-point certificate uses mirror symmetry and exact checks",
+          "url": "https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/10"
+        }
+      ],
+      "sandbox": {
+        "backend": "local",
+        "latency_seconds": 0.00027108308859169483,
+        "reason": "exact verifier passed",
+        "score": 58,
+        "valid": true
+      },
+      "sandbox_agrees": true,
+      "trusted_verifier": {
+        "reason": "exact verifier passed",
+        "score": 58,
+        "valid": true,
+        "witness": null
+      }
+    },
+    {
+      "accepted": false,
+      "agent_id": "agent-2",
+      "candidate": {
+        "agent_id": "agent-2",
+        "candidate_id": "203d5103442d5299",
+        "inherited_from_agent": "agent-1",
+        "parent_id": "203d5103442d5299",
+        "points": [
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            26
+          ],
+          [
+            0,
+            27
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            29
+          ],
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            11
+          ],
+          [
+            3,
+            20
+          ],
+          [
+            3,
+            31
+          ],
+          [
+            6,
+            0
+          ],
+          [
+            6,
+            11
+          ],
+          [
+            6,
+            20
+          ],
+          [
+            6,
+            31
+          ],
+          [
+            7,
+            0
+          ],
+          [
+            7,
+            11
+          ],
+          [
+            7,
+            20
+          ],
+          [
+            7,
+            31
+          ],
+          [
+            8,
+            1
+          ],
+          [
+            8,
+            30
+          ],
+          [
+            9,
+            1
+          ],
+          [
+            9,
+            30
+          ],
+          [
+            11,
+            4
+          ],
+          [
+            11,
+            5
+          ],
+          [
+            11,
+            8
+          ],
+          [
+            11,
+            23
+          ],
+          [
+            11,
+            26
+          ],
+          [
+            11,
+            27
+          ],
+          [
+            12,
+            1
+          ],
+          [
+            12,
+            30
+          ],
+          [
+            19,
+            1
+          ],
+          [
+            19,
+            30
+          ],
+          [
+            20,
+            4
+          ],
+          [
+            20,
+            5
+          ],
+          [
+            20,
+            8
+          ],
+          [
+            20,
+            23
+          ],
+          [
+            20,
+            26
+          ],
+          [
+            20,
+            27
+          ],
+          [
+            22,
+            1
+          ],
+          [
+            22,
+            30
+          ],
+          [
+            23,
+            1
+          ],
+          [
+            23,
+            30
+          ],
+          [
+            24,
+            0
+          ],
+          [
+            24,
+            11
+          ],
+          [
+            24,
+            20
+          ],
+          [
+            24,
+            31
+          ],
+          [
+            25,
+            0
+          ],
+          [
+            25,
+            11
+          ],
+          [
+            25,
+            20
+          ],
+          [
+            25,
+            31
+          ],
+          [
+            28,
+            0
+          ],
+          [
+            28,
+            11
+          ],
+          [
+            28,
+            20
+          ],
+          [
+            28,
+            31
+          ],
+          [
+            31,
+            4
+          ],
+          [
+            31,
+            5
+          ],
+          [
+            31,
+            26
+          ],
+          [
+            31,
+            27
+          ]
+        ],
+        "score": 58,
+        "source_urls": [
+          "https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/10"
+        ],
+        "strategy": "ruin_three"
+      },
+      "executor_error": null,
+      "generation": 1,
+      "inherited_from_agent": "agent-1",
+      "policy_after_feedback": {
+        "greedy_add": 1.0,
+        "ruin_one": 0.9025,
+        "ruin_three": 0.9025,
+        "symmetric_ruin": 0.95
+      },
+      "research_sources": [
+        {
+          "text": "mirror symmetry local search exact-integer verifier",
+          "title": "Public 58-point certificate uses mirror symmetry and exact checks",
+          "url": "https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/10"
+        }
+      ],
+      "sandbox": {
+        "backend": "local",
+        "latency_seconds": 0.0002794999163597822,
+        "reason": "exact verifier passed",
+        "score": 58,
+        "valid": true
+      },
+      "sandbox_agrees": true,
+      "trusted_verifier": {
+        "reason": "exact verifier passed",
+        "score": 58,
+        "valid": true,
+        "witness": null
+      }
+    },
+    {
+      "accepted": false,
+      "agent_id": "agent-3",
+      "candidate": {
+        "agent_id": "agent-3",
+        "candidate_id": "203d5103442d5299",
+        "inherited_from_agent": "agent-1",
+        "parent_id": "203d5103442d5299",
+        "points": [
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            26
+          ],
+          [
+            0,
+            27
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            29
+          ],
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            11
+          ],
+          [
+            3,
+            20
+          ],
+          [
+            3,
+            31
+          ],
+          [
+            6,
+            0
+          ],
+          [
+            6,
+            11
+          ],
+          [
+            6,
+            20
+          ],
+          [
+            6,
+            31
+          ],
+          [
+            7,
+            0
+          ],
+          [
+            7,
+            11
+          ],
+          [
+            7,
+            20
+          ],
+          [
+            7,
+            31
+          ],
+          [
+            8,
+            1
+          ],
+          [
+            8,
+            30
+          ],
+          [
+            9,
+            1
+          ],
+          [
+            9,
+            30
+          ],
+          [
+            11,
+            4
+          ],
+          [
+            11,
+            5
+          ],
+          [
+            11,
+            8
+          ],
+          [
+            11,
+            23
+          ],
+          [
+            11,
+            26
+          ],
+          [
+            11,
+            27
+          ],
+          [
+            12,
+            1
+          ],
+          [
+            12,
+            30
+          ],
+          [
+            19,
+            1
+          ],
+          [
+            19,
+            30
+          ],
+          [
+            20,
+            4
+          ],
+          [
+            20,
+            5
+          ],
+          [
+            20,
+            8
+          ],
+          [
+            20,
+            23
+          ],
+          [
+            20,
+            26
+          ],
+          [
+            20,
+            27
+          ],
+          [
+            22,
+            1
+          ],
+          [
+            22,
+            30
+          ],
+          [
+            23,
+            1
+          ],
+          [
+            23,
+            30
+          ],
+          [
+            24,
+            0
+          ],
+          [
+            24,
+            11
+          ],
+          [
+            24,
+            20
+          ],
+          [
+            24,
+            31
+          ],
+          [
+            25,
+            0
+          ],
+          [
+            25,
+            11
+          ],
+          [
+            25,
+            20
+          ],
+          [
+            25,
+            31
+          ],
+          [
+            28,
+            0
+          ],
+          [
+            28,
+            11
+          ],
+          [
+            28,
+            20
+          ],
+          [
+            28,
+            31
+          ],
+          [
+            31,
+            4
+          ],
+          [
+            31,
+            5
+          ],
+          [
+            31,
+            26
+          ],
+          [
+            31,
+            27
+          ]
+        ],
+        "score": 58,
+        "source_urls": [
+          "https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/10"
+        ],
+        "strategy": "greedy_add"
+      },
+      "executor_error": null,
+      "generation": 1,
+      "inherited_from_agent": "agent-1",
+      "policy_after_feedback": {
+        "greedy_add": 0.95,
+        "ruin_one": 0.9025,
+        "ruin_three": 0.9025,
+        "symmetric_ruin": 0.95
+      },
+      "research_sources": [
+        {
+          "text": "mirror symmetry local search exact-integer verifier",
+          "title": "Public 58-point certificate uses mirror symmetry and exact checks",
+          "url": "https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/10"
+        }
+      ],
+      "sandbox": {
+        "backend": "local",
+        "latency_seconds": 0.0002672499977052212,
+        "reason": "exact verifier passed",
+        "score": 58,
+        "valid": true
+      },
+      "sandbox_agrees": true,
+      "trusted_verifier": {
+        "reason": "exact verifier passed",
+        "score": 58,
+        "valid": true,
+        "witness": null
+      }
+    }
+  ],
+  "final_policy": {
+    "greedy_add": 0.95,
+    "ruin_one": 0.9025,
+    "ruin_three": 0.9025,
+    "symmetric_ruin": 0.95
+  },
+  "initial": {
+    "agent_id": "public-baseline",
+    "candidate_id": "203d5103442d5299",
+    "inherited_from_agent": null,
+    "parent_id": null,
+    "points": [
+      [
+        0,
+        4
+      ],
+      [
+        0,
+        5
+      ],
+      [
+        0,
+        26
+      ],
+      [
+        0,
+        27
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        29
+      ],
+      [
+        3,
+        0
+      ],
+      [
+        3,
+        11
+      ],
+      [
+        3,
+        20
+      ],
+      [
+        3,
+        31
+      ],
+      [
+        6,
+        0
+      ],
+      [
+        6,
+        11
+      ],
+      [
+        6,
+        20
+      ],
+      [
+        6,
+        31
+      ],
+      [
+        7,
+        0
+      ],
+      [
+        7,
+        11
+      ],
+      [
+        7,
+        20
+      ],
+      [
+        7,
+        31
+      ],
+      [
+        8,
+        1
+      ],
+      [
+        8,
+        30
+      ],
+      [
+        9,
+        1
+      ],
+      [
+        9,
+        30
+      ],
+      [
+        11,
+        4
+      ],
+      [
+        11,
+        5
+      ],
+      [
+        11,
+        8
+      ],
+      [
+        11,
+        23
+      ],
+      [
+        11,
+        26
+      ],
+      [
+        11,
+        27
+      ],
+      [
+        12,
+        1
+      ],
+      [
+        12,
+        30
+      ],
+      [
+        19,
+        1
+      ],
+      [
+        19,
+        30
+      ],
+      [
+        20,
+        4
+      ],
+      [
+        20,
+        5
+      ],
+      [
+        20,
+        8
+      ],
+      [
+        20,
+        23
+      ],
+      [
+        20,
+        26
+      ],
+      [
+        20,
+        27
+      ],
+      [
+        22,
+        1
+      ],
+      [
+        22,
+        30
+      ],
+      [
+        23,
+        1
+      ],
+      [
+        23,
+        30
+      ],
+      [
+        24,
+        0
+      ],
+      [
+        24,
+        11
+      ],
+      [
+        24,
+        20
+      ],
+      [
+        24,
+        31
+      ],
+      [
+        25,
+        0
+      ],
+      [
+        25,
+        11
+      ],
+      [
+        25,
+        20
+      ],
+      [
+        25,
+        31
+      ],
+      [
+        28,
+        0
+      ],
+      [
+        28,
+        11
+      ],
+      [
+        28,
+        20
+      ],
+      [
+        28,
+        31
+      ],
+      [
+        31,
+        4
+      ],
+      [
+        31,
+        5
+      ],
+      [
+        31,
+        26
+      ],
+      [
+        31,
+        27
+      ]
+    ],
+    "score": 58,
+    "source_urls": [],
+    "strategy": "certificate"
+  },
+  "latency_seconds": 0.2403426670935005,
+  "linear_issue": "TRI-18",
+  "provider_failures": [],
+  "run_id": "08f01195-97f6-4e94-80c3-47dbda44f162",
+  "schema_version": 1,
+  "started_at": "2026-11-15T20:33:21.571233+00:00",
+  "trials": 6
+}

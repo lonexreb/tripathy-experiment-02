@@ -1,16 +1,215 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "experiment_id": "02",
-  "status": "awaiting-idea",
-  "active_linear_issue": null,
-  "git_sha": null,
-  "objective": "Await idea assignment",
+  "status": "running",
+  "active_linear_issue": "TRI-19",
+  "git_sha": "cc69b3953b8c5f29580bc903c1fc9373a28f94d2",
+  "git_dirty": true,
+  "git_note": "Nothing in this tranche is committed. Evidence is tied to HEAD plus a dirty marker and the SHA-256 file hashes stored in every run artifact, not to a clean commit.",
+  "objective": "TRI-19 P0: replace the public-certificate replay with a from-scratch, deterministic, dual-verified baseline for AlphaEvolve Problem 59 and record one 64-trial reproduction gate",
   "subagents": [],
-  "runs": [],
-  "result": null,
-  "cost_usd": 0,
-  "latency_seconds": null,
-  "blockers": [],
-  "next_decision": "Define the idea and pass the start gate",
-  "updated_at": "2026-11-14T00:00:00Z"
+  "runs": [
+    {
+      "run_id": "854eee0f-73ac-4328-8736-9c2c3df39a69",
+      "mode": "local-small-grid",
+      "best_score": 10,
+      "trials": 6,
+      "latency_seconds": 0.0015967909712344408,
+      "evidence": "artifacts/runs/854eee0f-73ac-4328-8736-9c2c3df39a69.json",
+      "qualification": "Systems smoke test of the Python swarm on a small grid; not a competitive baseline."
+    },
+    {
+      "run_id": "08f01195-97f6-4e94-80c3-47dbda44f162",
+      "mode": "local-public-baseline",
+      "best_score": 58,
+      "trials": 6,
+      "latency_seconds": 0.2403426670935005,
+      "evidence": "artifacts/runs/08f01195-97f6-4e94-80c3-47dbda44f162.json",
+      "qualification": "Replay only: this run was initialized from the public 58-point certificate, so its best_score of 58 is not a from-scratch reproduction and not a discovery."
+    },
+    {
+      "run_id": "0d761a90-5869-4cd3-b872-b45e5ac23314",
+      "mode": "modal-sandbox-smoke",
+      "best_score": 6,
+      "trials": 1,
+      "latency_seconds": 2.9354780421126634,
+      "evidence": "artifacts/runs/0d761a90-5869-4cd3-b872-b45e5ac23314.json",
+      "qualification": "The Modal sandbox ran a copy of the same per-apex distance algorithm as the controller, so its agreement was one algorithm agreeing with itself, not independent verification. Its provider cost was not recorded."
+    },
+    {
+      "run_id": "bb6b15b0-c0b9-426f-a67d-464cdce1a551",
+      "mode": "from-scratch-compiled-baseline-gate",
+      "linear_issue": "TRI-19",
+      "gate_label": "reproduction",
+      "gate_status": "passed",
+      "trials": 64,
+      "child_artifacts": 64,
+      "seeds": "0..63",
+      "iters_per_trial": 1000000,
+      "workers": 8,
+      "best_score": 58,
+      "score_counts": {
+        "56": 54,
+        "58": 10
+      },
+      "reach_58_count": 10,
+      "reach_58_seeds": [
+        4,
+        5,
+        10,
+        18,
+        22,
+        29,
+        41,
+        44,
+        53,
+        61
+      ],
+      "reach_58_rate": 0.15625,
+      "reach_58_ci95_exact": [
+        0.07755733180012322,
+        0.26863424426625704
+      ],
+      "failure_counts": {},
+      "oracle_disagreements": 0,
+      "latency_seconds": 109.31379354093224,
+      "cpu_seconds_total": 793.151289,
+      "cost_usd": 0.0,
+      "evidence": "artifacts/runs/bb6b15b0-c0b9-426f-a67d-464cdce1a551.json",
+      "child_evidence_pattern": "artifacts/runs/bb6b15b0-c0b9-426f-a67d-464cdce1a551.trial-<seed>.json",
+      "parent_artifact_sha256": "874f05a75b9900af0cfbbac8dd1b922b8b31b957b9d0f0654533a3c7cadf346c"
+    }
+  ],
+  "implementation": {
+    "files_added": [
+      "solver/solver.c",
+      "src/tripathy_experiment/perpendicular_bisector_oracle.py",
+      "src/tripathy_experiment/baseline.py",
+      "tests/test_oracles.py",
+      "tests/test_baseline.py",
+      "benchmarks/upstream/PROVENANCE.json",
+      "benchmarks/upstream/verify_construction.py.txt"
+    ],
+    "files_changed": [
+      "experiment/manifest.json",
+      "project.yaml",
+      "src/tripathy_experiment/model.py",
+      "src/tripathy_experiment/cli.py",
+      "README.md",
+      "artifacts/session-summary.json"
+    ],
+    "file_sha256_at_gate": {
+      "benchmarks/no_isosceles_n32.json": "9bebfc52de362e80efc91d5455f2e20a103e766f191af8f665ee276907feb509",
+      "benchmarks/upstream/PROVENANCE.json": "f959a6a364c807b3e4f1bad76c38df85d58dcfaddb2adf011c7d15583993af6f",
+      "experiment/manifest.json": "14be24a32944c53a9d94f2fa401c23c652a80dd62da5f3373a673ab0230c09ec",
+      "project.yaml": "ef5a4edeb2fde7a0ef6c332c01aca379750c97b8f6698e0c4bc11681e67ef9ad",
+      "solver/solver.c": "ab141274701608a6841eed4f98c0ddf12e8135baeb4de2227b0b41b4758d471c",
+      "src/tripathy_experiment/baseline.py": "e5100b9ca15553018ee6487ce8d774deb70335bb9dd0fa3d7103a6c51c1b7340",
+      "src/tripathy_experiment/cli.py": "4d03334a256d28de692204c543c4f091aecdc8aa4f15f648797103dd216fde15",
+      "src/tripathy_experiment/no_isosceles.py": "4843790a2b7aa64502d4f580f356412f1d1e9247a260ce28377b1f3708ebf1ae",
+      "src/tripathy_experiment/perpendicular_bisector_oracle.py": "c8c8dc944d924267ce62acb9ec2eca448bad277baed88b33103d8242efb2113f"
+    },
+    "solver_binary_sha256": "0d2ed03f43a2f520737b19f8157390f39767ec188ffb7bf32f6f0876f65c896b",
+    "interpreter": "Python 3.12.13 from .venv (no bare python on PATH; pyproject targets 3.11)",
+    "checks": [
+      {
+        "command": ".venv/bin/python -m pytest -q",
+        "outcome": "31 passed"
+      },
+      {
+        "command": ".venv/bin/python -m ruff check src tests",
+        "outcome": "All checks passed"
+      },
+      {
+        "command": ".venv/bin/python -m mypy",
+        "outcome": "no issues in 10 source files"
+      },
+      {
+        "command": ".venv/bin/python -m tripathy_experiment.cli validate",
+        "outcome": "valid, exit 0"
+      },
+      {
+        "command": ".venv/bin/python -m tripathy_experiment.cli verify benchmarks/no_isosceles_n32.json",
+        "outcome": "both oracles accept, score 58, exit 0"
+      },
+      {
+        "command": "cc -O2 -std=c99 -Wall -Wextra -Werror -o build/solver solver/solver.c",
+        "outcome": "exit 0, no warnings"
+      },
+      {
+        "command": "./build/solver --seed 7 --iters 200000 (twice) and cmp",
+        "outcome": "byte-identical; score 56 at this shorter budget"
+      },
+      {
+        "command": ".venv/bin/python -m tripathy_experiment.cli baseline --seeds 0-63 --iters 1000000 --workers 8 --artifact-dir artifacts/runs",
+        "outcome": "exit 0, gate passed"
+      }
+    ],
+    "post_gate_verification": "All 64 child artifacts were reloaded from disk in a fresh process: required fields present in every child, both local oracles and the pinned upstream verify_construction accept every candidate, 0 disagreements, 0 failure artifacts, score counts equal the parent, seed 4 replayed to byte-identical stdout, no secret-like strings or provider response bodies, the 3 earlier run artifacts untouched.",
+    "primary_agent_audit": {
+      "audited_at": "2026-11-15T13:20:11-08:00",
+      "checks": [
+        "31 tests passed independently",
+        "Ruff passed independently",
+        "mypy passed independently",
+        "manifest validation and dual-oracle benchmark verification passed independently",
+        "C99 build with -Wall -Wextra -Werror passed",
+        "fixed-seed solver output was byte-identical",
+        "all 64 child artifacts were reparsed and reverified by both local oracles and the pinned upstream verifier",
+        "parent artifact SHA-256 matches the session summary"
+      ],
+      "score_counts": {
+        "56": 54,
+        "58": 10
+      },
+      "raw_58_candidates": 4,
+      "square_symmetry_classes": 2,
+      "oracle_disagreements": 0,
+      "disposition": "P0 reproduction evidence accepted with the unartifacted calibration history retained as a limitation"
+    }
+  },
+  "result": {
+    "reproduction_gate": "passed",
+    "gate_label": "reproduction",
+    "parent_run_id": "bb6b15b0-c0b9-426f-a67d-464cdce1a551",
+    "child_artifact_count": 64,
+    "best_from_scratch_score": 58,
+    "reach_58_count": 10,
+    "reach_58_ci95_exact": [
+      0.07755733180012322,
+      0.26863424426625704
+    ],
+    "score_counts": {
+      "56": 54,
+      "58": 10
+    },
+    "oracle_disagreement_count": 0,
+    "from_scratch_58s_are_new_constructions": false,
+    "from_scratch_58_note": "Up to the 8 symmetries of the square, the 10 from-scratch 58-point sets are images of the two sets already published in upstream issue 10: seeds 4, 5, 22 give set_a (the stored certificate) and seeds 10, 18, 29, 41, 44, 53, 61 give set_b. This is a reproduction, not a discovery.",
+    "public_certificate_verified": true,
+    "public_certificate_maximal_under_single_addition": true,
+    "public_score": 58,
+    "record_beaten": false,
+    "record_claim": false,
+    "upstream_verifier_pinned": true,
+    "degenerate_collinear_triples_rejected_upstream": true,
+    "tests_passed": 31,
+    "cross_agent_memory_observed": "earlier claim withdrawn as evidence: the swarm sets inherited_from_agent whenever another agent has an equal-or-better entry, so it was true by construction",
+    "modal_sandbox_agreed_with_trusted_verifier": "earlier claim qualified: same-algorithm agreement only, not independent verification"
+  },
+  "cost_usd": 0.0,
+  "cost_note": "The P0 tranche made no provider calls. The earlier Modal smoke run's cost was never recorded and is not included.",
+  "latency_seconds": 109.31379354093224,
+  "blockers": [
+    "No commit exists for this work, so no clean Git SHA can be cited; committing was not authorized in this tranche.",
+    "The solver parameters (20% noise, tabu 3 plus rand 10) and the 1000000-iteration budget were calibrated on off-gate seeds 1000..1015; those calibration runs were not saved as artifacts.",
+    "The public method's source and budget are not pinned, so solver/solver.c is an independent implementation and the 10 of 64 rate is not budget-matched to the public 15 of 200.",
+    "The mirror-symmetric baseline only reaches even cardinalities; it cannot output 59 until a symmetry-breaking operator exists.",
+    "The public point list comes from a mutable GitHub issue; only its retrieved content hash is pinned. The second public 58-point set is not stored under benchmarks/.",
+    "The older swarm path is unchanged: it still seeds from the public certificate, hardcodes TRI-18 in its artifacts, and uses same-algorithm sandbox verification.",
+    ".github/workflows/ci.yml still expects validate to fail and has no C compiler step for the new solver test beyond the runner default; it was not edited.",
+    "Exa, past.dev and Modal remain untested and were not called."
+  ],
+  "next_decision": "Decide whether to commit this tranche so later evidence can cite a clean SHA. Then choose one bounded P1 step: a symmetry-breaking destroy/repair operator started from from-scratch 58-point sets, preregistered on fresh seeds (not 0..63) with a fixed iteration budget, compared against this baseline as an exploratory two-arm run. No 59-point search has been started.",
+  "updated_at": "2026-11-15T13:20:11-08:00"
 }

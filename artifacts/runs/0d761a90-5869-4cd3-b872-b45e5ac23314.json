@@ -1,0 +1,170 @@
+{
+  "beat_target": false,
+  "best": {
+    "agent_id": "local-baseline",
+    "candidate_id": "adcde0a1857b6885",
+    "inherited_from_agent": null,
+    "parent_id": null,
+    "points": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        4
+      ]
+    ],
+    "score": 6,
+    "source_urls": [],
+    "strategy": "greedy-seed"
+  },
+  "completed_at": "2026-11-15T20:33:27.508237+00:00",
+  "config": {
+    "agents": 1,
+    "backend": "modal",
+    "generations": 1,
+    "grid_size": 5,
+    "memory_mode": "local",
+    "search_mode": "fixture",
+    "seed": 7,
+    "target_score": 6
+  },
+  "events": [
+    {
+      "accepted": false,
+      "agent_id": "agent-1",
+      "candidate": {
+        "agent_id": "agent-1",
+        "candidate_id": "adcde0a1857b6885",
+        "inherited_from_agent": null,
+        "parent_id": "adcde0a1857b6885",
+        "points": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            4,
+            4
+          ]
+        ],
+        "score": 6,
+        "source_urls": [
+          "https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/10"
+        ],
+        "strategy": "ruin_one"
+      },
+      "executor_error": null,
+      "generation": 0,
+      "inherited_from_agent": null,
+      "policy_after_feedback": {
+        "greedy_add": 1.0,
+        "ruin_one": 0.95,
+        "ruin_three": 1.0,
+        "symmetric_ruin": 1.0
+      },
+      "research_sources": [
+        {
+          "text": "mirror symmetry local search exact-integer verifier",
+          "title": "Public 58-point certificate uses mirror symmetry and exact checks",
+          "url": "https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/10"
+        }
+      ],
+      "sandbox": {
+        "backend": "modal-sandbox",
+        "latency_seconds": 2.08000774984248,
+        "reason": "exact verifier passed",
+        "score": 6,
+        "valid": true
+      },
+      "sandbox_agrees": true,
+      "trusted_verifier": {
+        "reason": "exact verifier passed",
+        "score": 6,
+        "valid": true,
+        "witness": null
+      }
+    }
+  ],
+  "final_policy": {
+    "greedy_add": 1.0,
+    "ruin_one": 0.95,
+    "ruin_three": 1.0,
+    "symmetric_ruin": 1.0
+  },
+  "initial": {
+    "agent_id": "local-baseline",
+    "candidate_id": "adcde0a1857b6885",
+    "inherited_from_agent": null,
+    "parent_id": null,
+    "points": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        4
+      ]
+    ],
+    "score": 6,
+    "source_urls": [],
+    "strategy": "greedy-seed"
+  },
+  "latency_seconds": 2.9354780421126634,
+  "linear_issue": "TRI-18",
+  "provider_failures": [],
+  "run_id": "0d761a90-5869-4cd3-b872-b45e5ac23314",
+  "schema_version": 1,
+  "started_at": "2026-11-15T20:33:24.572787+00:00",
+  "trials": 1
+}

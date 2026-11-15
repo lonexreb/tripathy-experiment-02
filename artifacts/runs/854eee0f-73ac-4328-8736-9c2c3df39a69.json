@@ -1,0 +1,653 @@
+{
+  "beat_target": false,
+  "best": {
+    "agent_id": "local-baseline",
+    "candidate_id": "875ae86c924d22f8",
+    "inherited_from_agent": null,
+    "parent_id": null,
+    "points": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        2,
+        4
+      ],
+      [
+        2,
+        6
+      ],
+      [
+        3,
+        7
+      ],
+      [
+        5,
+        7
+      ],
+      [
+        6,
+        2
+      ],
+      [
+        7,
+        0
+      ],
+      [
+        7,
+        1
+      ]
+    ],
+    "score": 10,
+    "source_urls": [],
+    "strategy": "greedy-seed"
+  },
+  "completed_at": "2026-11-15T20:33:17.764480+00:00",
+  "config": {
+    "agents": 3,
+    "backend": "local",
+    "generations": 2,
+    "grid_size": 8,
+    "memory_mode": "local",
+    "search_mode": "fixture",
+    "seed": 7,
+    "target_score": 10
+  },
+  "events": [
+    {
+      "accepted": false,
+      "agent_id": "agent-1",
+      "candidate": {
+        "agent_id": "agent-1",
+        "candidate_id": "875ae86c924d22f8",
+        "inherited_from_agent": null,
+        "parent_id": "875ae86c924d22f8",
+        "points": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            5,
+            7
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            7,
+            0
+          ],
+          [
+            7,
+            1
+          ]
+        ],
+        "score": 10,
+        "source_urls": [
+          "https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/10"
+        ],
+        "strategy": "ruin_one"
+      },
+      "executor_error": null,
+      "generation": 0,
+      "inherited_from_agent": null,
+      "policy_after_feedback": {
+        "greedy_add": 1.0,
+        "ruin_one": 0.95,
+        "ruin_three": 1.0,
+        "symmetric_ruin": 1.0
+      },
+      "research_sources": [
+        {
+          "text": "mirror symmetry local search exact-integer verifier",
+          "title": "Public 58-point certificate uses mirror symmetry and exact checks",
+          "url": "https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/10"
+        }
+      ],
+      "sandbox": {
+        "backend": "local",
+        "latency_seconds": 8.041039109230042e-06,
+        "reason": "exact verifier passed",
+        "score": 10,
+        "valid": true
+      },
+      "sandbox_agrees": true,
+      "trusted_verifier": {
+        "reason": "exact verifier passed",
+        "score": 10,
+        "valid": true,
+        "witness": null
+      }
+    },
+    {
+      "accepted": false,
+      "agent_id": "agent-2",
+      "candidate": {
+        "agent_id": "agent-2",
+        "candidate_id": "875ae86c924d22f8",
+        "inherited_from_agent": "agent-1",
+        "parent_id": "875ae86c924d22f8",
+        "points": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            5,
+            7
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            7,
+            0
+          ],
+          [
+            7,
+            1
+          ]
+        ],
+        "score": 10,
+        "source_urls": [
+          "https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/10"
+        ],
+        "strategy": "symmetric_ruin"
+      },
+      "executor_error": null,
+      "generation": 0,
+      "inherited_from_agent": "agent-1",
+      "policy_after_feedback": {
+        "greedy_add": 1.0,
+        "ruin_one": 0.95,
+        "ruin_three": 1.0,
+        "symmetric_ruin": 0.95
+      },
+      "research_sources": [
+        {
+          "text": "mirror symmetry local search exact-integer verifier",
+          "title": "Public 58-point certificate uses mirror symmetry and exact checks",
+          "url": "https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/10"
+        }
+      ],
+      "sandbox": {
+        "backend": "local",
+        "latency_seconds": 6.9160014390945435e-06,
+        "reason": "exact verifier passed",
+        "score": 10,
+        "valid": true
+      },
+      "sandbox_agrees": true,
+      "trusted_verifier": {
+        "reason": "exact verifier passed",
+        "score": 10,
+        "valid": true,
+        "witness": null
+      }
+    },
+    {
+      "accepted": false,
+      "agent_id": "agent-3",
+      "candidate": {
+        "agent_id": "agent-3",
+        "candidate_id": "875ae86c924d22f8",
+        "inherited_from_agent": "agent-1",
+        "parent_id": "875ae86c924d22f8",
+        "points": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            5,
+            7
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            7,
+            0
+          ],
+          [
+            7,
+            1
+          ]
+        ],
+        "score": 10,
+        "source_urls": [
+          "https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/10"
+        ],
+        "strategy": "greedy_add"
+      },
+      "executor_error": null,
+      "generation": 0,
+      "inherited_from_agent": "agent-1",
+      "policy_after_feedback": {
+        "greedy_add": 0.95,
+        "ruin_one": 0.95,
+        "ruin_three": 1.0,
+        "symmetric_ruin": 0.95
+      },
+      "research_sources": [
+        {
+          "text": "mirror symmetry local search exact-integer verifier",
+          "title": "Public 58-point certificate uses mirror symmetry and exact checks",
+          "url": "https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/10"
+        }
+      ],
+      "sandbox": {
+        "backend": "local",
+        "latency_seconds": 6.708083674311638e-06,
+        "reason": "exact verifier passed",
+        "score": 10,
+        "valid": true
+      },
+      "sandbox_agrees": true,
+      "trusted_verifier": {
+        "reason": "exact verifier passed",
+        "score": 10,
+        "valid": true,
+        "witness": null
+      }
+    },
+    {
+      "accepted": false,
+      "agent_id": "agent-1",
+      "candidate": {
+        "agent_id": "agent-1",
+        "candidate_id": "875ae86c924d22f8",
+        "inherited_from_agent": "agent-2",
+        "parent_id": "875ae86c924d22f8",
+        "points": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            5,
+            7
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            7,
+            0
+          ],
+          [
+            7,
+            1
+          ]
+        ],
+        "score": 10,
+        "source_urls": [
+          "https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/10"
+        ],
+        "strategy": "symmetric_ruin"
+      },
+      "executor_error": null,
+      "generation": 1,
+      "inherited_from_agent": "agent-2",
+      "policy_after_feedback": {
+        "greedy_add": 0.95,
+        "ruin_one": 0.95,
+        "ruin_three": 1.0,
+        "symmetric_ruin": 0.9025
+      },
+      "research_sources": [
+        {
+          "text": "mirror symmetry local search exact-integer verifier",
+          "title": "Public 58-point certificate uses mirror symmetry and exact checks",
+          "url": "https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/10"
+        }
+      ],
+      "sandbox": {
+        "backend": "local",
+        "latency_seconds": 6.666872650384903e-06,
+        "reason": "exact verifier passed",
+        "score": 10,
+        "valid": true
+      },
+      "sandbox_agrees": true,
+      "trusted_verifier": {
+        "reason": "exact verifier passed",
+        "score": 10,
+        "valid": true,
+        "witness": null
+      }
+    },
+    {
+      "accepted": false,
+      "agent_id": "agent-2",
+      "candidate": {
+        "agent_id": "agent-2",
+        "candidate_id": "875ae86c924d22f8",
+        "inherited_from_agent": "agent-1",
+        "parent_id": "875ae86c924d22f8",
+        "points": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            5,
+            7
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            7,
+            0
+          ],
+          [
+            7,
+            1
+          ]
+        ],
+        "score": 10,
+        "source_urls": [
+          "https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/10"
+        ],
+        "strategy": "ruin_three"
+      },
+      "executor_error": null,
+      "generation": 1,
+      "inherited_from_agent": "agent-1",
+      "policy_after_feedback": {
+        "greedy_add": 0.95,
+        "ruin_one": 0.95,
+        "ruin_three": 0.95,
+        "symmetric_ruin": 0.9025
+      },
+      "research_sources": [
+        {
+          "text": "mirror symmetry local search exact-integer verifier",
+          "title": "Public 58-point certificate uses mirror symmetry and exact checks",
+          "url": "https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/10"
+        }
+      ],
+      "sandbox": {
+        "backend": "local",
+        "latency_seconds": 6.417045369744301e-06,
+        "reason": "exact verifier passed",
+        "score": 10,
+        "valid": true
+      },
+      "sandbox_agrees": true,
+      "trusted_verifier": {
+        "reason": "exact verifier passed",
+        "score": 10,
+        "valid": true,
+        "witness": null
+      }
+    },
+    {
+      "accepted": false,
+      "agent_id": "agent-3",
+      "candidate": {
+        "agent_id": "agent-3",
+        "candidate_id": "875ae86c924d22f8",
+        "inherited_from_agent": "agent-1",
+        "parent_id": "875ae86c924d22f8",
+        "points": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            5,
+            7
+          ],
+          [
+            6,
+            2
+          ],
+          [
+            7,
+            0
+          ],
+          [
+            7,
+            1
+          ]
+        ],
+        "score": 10,
+        "source_urls": [
+          "https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/10"
+        ],
+        "strategy": "ruin_three"
+      },
+      "executor_error": null,
+      "generation": 1,
+      "inherited_from_agent": "agent-1",
+      "policy_after_feedback": {
+        "greedy_add": 0.95,
+        "ruin_one": 0.95,
+        "ruin_three": 0.9025,
+        "symmetric_ruin": 0.9025
+      },
+      "research_sources": [
+        {
+          "text": "mirror symmetry local search exact-integer verifier",
+          "title": "Public 58-point certificate uses mirror symmetry and exact checks",
+          "url": "https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/10"
+        }
+      ],
+      "sandbox": {
+        "backend": "local",
+        "latency_seconds": 6.417045369744301e-06,
+        "reason": "exact verifier passed",
+        "score": 10,
+        "valid": true
+      },
+      "sandbox_agrees": true,
+      "trusted_verifier": {
+        "reason": "exact verifier passed",
+        "score": 10,
+        "valid": true,
+        "witness": null
+      }
+    }
+  ],
+  "final_policy": {
+    "greedy_add": 0.95,
+    "ruin_one": 0.95,
+    "ruin_three": 0.9025,
+    "symmetric_ruin": 0.9025
+  },
+  "initial": {
+    "agent_id": "local-baseline",
+    "candidate_id": "875ae86c924d22f8",
+    "inherited_from_agent": null,
+    "parent_id": null,
+    "points": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        2,
+        4
+      ],
+      [
+        2,
+        6
+      ],
+      [
+        3,
+        7
+      ],
+      [
+        5,
+        7
+      ],
+      [
+        6,
+        2
+      ],
+      [
+        7,
+        0
+      ],
+      [
+        7,
+        1
+      ]
+    ],
+    "score": 10,
+    "source_urls": [],
+    "strategy": "greedy-seed"
+  },
+  "latency_seconds": 0.0015967909712344408,
+  "linear_issue": "TRI-18",
+  "provider_failures": [],
+  "run_id": "854eee0f-73ac-4328-8736-9c2c3df39a69",
+  "schema_version": 1,
+  "started_at": "2026-11-15T20:33:17.762887+00:00",
+  "trials": 6
+}

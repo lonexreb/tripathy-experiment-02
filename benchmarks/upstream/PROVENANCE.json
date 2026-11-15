@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "problem": "AlphaEvolve repository Problem 59: subsets of the grid with no isosceles triangles",
+  "retrieved_at": "2026-11-15",
+  "retrieval": "anonymous read-only shallow git clone and one anonymous HTTPS GET; no credentials",
+  "upstream_repository": {
+    "url": "https://github.com/google-deepmind/alphaevolve_repository_of_problems",
+    "commit_sha": "8f447457957deac61e28bf1676746f0753b3b2f8",
+    "commit_date": "2026-07-11T19:25:35Z",
+    "license": "Apache-2.0",
+    "license_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  "upstream_verifier_source": {
+    "path": "experiments/subsets_of_the_grid_with_no_isosceles_triangles/subsets_of_the_grid_with_no_isosceles_triangles.ipynb",
+    "immutable_url": "https://github.com/google-deepmind/alphaevolve_repository_of_problems/blob/8f447457957deac61e28bf1676746f0753b3b2f8/experiments/subsets_of_the_grid_with_no_isosceles_triangles/subsets_of_the_grid_with_no_isosceles_triangles.ipynb",
+    "git_blob_sha1": "c0d665a986ece2f7efd220f2f179ebf2935149e5",
+    "sha256": "653accd24369672f1cc757b203dae311f1489895a1cb8e6242d3308fe657891d",
+    "bytes": 38367
+  },
+  "vendored_verifier": {
+    "file": "benchmarks/upstream/verify_construction.py.txt",
+    "sha256": "226370ddce5130a4e247ac1b1718bb4b120218d231507b1249137fd10e4eceaf",
+    "extraction": "verbatim UTF-8 text of notebook code cell index 1, from the line '# --- Verification Function ---' up to but excluding '# --- Plotting Function ---' (functions dist_sq and verify_construction). The cell-level imports 'import itertools' and 'from math import sqrt' sit above the excerpt and are supplied by the test harness.",
+    "stored_as_txt": "kept as .txt so linters never rewrite the verbatim upstream text"
+  },
+  "semantics": {
+    "degenerate_collinear_triples_rejected": true,
+    "note": "Official semantics REJECT degenerate (flat) isosceles triples. verify_construction iterates every ordered triple (a, b, c) of distinct list positions and fails when dist_sq(a, b) == dist_sq(b, c); its docstring says this 'checks for both standard and degenerate/flat isosceles triangles', and the problem prompt forbids three collinear points P, Q, R with Q the midpoint of PR. Both local oracles implement the same rule, so the local rule is neither stricter nor looser than upstream on the constraint itself.",
+    "upstream_gaps": "verify_construction does not check grid bounds; a repeated point is rejected only when the list has at least three entries. Both local oracles additionally require distinct points inside [0, grid_size)^2."
+  },
+  "public_point_list": {
+    "file": "benchmarks/no_isosceles_n32.json",
+    "file_sha256": "9bebfc52de362e80efc91d5455f2e20a103e766f191af8f665ee276907feb509",
+    "canonical_points_sha256": "203d5103442d52995d806aa01848b12c48621118d9fc04ba139b4e9f3df24431",
+    "canonical_form": "JSON array of [x,y] pairs sorted ascending, separators ',' and ':' with no whitespace, UTF-8",
+    "score": 58,
+    "source_url": "https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/10",
+    "source_is_mutable": true,
+    "check_on_retrieval": "On 2026-11-15 the issue page listed two distinct 58-point sets. The local file is point-for-point identical to the first (set_a). The second public set (canonical_points_sha256 32f4587ec2c06989faede39911b3081653f91a6d93b87f4bb8f6191d83bdb5ec) is not stored in this repository.",
+    "limitation": "A GitHub issue body has no immutable content address, so this hash pins what was retrieved, not what the page will say later. The issue is a third-party report in the official repository, not a DeepMind-authored result."
+  },
+  "public_method_as_reported": "The issue reports a from-scratch local search in C with a mirror-symmetry constraint that reached 58 in 15 of 200 runs and 56 in the other 185. Its source and exact budget are not pinned here, so solver/solver.c is an independent implementation, not a port."
+}
