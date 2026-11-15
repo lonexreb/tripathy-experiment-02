@@ -14,6 +14,7 @@ from .adapters import (
     PastSharedMemory,
 )
 from .baseline import parse_seeds, run_baseline, sha256_file
+from .judge_report import build_report, write_report
 from .modal_gateway import ModalSandboxGateway
 from .model import ExperimentManifest, ValidationError
 from .no_isosceles import Candidate, greedy_seed, load_public_baseline, verify
@@ -61,7 +62,10 @@ def verify_benchmark(path: Path | None) -> int:
 def main() -> int:
     parser = argparse.ArgumentParser(description="EvoHive verification-first autoresearch runner")
     parser.add_argument(
-        "command", choices=("validate", "run", "verify", "baseline", "p1-smoke", "p2-compare")
+        "command",
+        choices=(
+            "validate", "run", "verify", "baseline", "p1-smoke", "p2-compare", "judge-report"
+        ),
     )
     parser.add_argument("benchmark", nargs="?", type=Path, help="benchmark JSON for verify")
     parser.add_argument("--seeds", default="0-63", help="baseline seeds, e.g. 0-63")
@@ -83,6 +87,8 @@ def main() -> int:
     parser.add_argument("--search", choices=("fixture", "exa"), default="fixture")
     parser.add_argument("--memory", choices=("local", "past"), default="local")
     parser.add_argument("--artifact-dir", type=Path, default=Path("artifacts/runs"))
+    parser.add_argument("--report-dir", type=Path, default=Path("artifacts/judge"))
+    parser.add_argument("--check-report", action="store_true")
     args = parser.parse_args()
 
     try:
@@ -93,6 +99,27 @@ def main() -> int:
         if args.command == "validate":
             manifest.validate()
             print(json.dumps({"status": "valid", "experiment_id": manifest.experiment_id}))
+            return 0
+
+        if args.command == "judge-report":
+            report = build_report(artifact_dir=args.artifact_dir)
+            json_path, markdown_path = write_report(
+                report, args.report_dir, check=args.check_report
+            )
+            print(
+                json.dumps(
+                    {
+                        "status": "current" if args.check_report else "written",
+                        "json": str(json_path),
+                        "markdown": str(markdown_path),
+                        "source_artifacts": report["integrity"]["source_artifact_count"],
+                        "fresh_dual_verifications": report["integrity"][
+                            "fresh_dual_verifications"
+                        ],
+                    },
+                    sort_keys=True,
+                )
+            )
             return 0
 
         if args.command == "baseline":

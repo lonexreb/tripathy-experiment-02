@@ -206,3 +206,18 @@ environment names) is reported from inside the untrusted Sandbox, with no provid
 attestation; `GPG_KEY`, a public fingerprint name from the python base image, is allowlisted by
 name and its value is never read. One gateway preflight on off-experiment seed 1399 (run
 `fc905c4a-ff66-4ce5-a12a-609eaef96478`) preceded the run and is kept as an artifact.
+
+## Judge evidence report
+
+Build the two-minute Markdown view and its machine-readable companion directly from the
+immutable run artifacts:
+
+```bash
+python -m tripathy_experiment.cli judge-report
+python -m tripathy_experiment.cli judge-report --check-report
+```
+
+The generator follows `experiment/evidence-index.json`, reloads and hashes all 103 linked
+artifacts, and freshly runs both local oracles over all 96 accepted candidates. It refuses
+missing, escaped or inconsistent artifact references. No result metric is copied from the
+index. Generated views live in `artifacts/judge/` and CI checks that they are current.

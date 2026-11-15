@@ -3,9 +3,9 @@
   "experiment_id": "02",
   "status": "complete",
   "active_linear_issue": "TRI-19",
-  "git_sha": "8eff91e44d12cd06e060a5bb18bb7ebb2fbf9f3a",
-  "git_dirty": true,
-  "git_note": "The P2 artifacts record execution-time base HEAD 8eff91e, dirty=true and SHA-256 hashes of every file as executed. The controller, gateway, audit hardening, tests, docs and 16 new artifacts are preserved together in this evidence snapshot.",
+  "git_sha": "9c8b91988779374bc6be09d014f559de2dd60f90",
+  "git_dirty": false,
+  "git_note": "P2 implementation and all 16 new artifacts are preserved at evidence commit 9c8b919, with green CI run 43767285572. The immutable P2 run artifacts retain their execution-time base HEAD 8eff91e, dirty=true and exact file hashes.",
   "objective": "TRI-19 P2 judge-readiness tranche (docs/P2_MODAL_CAUSAL_PLAN.md): provider-independent comparison controller with a narrow Modal gateway, and one preregistered local-vs-Modal run on seeds 1300..1303",
   "subagents": [],
   "runs": [
@@ -604,16 +604,14 @@
     "The P0 solver parameters and 1000000-iteration budget were calibrated on off-gate seeds 1000..1015 and those runs were not saved.",
     "The public method's source and budget are not pinned; the public point list comes from a mutable GitHub issue and only its retrieved hash is pinned.",
     "The older swarm path is unchanged: it still seeds from the public certificate, hardcodes TRI-18, and uses same-algorithm sandbox verification.",
-    "CI configuration has been corrected locally but has not yet run on the remote P1 commit.",
     "Local interpreter is Python 3.12.13 while pyproject targets 3.11.",
-    "The submitted P2 evidence commit still needs a green remote CI run.",
     "P2 Modal cost is unknown: no authoritative per-Sandbox cost is exposed to this client.",
     "P2 showed no Modal speedup: startup overhead dominates the ~1 s solve at 100000 iterations.",
     "P2 isolation evidence is requested configuration plus an in-Sandbox self-report; there is no provider-side attestation.",
     "Exa and past.dev remain untested and were not called. No Linear or Slack update was posted (external writes were not authorized)."
   ],
-  "next_decision": "P2 acceptance gate is met locally. Next: commit the P2 tranche so CI runs the 22 new tests at a clean SHA, then build the judge evidence view from artifacts. Modal gave no speedup at 100000 iterations; a throughput claim would need a new preregistered run at a budget where solve time exceeds the ~3 s per-Sandbox overhead.",
-  "updated_at": "2026-11-15T14:00:22-08:00",
+  "next_decision": "The judge evidence view is generated and self-checking. Next: demonstrate a causal evidence-to-decision autonomy transition without spending reserved confirmatory seeds. Modal gave no speedup at 100000 iterations; any throughput claim needs a separately preregistered budget where solve time exceeds the roughly 3-second per-Sandbox overhead.",
+  "updated_at": "2026-11-15T14:06:30-08:00",
   "p0_objective": "TRI-19 P0: replace the public-certificate replay with a from-scratch, deterministic, dual-verified baseline for AlphaEvolve Problem 59 and record one 64-trial reproduction gate (passed, committed at 2914794)",
   "p1_implementation": {
     "files_added": [
@@ -914,7 +912,7 @@
     "checks": [
       {
         "command": ".venv/bin/python -m pytest -q",
-        "outcome": "63 passed after independent audit hardening"
+        "outcome": "67 passed with judge-report tests"
       },
       {
         "command": ".venv/bin/python -m ruff check .",
@@ -922,7 +920,7 @@
       },
       {
         "command": ".venv/bin/python -m mypy",
-        "outcome": "no issues in 13 source files"
+        "outcome": "no issues in 14 source files"
       },
       {
         "command": ".venv/bin/python -m tripathy_experiment.cli validate",
@@ -943,5 +941,15 @@
       "sandbox_prepare_seconds (1.62 s) reflects an image cached by the disclosed preflight; the preflight's cold prepare took 11.13 s.",
       "The Sandbox 'solve' phase (2.47 s mean) includes the exec round trip, so it is not a pure CPU comparison with the 1.04 s local trials."
     ]
+  },
+  "judge_report": {
+    "index": "experiment/evidence-index.json (canonical run selection only; no result metrics)",
+    "machine_view": "artifacts/judge/judge-report.json",
+    "human_view": "artifacts/judge/judge-report.md",
+    "source_artifacts": 103,
+    "fresh_dual_verifications": 96,
+    "evidence_set_sha256": "f2ce796bd3677a1e9271b76cc2dc05f59ad34026190ec4ff58607f13d1830c95",
+    "safety": "all artifact references must stay inside artifacts/runs; child counts, scores, target counts, failure counts, oracle disagreements, Modal pair hashes, isolation and termination counts are recomputed or cross-checked; CI refuses stale generated views",
+    "checks": "python -m tripathy_experiment.cli judge-report --check-report"
   }
 }

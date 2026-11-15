@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "project": "EvoHive",
+  "p0": {
+    "label": "from-scratch reproduction",
+    "run_id": "bb6b15b0-c0b9-426f-a67d-464cdce1a551"
+  },
+  "p1": [
+    {
+      "label": "single-point swaps",
+      "run_id": "418e67a9-dca8-4d0d-ac3d-1b5355bf6a45"
+    },
+    {
+      "label": "destroy 4 / exact repair 5",
+      "run_id": "ff52f29c-b4e5-4620-993d-5236b324991e"
+    },
+    {
+      "label": "destroy 8 / exact repair 9",
+      "run_id": "e46d5be6-98e0-43ae-848b-3a439246c249"
+    }
+  ],
+  "p2": {
+    "label": "local versus Modal sandbox parity",
+    "run_id": "eaacf19f-08a7-46c3-8b89-6486492c601f"
+  },
+  "sponsor_status": {
+    "Modal": "live evidence",
+    "Exa": "adapter only; no live credential or run",
+    "past.dev": "adapter only; no live credential or run"
+  }
+}

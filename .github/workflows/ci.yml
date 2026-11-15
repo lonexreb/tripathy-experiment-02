@@ -25,3 +25,5 @@ jobs:
         run: python -m tripathy_experiment.cli validate
       - name: Verify the pinned public benchmark with both local oracles
         run: python -m tripathy_experiment.cli verify benchmarks/no_isosceles_n32.json
+      - name: Rebuild and verify the judge evidence report
+        run: python -m tripathy_experiment.cli judge-report --check-report
