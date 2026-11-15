@@ -1,11 +1,11 @@
 {
   "schema_version": 2,
   "experiment_id": "02",
-  "status": "running",
+  "status": "complete",
   "active_linear_issue": "TRI-19",
-  "git_sha": "29147943bd20726ee2dcd3237edeb4e297f748bf",
-  "git_dirty": true,
-  "git_note": "P0 is committed at 2914794. All three P1 iterations are uncommitted (committing was not authorized), so P1 evidence is tied to HEAD 2914794 plus a dirty marker and the SHA-256 file hashes stored in every P1 run artifact, not to a clean commit.",
+  "git_sha": "3402f102c94cc8bacf452062a97c0656dc6f57d4",
+  "git_dirty": false,
+  "git_note": "P1 implementation, rejected solver variants and all three negative run families are preserved in evidence commit 3402f10. The immutable run artifacts retain their original base HEAD 2914794, dirty marker and exact file hashes, reflecting the state in which they actually executed.",
   "objective": "TRI-19 outcome: preserve the dual-verified P0 reproduction and close the P1 local destroy/repair family after its preregistered negative stopping boundary",
   "subagents": [],
   "runs": [
@@ -545,7 +545,7 @@
   "latency_seconds": 3.0725109172053635,
   "blockers": [
     "The P1 destroy/repair operator family is closed as stopped with no 59 found; there is no candidate algorithm to freeze, so the confirmatory run has nothing to confirm.",
-    "All three P1 iterations are uncommitted (not authorized), so runs 418e67a9, ff52f29c and e46d5be6 cite HEAD 2914794 with dirty=true plus file hashes rather than a clean SHA. The iteration-1 and iteration-2 breaker sources survive only as uncommitted copies in solver/rejected/.",
+    "The immutable P1 run artifacts cite their execution-time base HEAD 2914794 with dirty=true plus file hashes; the exact implementation, rejected variants and artifacts are now preserved together in evidence commit 3402f10.",
     "The 'exhausted' repair claim is the solver's own report; no independent enumerator cross-checks it.",
     "The P0 solver parameters and 1000000-iteration budget were calibrated on off-gate seeds 1000..1015 and those runs were not saved.",
     "The public method's source and budget are not pinned; the public point list comes from a mutable GitHub issue and only its retrieved hash is pinned.",
@@ -554,8 +554,8 @@
     "Local interpreter is Python 3.12.13 while pyproject targets 3.11.",
     "Exa, past.dev and Modal remain untested and were not called. No Linear or Slack update was posted (external writes were not authorized)."
   ],
-  "next_decision": "Commit and push the three audited P1 iterations. Then close TRI-19 with 58 as the reproduced, dual-verified result and a documented negative P1. Any further 59 search must be a structurally different approach that does not start from a P0 58 and must receive a new preregistered objective before seeds 64..127 are used.",
-  "updated_at": "2026-11-15T13:46:20-08:00",
+  "next_decision": "TRI-19 is locally complete with 58 as the reproduced, dual-verified result and a documented negative P1. Any further 59 search must be a structurally different approach that does not start from a P0 58 and must receive a new preregistered objective before seeds 64..127 are used.",
+  "updated_at": "2026-11-15T13:46:56-08:00",
   "p0_objective": "TRI-19 P0: replace the public-certificate replay with a from-scratch, deterministic, dual-verified baseline for AlphaEvolve Problem 59 and record one 64-trial reproduction gate (passed, committed at 2914794)",
   "p1_implementation": {
     "files_added": [

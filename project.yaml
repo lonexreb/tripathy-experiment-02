@@ -1,7 +1,7 @@
 schema_version: 1
 experiment_id: 02
 name: EvoHive — Track 1 Autoresearch
-status: running
+status: completed
 owner: Claude session 02
 systems:
   github: https://github.com/lonexreb/tripathy-experiment-02
@@ -42,5 +42,6 @@ experiment:
   stop_condition: met; no verified 59 and minimum working violations remained 2
   git:
     base_head: 29147943bd20726ee2dcd3237edeb4e297f748bf
-    dirty: true
-    note: P1 evidence is pending the user-authorized commit and push
+    evidence_commit: 3402f102c94cc8bacf452062a97c0656dc6f57d4
+    dirty: false
+    note: P1 implementation, rejected variants and all three negative runs are preserved in the evidence commit
