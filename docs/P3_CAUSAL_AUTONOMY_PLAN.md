@@ -1,6 +1,6 @@
 # P3 Causal Autonomy Plan
 
-Status: preregistered; do not edit after the first live invocation
+Status: completed once; transition `67bec1d8-08d6-4118-85a8-433d13c53982`
 
 Owner issue: TRI-19 judge-readiness continuation
 
@@ -76,3 +76,14 @@ Run exactly once:
 python -m tripathy_experiment.cli p3-autonomy --seeds 1400-1403 --iters 250 \
   --workers 4 --timeout-seconds 120 --artifact-dir artifacts/runs
 ```
+
+## Outcome
+
+The causal gate passed. The clean preregistration commit was `14f7012`. The
+decision artifact selected `asymmetric_random_greedy_screen` from the registered
+signals and was persisted about 20 ms before action start. The executed config
+matched the emitted spec exactly. All four trials passed both oracles, scoring
+39, 39, 40 and 39. Because best score 40 was below incumbent 58, the transition
+rolled back, retained the negative evidence, and confirmed `solver/solver.c`
+unchanged at SHA-256 `ab141274...`. No parameter was tuned or rerun; seeds
+64..127 remain untouched.

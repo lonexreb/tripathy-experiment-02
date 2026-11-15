@@ -315,6 +315,81 @@ def _p2_report(loader: EvidenceLoader, label: str, run_id: str) -> dict[str, Any
     }
 
 
+def _p3_report(loader: EvidenceLoader, label: str, transition_id: str) -> dict[str, Any]:
+    transition_path = loader.artifact_dir / f"{transition_id}.transition.json"
+    transition = loader.read(transition_path)
+    if (
+        transition.get("kind") != "autonomy-transition"
+        or transition.get("transition_id") != transition_id
+    ):
+        raise EvidenceError(f"{transition_path} is not the selected autonomy transition")
+    decision_ref = transition.get("decision_artifact")
+    action_ref = transition.get("action_artifact")
+    if not isinstance(decision_ref, str) or not isinstance(action_ref, str):
+        raise EvidenceError(f"{transition_id} lacks decision or action references")
+    decision = loader.read(decision_ref)
+    action = loader.read(action_ref)
+    if (
+        decision.get("kind") != "causal-decision"
+        or decision.get("decision_id") != transition_id
+        or action.get("kind") != "baseline-summary"
+        or action.get("run_id") != transition.get("action_run_id")
+    ):
+        raise EvidenceError(f"{transition_id} has inconsistent linked artifacts")
+    if (
+        _sha256(loader._resolve(decision_ref)) != transition.get("decision_sha256")
+        or _sha256(loader._resolve(action_ref)) != transition.get("action_sha256")
+    ):
+        raise EvidenceError(f"{transition_id} linked artifact hash mismatch")
+    action_run_id = str(action["run_id"])
+    children = _load_children(loader, action, action_run_id)
+    scores = [int(child["score"]) for child in children if child.get("failure_class") is None]
+    score_counts = {
+        str(score): count for score, count in sorted(Counter(scores).items())
+    }
+    disagreements = sum(
+        child.get("failure_class") == "oracle_disagreement" for child in children
+    )
+    incumbent_hash = _sha256(loader.root / "solver/solver.c")
+    rollback = transition.get("rollback", {})
+    causal_gate = all(
+        (
+            transition.get("gate_status") == "passed",
+            transition.get("decision_precedes_action") is True,
+            transition.get("action_matches_decision_spec") is True,
+            decision.get("selected_action") == transition.get("selected_action"),
+            decision.get("reason_code") == transition.get("reason_code"),
+            decision.get("experiment_spec", {}).get("matches_preregistration") is True,
+            action.get("score_counts") == score_counts,
+            action.get("oracle_disagreements") == disagreements,
+            max(scores) == transition.get("best_score"),
+            rollback.get("incumbent_unchanged") is True,
+            rollback.get("sha256_before") == rollback.get("sha256_after") == incumbent_hash,
+        )
+    )
+    if not causal_gate:
+        raise EvidenceError(f"{transition_id} failed causal transition reconstruction")
+    return {
+        "label": label,
+        "transition_id": transition_id,
+        "decision_artifact": decision_ref,
+        "action_run_id": action_run_id,
+        "selected_action": transition["selected_action"],
+        "reason_code": transition["reason_code"],
+        "decision_precedes_action": True,
+        "action_matches_decision_spec": True,
+        "trials": len(children),
+        "score_counts": score_counts,
+        "best_score": max(scores),
+        "oracle_disagreements": disagreements,
+        "promotion_status": transition["promotion"]["status"],
+        "incumbent_unchanged": True,
+        "negative_evidence_retained": transition["rollback"]["negative_evidence_retained"],
+        "cost_usd": transition["cost_usd"],
+        "record_claim": transition["record_claim"],
+    }
+
+
 def build_report(
     root: Path = Path("."),
     index_path: Path = DEFAULT_INDEX,
@@ -327,6 +402,12 @@ def build_report(
         raise EvidenceError("unsupported evidence-index schema")
     p0_label, p0_run = _indexed_run(index, "p0")
     p2_label, p2_run = _indexed_run(index, "p2")
+    p3_value = index.get("p3")
+    if not isinstance(p3_value, dict):
+        raise EvidenceError("evidence index needs object p3")
+    p3_label, p3_transition = p3_value.get("label"), p3_value.get("transition_id")
+    if not isinstance(p3_label, str) or not isinstance(p3_transition, str):
+        raise EvidenceError("evidence index p3 needs label and transition_id")
     p1_entries = index.get("p1")
     if not isinstance(p1_entries, list) or not p1_entries:
         raise EvidenceError("evidence index needs non-empty p1")
@@ -341,6 +422,7 @@ def build_report(
     p0 = _p0_report(loader, p0_label, p0_run)
     p1 = _p1_report(loader, p1_entries)
     p2 = _p2_report(loader, p2_label, p2_run)
+    p3 = _p3_report(loader, p3_label, p3_transition)
     source_hashes = [
         {"path": path, "sha256": digest} for path, digest in sorted(loader.hashes.items())
     ]
@@ -356,15 +438,23 @@ def build_report(
             "verified_59_found": p1["verified_59_count"] > 0,
             "modal_candidate_parity": p2["candidate_hash_mismatch"] == 0,
             "modal_speedup_demonstrated": p2["modal_faster_than_local_parallel"],
+            "causal_autonomy_demonstrated": (
+                p3["decision_precedes_action"]
+                and p3["action_matches_decision_spec"]
+                and p3["incumbent_unchanged"]
+            ),
         },
         "p0": p0,
         "p1": p1,
         "p2": p2,
+        "p3": p3,
         "sponsor_status": sponsor_status,
         "claim_boundaries": [
             "The 58-point result is a from-scratch reproduction, not a discovery.",
             "No verified 59-point construction exists in this evidence set.",
             "The Modal run demonstrates isolated parity, not speedup or known cost.",
+            "The autonomy canary demonstrates a causal transition and rollback, "
+            "not a better solver.",
             "Exa and past.dev have adapters and fixture tests but no live evidence.",
         ],
         "integrity": {
@@ -382,7 +472,7 @@ def render_json(report: dict[str, Any]) -> str:
 
 
 def render_markdown(report: dict[str, Any]) -> str:
-    p0, p1, p2 = report["p0"], report["p1"], report["p2"]
+    p0, p1, p2, p3 = report["p0"], report["p1"], report["p2"], report["p3"]
     lines = [
         "# EvoHive: Judge Evidence Report",
         "",
@@ -391,7 +481,8 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"EvoHive reproduced the public {p0['target_score']}-point construction from scratch in "
         f"{p0['target_reached']}/{p0['trials']} fixed-budget trials. It did not find a verified "
         "59-point construction. Modal reproduced four same-seed local candidates exactly, but "
-        "was slower at this budget; Exa and past.dev have no live evidence.",
+        "was slower at this budget. A persisted P3 decision causally selected and rolled back a "
+        "structurally different canary; Exa and past.dev have no live evidence.",
         "",
         "## Evidence",
         "",
@@ -414,6 +505,9 @@ def render_markdown(report: dict[str, Any]) -> str:
             f"{p2['seeds_compared']} stdout streams match | "
             f"{p2['sandboxes_terminated']}/{p2['sandboxes_created']} terminated; "
             f"{p2['oracle_disagreements']} oracle disagreements |",
+            f"| P3 `{p3['transition_id'][:8]}` | selected `{p3['selected_action']}` from P1/P2 "
+            f"evidence; best {p3['best_score']} | decision preceded action; "
+            f"{p3['promotion_status']}; incumbent unchanged |",
             "",
             "## Modal timing",
             "",

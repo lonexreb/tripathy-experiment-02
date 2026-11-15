@@ -1,0 +1,42 @@
+{
+  "action_artifact": "artifacts/runs/7035b607-0668-43e4-b51f-acc6ac68402e.json",
+  "action_matches_decision_spec": true,
+  "action_run_id": "7035b607-0668-43e4-b51f-acc6ac68402e",
+  "action_search_gate_status": "failed",
+  "action_sha256": "cab166b99e8f1fb5b24dbada4341a3bbf255d6eb1d51e33aada670e43e1f38ee",
+  "action_started_at": "2026-11-15T22:17:50.537658+00:00",
+  "best_score": 40,
+  "completed_at": "2026-11-15T22:17:50.614623+00:00",
+  "cost_usd": 0.0,
+  "decision_artifact": "artifacts/runs/67bec1d8-08d6-4118-85a8-433d13c53982.decision.json",
+  "decision_created_at": "2026-11-15T22:17:50.517724+00:00",
+  "decision_precedes_action": true,
+  "decision_sha256": "2dc58fc6b9475a4fb56e0a3d1bf81b28b703ebb6c0e2e9ae6da978e117e5a7d8",
+  "experiment_id": "02",
+  "gate_status": "passed",
+  "kind": "autonomy-transition",
+  "linear_issue": "TRI-19",
+  "oracle_disagreements": 0,
+  "promotion": {
+    "reason": "screening result did not match the incumbent",
+    "status": "rolled_back",
+    "threshold": 58
+  },
+  "reason_code": "stopped_family_needs_structural_change",
+  "record_claim": false,
+  "rollback": {
+    "incumbent_source": "solver/solver.c",
+    "incumbent_unchanged": true,
+    "negative_evidence_retained": true,
+    "sha256_after": "ab141274701608a6841eed4f98c0ddf12e8135baeb4de2227b0b41b4758d471c",
+    "sha256_before": "ab141274701608a6841eed4f98c0ddf12e8135baeb4de2227b0b41b4758d471c"
+  },
+  "schema_version": 1,
+  "score_counts": {
+    "39": 3,
+    "40": 1
+  },
+  "selected_action": "asymmetric_random_greedy_screen",
+  "transition_id": "67bec1d8-08d6-4118-85a8-433d13c53982",
+  "trials": 4
+}

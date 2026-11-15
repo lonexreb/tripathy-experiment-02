@@ -1,13 +1,13 @@
 # EvoHive Judge-Readiness Ledger
 
 Updated: 2026-11-15
-Current evidence commit: `9c8b919` (P0, P1, audited P2 implementation and live evidence)
-Current CI: GitHub Actions run `43767285572`, passed on `9c8b919`
+Current preregistration commit: `14f7012` (P3 plan, policy and canary before live execution)
+Current CI: GitHub Actions run `43768422967`, passed on `14f7012`; P3 live evidence CI pending
 Claim policy: a capability receives credit here only when a persisted run demonstrates it
 
 ## Executive verdict
 
-EvoHive is scientifically credible but not yet judge-ready. It is strong on rigor and reproducibility, honest about negative results, and has a real compiled search system. It has not beaten the public 58-point construction, and of its sponsor integrations only Modal has measured evidence (P2 run `eaacf19f`, agreement without a speedup); Exa and past.dev remain architecture claims. The generated judge report now reconstructs the full experiment lineage. The shortest remaining route is a causal automated evidence-to-decision run, followed by live Exa/past.dev proofs if credentials become available, without overstating the mathematical result.
+EvoHive now demonstrates the core autoresearch loop end to end: measured failure evidence caused a persisted operator decision, the emitted experiment ran exactly, and an underperforming canary rolled back without mutating the incumbent. It remains weak on mathematical improvement—it reproduced 58 but did not find 59—and only Modal has live sponsor evidence. The system is technically submission-ready once P3 has a committed green SHA and the concise demo/pitch are frozen; Exa and past.dev must stay explicitly unclaimed unless credentials become available.
 
 ## Core judging criteria
 
@@ -16,12 +16,12 @@ Scores are internal readiness estimates on a five-point scale, not predicted jud
 | Criterion | Current | Evidence | Missing bar |
 |---|---:|---|---|
 | Scientific rigor | 5/5 | Frozen manifest; two structurally independent local oracles; pinned upstream verifier; preregistered stop rules; immutable accepted and rejected artifacts | Maintain these invariants in sponsor-backed runs |
-| Novelty | 3/5 | Anchored self-improvement design; verifier outside the optimized object; rejected solver lineage retained; fixed-iteration C search | Show the loop adapting from evidence rather than describing adaptation |
+| Novelty | 3/5 | Anchored self-improvement design; verifier outside the optimized object; rejected solver lineage retained; P3 selected a structurally different canary from measured evidence | Extend the demonstrated policy beyond one deterministic transition |
 | Results | 2/5 | Reproduced 58 from scratch in 10/64 trials; three honest negative 59-search iterations | A verified improvement above 58, or a much stronger cross-benchmark systems result |
-| Autonomy / self-improvement | 2/5 | Search-policy and swarm scaffolding exist; P1 changed operators from measured failures | Demonstrate an automated evidence -> decision -> new experiment transition with a budget and rollback |
-| Interpretability / reproducibility | 5/5 | Per-trial artifacts, source/config hashes, failure classes, deterministic replay, green CI, public commands; generated two-minute report freshly re-verifies 96 candidates across 103 artifacts | Keep the generated report current in CI |
+| Autonomy / self-improvement | 4/5 | P3 transition `67bec1d8`: canonical P1/P2 evidence selected `asymmetric_random_greedy_screen`; decision preceded action; config matched; best 40 triggered rollback; incumbent hash unchanged | Demonstrate repeated transitions or a live research/memory-influenced branch |
+| Interpretability / reproducibility | 5/5 | Per-trial artifacts, source/config hashes, failure classes, deterministic replay, green preregistration CI, public commands; generated two-minute report freshly re-verifies 100 candidates across 110 artifacts | Obtain green CI for the committed P3 evidence snapshot |
 
-Core readiness: **17/25**. The limiting dimensions are results and demonstrated autonomy.
+Core readiness: **19/25**. The main limiting dimension is mathematical results.
 
 ## Sponsor readiness
 
@@ -36,8 +36,8 @@ Sponsor claims must be removed or qualified in the pitch until these proofs exis
 ## Highest-impact sequence
 
 1. **P2 Modal causal experiment — complete (run `eaacf19f`, commit `9c8b919`, CI `43767285572`):** agreement 4/4, zero failures, isolation probe clean, no speedup, cost unknown.
-2. **Judge evidence view — complete in the containing snapshot:** machine-readable JSON and concise Markdown are generated from 103 artifacts; 96 accepted candidates are freshly dual-verified; CI checks staleness.
-3. **Causal autonomy loop:** let the controller select the next preregistered operator from failure evidence, record the decision input/output and preserve rollback. Do not spend reserved confirmatory seeds on stopped P1 code.
+2. **Judge evidence view — complete in the containing snapshot:** machine-readable JSON and concise Markdown are generated from 110 artifacts; 100 accepted candidates are freshly dual-verified; CI checks staleness.
+3. **Causal autonomy loop — complete (transition `67bec1d8`):** evidence selected a new operator, the decision preceded action, the action matched its emitted spec, and a best score of 40 rolled back with the incumbent unchanged.
 4. **Exa and past.dev live proofs:** only after credentials exist. Until then, keep fixture tests but mark them as unverified integrations.
 5. **Results strategy:** start a structurally different asymmetric-from-scratch search or add a second benchmark where EvoHive can demonstrate improvement. This needs a new frozen manifest before compute.
 
@@ -48,7 +48,7 @@ Sponsor claims must be removed or qualified in the pitch until these proofs exis
 | “EvoHive reproduced the public 58 from scratch” | Yes | 10/64 fixed-budget trials; two public symmetry classes; not a discovery |
 | “EvoHive found 59” | No | No verified 59 exists |
 | “The local-repair family improved the search” | No | All three iterations stayed at a two-conflict minimum |
-| “EvoHive preserves and learns from failures” | Partly | Failure lineage is preserved; automated policy influence still needs a causal run |
+| “EvoHive preserves and learns from failures” | Yes, qualified | P3 provides one causal evidence-to-decision-to-action transition with rollback; this is not yet a repeated open-ended loop |
 | “Modal safely runs parallel experiments” | Yes, qualified | One run, four Sandboxes, results identical to local; isolation is requested configuration plus an in-Sandbox self-report |
 | “Modal makes the search faster” | No | At 100000 iterations Modal took 5.90 s against 1.07 s local parallel and 4.16 s local serial-equivalent |
 | “The Modal run cost $X” | No | Cost is unknown; Modal exposes no authoritative per-Sandbox figure to this client |

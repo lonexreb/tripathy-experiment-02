@@ -3,13 +3,14 @@
     "The 58-point result is a from-scratch reproduction, not a discovery.",
     "No verified 59-point construction exists in this evidence set.",
     "The Modal run demonstrates isolated parity, not speedup or known cost.",
+    "The autonomy canary demonstrates a causal transition and rollback, not a better solver.",
     "Exa and past.dev have adapters and fixture tests but no live evidence."
   ],
   "integrity": {
-    "evidence_index_sha256": "147d6692aa33ba29a9a90378562bdd652dbdaaba498ed1a5f939953123a7e2b8",
-    "evidence_set_sha256": "f2ce796bd3677a1e9271b76cc2dc05f59ad34026190ec4ff58607f13d1830c95",
-    "fresh_dual_verifications": 96,
-    "source_artifact_count": 103,
+    "evidence_index_sha256": "ec9ed2bbfc8755bdd51cad7c5f686878d7d4eed8c49ead919c504caf7300fd14",
+    "evidence_set_sha256": "daee393444682ef9a1632478080f028f230c67fd60ad9096c32222aad1c2c7e1",
+    "fresh_dual_verifications": 100,
+    "source_artifact_count": 110,
     "source_artifacts": [
       {
         "path": "artifacts/runs/418e67a9-dca8-4d0d-ac3d-1b5355bf6a45.json",
@@ -46,6 +47,34 @@
       {
         "path": "artifacts/runs/418e67a9-dca8-4d0d-ac3d-1b5355bf6a45.trial-1007.json",
         "sha256": "aa56d119f615bd54b66b75793aca4f44860256f4239fe794620da1e02dd836ec"
+      },
+      {
+        "path": "artifacts/runs/67bec1d8-08d6-4118-85a8-433d13c53982.decision.json",
+        "sha256": "2dc58fc6b9475a4fb56e0a3d1bf81b28b703ebb6c0e2e9ae6da978e117e5a7d8"
+      },
+      {
+        "path": "artifacts/runs/67bec1d8-08d6-4118-85a8-433d13c53982.transition.json",
+        "sha256": "f03cbfe90c1e845a3f80e505d1cf20fc16c243d4febe761448cec8c7ef7366a7"
+      },
+      {
+        "path": "artifacts/runs/7035b607-0668-43e4-b51f-acc6ac68402e.json",
+        "sha256": "cab166b99e8f1fb5b24dbada4341a3bbf255d6eb1d51e33aada670e43e1f38ee"
+      },
+      {
+        "path": "artifacts/runs/7035b607-0668-43e4-b51f-acc6ac68402e.trial-1400.json",
+        "sha256": "34e6bb2ef568e66363b203de7f5a4399838685a1eaca5847b58fdd1deb50cc27"
+      },
+      {
+        "path": "artifacts/runs/7035b607-0668-43e4-b51f-acc6ac68402e.trial-1401.json",
+        "sha256": "9c86b76a13df6deaad5dc21c2817746f34c71daee581e13b087c168fa1d1b6e3"
+      },
+      {
+        "path": "artifacts/runs/7035b607-0668-43e4-b51f-acc6ac68402e.trial-1402.json",
+        "sha256": "2328e6604f5fc780fc514b79bb9b8503233910436a56240e34ef9853410f294e"
+      },
+      {
+        "path": "artifacts/runs/7035b607-0668-43e4-b51f-acc6ac68402e.trial-1403.json",
+        "sha256": "7fd56dd34a680bb6606aa0d5ed69bf8941b954c0961dd0fa0a50e2c0c018cc7b"
       },
       {
         "path": "artifacts/runs/bb6b15b0-c0b9-426f-a67d-464cdce1a551.json",
@@ -521,6 +550,28 @@
     "stdout_byte_identical": 4,
     "trials": 8
   },
+  "p3": {
+    "action_matches_decision_spec": true,
+    "action_run_id": "7035b607-0668-43e4-b51f-acc6ac68402e",
+    "best_score": 40,
+    "cost_usd": 0.0,
+    "decision_artifact": "artifacts/runs/67bec1d8-08d6-4118-85a8-433d13c53982.decision.json",
+    "decision_precedes_action": true,
+    "incumbent_unchanged": true,
+    "label": "causal evidence-to-decision canary with rollback",
+    "negative_evidence_retained": true,
+    "oracle_disagreements": 0,
+    "promotion_status": "rolled_back",
+    "reason_code": "stopped_family_needs_structural_change",
+    "record_claim": false,
+    "score_counts": {
+      "39": 3,
+      "40": 1
+    },
+    "selected_action": "asymmetric_random_greedy_screen",
+    "transition_id": "67bec1d8-08d6-4118-85a8-433d13c53982",
+    "trials": 4
+  },
   "project": "EvoHive",
   "schema_version": 1,
   "sponsor_status": {
@@ -530,6 +581,7 @@
   },
   "verdict": {
     "best_dual_verified_score": 58,
+    "causal_autonomy_demonstrated": true,
     "modal_candidate_parity": true,
     "modal_speedup_demonstrated": false,
     "public_score_reproduced_from_scratch": true,

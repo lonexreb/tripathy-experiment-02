@@ -2,7 +2,7 @@
   "schema_version": 2,
   "experiment_id": "02",
   "linear_issue": "TRI-19",
-  "status": "preregistered",
+  "status": "completed",
   "phase": "P3 causal autonomy: evidence-to-decision-to-action canary with rollback",
   "plan": "docs/P3_CAUSAL_AUTONOMY_PLAN.md",
   "question": "Can EvoHive deterministically turn the three stopped P1 iterations and measured P2 overhead into a persisted next-operator decision, execute the emitted bounded experiment, and preserve an automatic rollback without a human choosing the operator after seeing the evidence?",
@@ -247,5 +247,31 @@
       "sandbox_prepare_seconds (1.62 s) reflects an image cached by the disclosed preflight; the preflight's cold prepare took 11.13 s.",
       "The Sandbox 'solve' phase (2.47 s mean) includes the exec round trip, so it is not a pure CPU comparison with the 1.04 s local trials."
     ]
+  },
+  "p3_result": {
+    "transition_id": "67bec1d8-08d6-4118-85a8-433d13c53982",
+    "decision_artifact": "artifacts/runs/67bec1d8-08d6-4118-85a8-433d13c53982.decision.json",
+    "action_run_id": "7035b607-0668-43e4-b51f-acc6ac68402e",
+    "transition_artifact": "artifacts/runs/67bec1d8-08d6-4118-85a8-433d13c53982.transition.json",
+    "gate_status": "passed",
+    "selected_action": "asymmetric_random_greedy_screen",
+    "reason_code": "stopped_family_needs_structural_change",
+    "decision_precedes_action": true,
+    "action_matches_decision_spec": true,
+    "trials": 4,
+    "accepted_trials": 4,
+    "score_counts": {
+      "39": 3,
+      "40": 1
+    },
+    "best_score": 40,
+    "oracle_disagreements": 0,
+    "promotion_status": "rolled_back",
+    "incumbent_score": 58,
+    "incumbent_source_sha256_before": "ab141274701608a6841eed4f98c0ddf12e8135baeb4de2227b0b41b4758d471c",
+    "incumbent_source_sha256_after": "ab141274701608a6841eed4f98c0ddf12e8135baeb4de2227b0b41b4758d471c",
+    "negative_evidence_retained": true,
+    "cost_usd": 0.0,
+    "record_claim": false
   }
 }

@@ -2,7 +2,7 @@
 
 ## Verdict
 
-EvoHive reproduced the public 58-point construction from scratch in 10/64 fixed-budget trials. It did not find a verified 59-point construction. Modal reproduced four same-seed local candidates exactly, but was slower at this budget; Exa and past.dev have no live evidence.
+EvoHive reproduced the public 58-point construction from scratch in 10/64 fixed-budget trials. It did not find a verified 59-point construction. Modal reproduced four same-seed local candidates exactly, but was slower at this budget. A persisted P3 decision causally selected and rolled back a structurally different canary; Exa and past.dev have no live evidence.
 
 ## Evidence
 
@@ -13,6 +13,7 @@ EvoHive reproduced the public 58-point construction from scratch in 10/64 fixed-
 | P1.2 `ff52f29c` | destroy 4 / exact repair 5: 0 verified 59s; minimum 2 conflicts | gate passed; operator family stopped |
 | P1.3 `e46d5be6` | destroy 8 / exact repair 9: 0 verified 59s; minimum 2 conflicts | gate passed; operator family stopped |
 | P2 `eaacf19f` | 4/4 candidate hashes and 4/4 stdout streams match | 4/4 terminated; 0 oracle disagreements |
+| P3 `67bec1d8` | selected `asymmetric_random_greedy_screen` from P1/P2 evidence; best 40 | decision preceded action; rolled_back; incumbent unchanged |
 
 ## Modal timing
 
@@ -23,10 +24,11 @@ Local parallel: **1.07 s**. Local serial-equivalent: **4.16 s**. Modal: **5.90 s
 - The 58-point result is a from-scratch reproduction, not a discovery.
 - No verified 59-point construction exists in this evidence set.
 - The Modal run demonstrates isolated parity, not speedup or known cost.
+- The autonomy canary demonstrates a causal transition and rollback, not a better solver.
 - Exa and past.dev have adapters and fixture tests but no live evidence.
 
 ## Integrity
 
-The generator freshly dual-verified **96** accepted candidates and hashed **103** source artifacts. Evidence-set SHA-256: `f2ce796bd3677a1e9271b76cc2dc05f59ad34026190ec4ff58607f13d1830c95`.
+The generator freshly dual-verified **100** accepted candidates and hashed **110** source artifacts. Evidence-set SHA-256: `daee393444682ef9a1632478080f028f230c67fd60ad9096c32222aad1c2c7e1`.
 
 Rebuild: `python -m tripathy_experiment.cli judge-report`

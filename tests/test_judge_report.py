@@ -21,14 +21,17 @@ def test_report_reconstructs_canonical_evidence_and_reverifies_candidates() -> N
         "verified_59_found": False,
         "modal_candidate_parity": True,
         "modal_speedup_demonstrated": False,
+        "causal_autonomy_demonstrated": True,
     }
     assert report["p0"]["target_reached"] == 10
     assert report["p1"]["total_trials"] == 24
     assert report["p1"]["minimum_working_violations"] == 2
     assert report["p2"]["candidate_hash_agree"] == 4
     assert report["p2"]["sandboxes_terminated"] == 4
-    assert report["integrity"]["fresh_dual_verifications"] == 96
-    assert report["integrity"]["source_artifact_count"] == 103
+    assert report["p3"]["selected_action"] == "asymmetric_random_greedy_screen"
+    assert report["p3"]["promotion_status"] == "rolled_back"
+    assert report["integrity"]["fresh_dual_verifications"] == 100
+    assert report["integrity"]["source_artifact_count"] == 110
     assert len(report["integrity"]["evidence_set_sha256"]) == 64
     assert len(report["integrity"]["evidence_index_sha256"]) == 64
 
@@ -39,6 +42,7 @@ def test_markdown_states_result_and_claim_boundaries() -> None:
     assert "did not find a verified 59-point" in markdown
     assert "Modal timing" in markdown and "Cost is unknown, not zero" in markdown
     assert "Exa and past.dev have no live evidence" in markdown
+    assert "decision preceded action" in markdown and "incumbent unchanged" in markdown
 
 
 def test_write_then_check_detects_stale_output(tmp_path: Path) -> None:

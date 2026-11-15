@@ -610,7 +610,7 @@
     "P2 isolation evidence is requested configuration plus an in-Sandbox self-report; there is no provider-side attestation.",
     "Exa and past.dev remain untested and were not called. No Linear or Slack update was posted (external writes were not authorized)."
   ],
-  "next_decision": "The judge evidence view is generated and self-checking. Next: demonstrate a causal evidence-to-decision autonomy transition without spending reserved confirmatory seeds. Modal gave no speedup at 100000 iterations; any throughput claim needs a separately preregistered budget where solve time exceeds the roughly 3-second per-Sandbox overhead.",
+  "next_decision": "P3 demonstrated one causal evidence-to-decision-to-action transition and a safe rollback. Next: commit the live evidence and obtain green CI, then freeze the submission narrative and demo. Exa and past.dev remain unclaimed without credentials; mathematical improvement above 58 remains the largest evidence gap.",
   "updated_at": "2026-11-15T14:06:30-08:00",
   "p0_objective": "TRI-19 P0: replace the public-certificate replay with a from-scratch, deterministic, dual-verified baseline for AlphaEvolve Problem 59 and record one 64-trial reproduction gate (passed, committed at 2914794)",
   "p1_implementation": {
@@ -946,10 +946,30 @@
     "index": "experiment/evidence-index.json (canonical run selection only; no result metrics)",
     "machine_view": "artifacts/judge/judge-report.json",
     "human_view": "artifacts/judge/judge-report.md",
-    "source_artifacts": 103,
-    "fresh_dual_verifications": 96,
-    "evidence_set_sha256": "f2ce796bd3677a1e9271b76cc2dc05f59ad34026190ec4ff58607f13d1830c95",
+    "source_artifacts": 110,
+    "fresh_dual_verifications": 100,
+    "evidence_set_sha256": "daee393444682ef9a1632478080f028f230c67fd60ad9096c32222aad1c2c7e1",
     "safety": "all artifact references must stay inside artifacts/runs; child counts, scores, target counts, failure counts, oracle disagreements, Modal pair hashes, isolation and termination counts are recomputed or cross-checked; CI refuses stale generated views",
     "checks": "python -m tripathy_experiment.cli judge-report --check-report"
+  },
+  "p3_autonomy": {
+    "preregistration_commit": "14f70124c2a5ce80a120bae07f5900c0d14be372",
+    "preregistration_ci": "43768422967 passed",
+    "transition_id": "67bec1d8-08d6-4118-85a8-433d13c53982",
+    "decision_artifact": "artifacts/runs/67bec1d8-08d6-4118-85a8-433d13c53982.decision.json",
+    "action_run_id": "7035b607-0668-43e4-b51f-acc6ac68402e",
+    "transition_artifact": "artifacts/runs/67bec1d8-08d6-4118-85a8-433d13c53982.transition.json",
+    "selected_action": "asymmetric_random_greedy_screen",
+    "reason_code": "stopped_family_needs_structural_change",
+    "decision_precedes_action": true,
+    "action_matches_decision_spec": true,
+    "scores": [39, 39, 40, 39],
+    "best_score": 40,
+    "oracle_disagreements": 0,
+    "promotion_status": "rolled_back",
+    "incumbent_sha256_before_and_after": "ab141274701608a6841eed4f98c0ddf12e8135baeb4de2227b0b41b4758d471c",
+    "cost_usd": 0.0,
+    "record_claim": false,
+    "post_run_audit": "Fresh process reloaded all four action children; both oracles accepted every set and scores matched 39,39,40,39. Decision input hashes and plan/policy/source hashes matched. The decision was written from clean commit 14f7012 about 20 ms before action start. Protected incumbent, oracles, benchmarks and prior solvers remain unchanged."
   }
 }

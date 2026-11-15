@@ -1,0 +1,108 @@
+{
+  "budget": {
+    "cost_usd": 0.0,
+    "provider_calls": 0,
+    "trials": 4
+  },
+  "candidates": [
+    {
+      "action": "freeze_candidate",
+      "eligible": false,
+      "reason": "requires a verified 59"
+    },
+    {
+      "action": "deepen_exact_repair",
+      "eligible": false,
+      "reason": "requires measured progress below two conflicts"
+    },
+    {
+      "action": "continue_destroy_repair",
+      "eligible": false,
+      "reason": "forbidden by the P1 preregistered stopping boundary"
+    },
+    {
+      "action": "modal_scale_same_short_solver",
+      "eligible": false,
+      "reason": "P2 startup overhead dominated and P1 showed no algorithmic progress"
+    },
+    {
+      "action": "asymmetric_random_greedy_screen",
+      "eligible": true,
+      "reason": "structurally different from the stopped seeded-repair family"
+    }
+  ],
+  "created_at": "2026-11-15T22:17:50.517724+00:00",
+  "decision_id": "67bec1d8-08d6-4118-85a8-433d13c53982",
+  "experiment_spec": {
+    "initialization": "empty grid; no certificate or incumbent candidate",
+    "iters": 250,
+    "matches_preregistration": true,
+    "promotion_score": 58,
+    "reserved_confirmatory_seeds": "64..127 untouched",
+    "seeds": [
+      1400,
+      1401,
+      1402,
+      1403
+    ],
+    "solver_source": "solver/asymmetric_greedy.c",
+    "timeout_seconds": 120.0,
+    "workers": 4
+  },
+  "file_sha256": {
+    "docs/P3_CAUSAL_AUTONOMY_PLAN.md": "e56ea4b4773af5d9db0f7b54e30b80dd8d18b53c1ee3a13f17253a23a6aef963",
+    "solver/asymmetric_greedy.c": "5d6049cd90550beb64b441b96dcdda1211215fbd4bfb0fff49eb08266ca46437",
+    "src/tripathy_experiment/autonomy.py": "88a5a20c4752aa191e294871f733e9e559d3cde3bc5bab235ebe12975d3ca49b"
+  },
+  "git": {
+    "dirty": false,
+    "dirty_paths": 0,
+    "head": "14f70124c2a5ce80a120bae07f5900c0d14be372"
+  },
+  "input_evidence": [
+    {
+      "kind": "p1-smoke-summary",
+      "path": "artifacts/runs/418e67a9-dca8-4d0d-ac3d-1b5355bf6a45.json",
+      "run_id": "418e67a9-dca8-4d0d-ac3d-1b5355bf6a45",
+      "sha256": "837dbe2b3ba66d55287480957da3f9532f07cabc95b1f8d74e891a78705a1565"
+    },
+    {
+      "kind": "p1-smoke-summary",
+      "path": "artifacts/runs/ff52f29c-b4e5-4620-993d-5236b324991e.json",
+      "run_id": "ff52f29c-b4e5-4620-993d-5236b324991e",
+      "sha256": "1ec6c9095def04ef6c893967fde60e63e4d25b267d40cdd97c6addd376361580"
+    },
+    {
+      "kind": "p1-smoke-summary",
+      "path": "artifacts/runs/e46d5be6-98e0-43ae-848b-3a439246c249.json",
+      "run_id": "e46d5be6-98e0-43ae-848b-3a439246c249",
+      "sha256": "5296e7e7de204bb3fc3d7b86aa056d88d5959292242b0f2d1323287f3b876fe1"
+    },
+    {
+      "kind": "p2-comparison",
+      "path": "artifacts/runs/eaacf19f-08a7-46c3-8b89-6486492c601f.json",
+      "run_id": "eaacf19f-08a7-46c3-8b89-6486492c601f",
+      "sha256": "4193c7bdea12dc906d15fc885aa0b8f3e50322da44a7294f6abbe436c2a5e4cf"
+    }
+  ],
+  "kind": "causal-decision",
+  "linear_issue": "TRI-19",
+  "reason_code": "stopped_family_needs_structural_change",
+  "record_claim": false,
+  "rollback_rule": "retain solver/solver.c unless the canary reaches 58 with a passed gate; screening never overwrites the incumbent",
+  "schema_version": 1,
+  "selected_action": "asymmetric_random_greedy_screen",
+  "signals": {
+    "all_p1_minimums": [
+      2,
+      2,
+      2
+    ],
+    "minimum_working_violations": 2,
+    "modal_faster_than_local_parallel": false,
+    "modal_startup_overhead_dominates": true,
+    "p1_no_progress_iterations": 3,
+    "passed_p1_iterations": 3,
+    "verified_59_count": 0
+  }
+}
