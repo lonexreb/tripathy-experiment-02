@@ -21,7 +21,7 @@ experiment:
     - Exa
     - past.dev
     - Modal
-  phase: P2 Modal causal comparison completed (systems evidence); P1 closed by preregistered stop rule
+  phase: P3 causal autonomy canary preregistered; P2 completed; P1 closed by stop rule
   trial_definition: one seeded symmetry-breaker invocation on one dual-verified P0 candidate
   development_seeds:
     - 1000..1007
@@ -44,6 +44,9 @@ experiment:
   p2_preflight_run: fc905c4a-ff66-4ce5-a12a-609eaef96478
   p2_seeds: 1300..1303
   p2_result: gate passed; 4/4 same-seed candidate hashes agree; 0 oracle disagreements; no Modal speedup
+  p3_plan: docs/P3_CAUSAL_AUTONOMY_PLAN.md
+  p3_selected_action_expected: asymmetric_random_greedy_screen from stopped P1 evidence
+  p3_live_status: not run
   stop_condition: met; no verified 59 and minimum working violations remained 2
   git:
     base_head: 29147943bd20726ee2dcd3237edeb4e297f748bf

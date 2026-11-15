@@ -207,6 +207,19 @@ attestation; `GPG_KEY`, a public fingerprint name from the python base image, is
 name and its value is never read. One gateway preflight on off-experiment seed 1399 (run
 `fc905c4a-ff66-4ce5-a12a-609eaef96478`) preceded the run and is kept as an artifact.
 
+## P3 causal autonomy canary (preregistered, not yet run)
+
+`docs/P3_CAUSAL_AUTONOMY_PLAN.md` freezes a deterministic policy over the three P1 parent
+artifacts and the P2 comparison. The expected branch rejects more work in the stopped
+destroy/repair family and emits a structurally different asymmetric-from-scratch canary. Its
+decision must be persisted before action; a result below the incumbent 58 rolls back without
+changing `solver/solver.c`. Seeds 64..127 remain untouched.
+
+```bash
+python -m tripathy_experiment.cli p3-autonomy --seeds 1400-1403 --iters 250 \
+  --workers 4 --timeout-seconds 120 --artifact-dir artifacts/runs
+```
+
 ## Judge evidence report
 
 Build the two-minute Markdown view and its machine-readable companion directly from the

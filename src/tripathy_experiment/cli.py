@@ -13,6 +13,8 @@ from .adapters import (
     ModalCandidateExecutor,
     PastSharedMemory,
 )
+from .autonomy import PREREGISTERED as P3_PREREGISTERED
+from .autonomy import run_autonomy_transition
 from .baseline import parse_seeds, run_baseline, sha256_file
 from .judge_report import build_report, write_report
 from .modal_gateway import ModalSandboxGateway
@@ -64,7 +66,14 @@ def main() -> int:
     parser.add_argument(
         "command",
         choices=(
-            "validate", "run", "verify", "baseline", "p1-smoke", "p2-compare", "judge-report"
+            "validate",
+            "run",
+            "verify",
+            "baseline",
+            "p1-smoke",
+            "p2-compare",
+            "judge-report",
+            "p3-autonomy",
         ),
     )
     parser.add_argument("benchmark", nargs="?", type=Path, help="benchmark JSON for verify")
@@ -136,12 +145,14 @@ def main() -> int:
                 linear_issue=manifest.linear_issue,
                 experiment_id=manifest.experiment_id,
             )
-            keys = (
+            baseline_keys = (
                 "run_id", "gate_label", "gate_status", "trials", "score_counts", "failure_counts",
                 "best_score", "reach_target_count", "reach_target_ci95_exact",
                 "oracle_disagreements", "wall_seconds", "cost_usd",
             )
-            report = {key: summary.get(key, summary["config"].get(key)) for key in keys}
+            report = {
+                key: summary.get(key, summary["config"].get(key)) for key in baseline_keys
+            }
             print(json.dumps({**report, "artifact": str(summary_path)}, sort_keys=True))
             return 2 if summary["gate_status"] == "infrastructure_failure" else 0
 
@@ -204,6 +215,41 @@ def main() -> int:
             report = {key: summary[key] for key in compare_keys}
             print(json.dumps({**report, "artifact": str(summary_path)}, sort_keys=True))
             return 0 if summary["gate_status"].startswith("passed") else 2
+
+        if args.command == "p3-autonomy":
+            manifest.validate()
+            if args.iters is None:
+                raise ValidationError("p3-autonomy requires --iters")
+            seeds = parse_seeds(args.seeds)
+            requested = {
+                "seeds": seeds,
+                "iters": args.iters,
+                "workers": args.workers,
+                "timeout_seconds": args.timeout_seconds,
+            }
+            if requested != P3_PREREGISTERED:
+                raise ValidationError(
+                    "p3-autonomy is frozen to --seeds 1400-1403 --iters 250 --workers 4 "
+                    "--timeout-seconds 120"
+                )
+            transition, transition_path = run_autonomy_transition(
+                seeds=seeds,
+                iters=args.iters,
+                workers=args.workers,
+                timeout_seconds=args.timeout_seconds,
+                artifact_dir=args.artifact_dir,
+                linear_issue=manifest.linear_issue,
+                experiment_id=manifest.experiment_id,
+            )
+            transition_keys = (
+                "transition_id", "selected_action", "reason_code", "action_run_id",
+                "decision_precedes_action", "action_matches_decision_spec", "gate_status",
+                "trials", "score_counts", "best_score", "oracle_disagreements", "promotion",
+                "rollback", "cost_usd", "record_claim",
+            )
+            report = {key: transition[key] for key in transition_keys}
+            print(json.dumps({**report, "artifact": str(transition_path)}, sort_keys=True))
+            return 0 if transition["gate_status"] == "passed" else 2
 
         if args.dry_run:
             result = ExperimentRunner().run(manifest, dry_run=True)

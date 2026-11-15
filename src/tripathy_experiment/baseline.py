@@ -344,6 +344,7 @@ def run_baseline(
     experiment_id: str,
     root: Path = Path("."),
     solver_binary: str | None = None,
+    solver_source: Path = SOLVER_SOURCE,
 ) -> tuple[dict[str, Any], Path]:
     """Run every seed, write one child artifact per trial and one parent summary."""
     if iters < 1 or workers < 1 or timeout_seconds <= 0:
@@ -352,7 +353,7 @@ def run_baseline(
     started_at = datetime.now(UTC).isoformat()
     started = time.monotonic()
     solver = (
-        build_solver(root, root / "build")
+        build_solver(root, root / "build", solver_source)
         if solver_binary is None
         else {"binary": solver_binary, "binary_sha256": sha256_file(Path(solver_binary))}
     )
