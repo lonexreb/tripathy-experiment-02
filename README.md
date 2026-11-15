@@ -105,3 +105,57 @@ python -m tripathy_experiment.cli baseline --seeds 0-63 --iters 1000000 --worker
   perpendicular-bisector oracle (`perpendicular_bisector_oracle.py`) both accept it.
 - Each trial writes one immutable artifact, failures included, plus one parent summary.
 - Upstream verifier provenance and semantics are pinned in `benchmarks/upstream/PROVENANCE.json`.
+
+## P1 symmetry-breaking development smokes (TRI-19) — operator family stopped
+
+Plan and iteration log: `docs/P1_SYMMETRY_BREAKING_PLAN.md`. The P0 solver and its artifacts are
+frozen; P1 added a separate solver and controller. **No 59 was found in three development
+iterations, no record is claimed, and the destroy/repair operator family is closed as stopped**
+under the stop rule preregistered for iteration 3. Confirmatory seeds `64..127` were never used
+and will not be spent on this family.
+
+```bash
+# iteration 3 (current solver; final run for this operator family)
+python -m tripathy_experiment.cli p1-smoke \
+  --parent-run bb6b15b0-c0b9-426f-a67d-464cdce1a551 \
+  --seeds 1200-1207 --iters 200000 --repair-nodes 200000 --destroy-size 8 \
+  --workers 8 --artifact-dir artifacts/runs
+```
+
+- `solver/symmetry_breaker.c` reads a verified 58-point set on stdin. Once at startup and after
+  every stall restart it runs a bounded destroy / exact-repair attempt: remove `--destroy-size`
+  seeded-random points, collect every cell with zero exact add cost, and depth-first search for
+  destroy-size + 1 mutually compatible additions under the `--repair-nodes` cap. If that fails it
+  falls back to conflict-guided single-point swaps at cardinality 59. `--destroy-size` is required
+  and must be between 1 and the input count. The solver recounts its violation total by brute
+  force at every new minimum, restart and exit, emits only a valid set in `points`, and reports the
+  lowest-violation 59-point working state separately as `closest_approach`.
+- `src/tripathy_experiment/symmetry_breaking.py` selects the distinct verified 58s of the named P0
+  run, re-verifies the source before every invocation, recounts the closest approach itself,
+  validates the echoed destroy size and repair counters, and writes one immutable child artifact
+  per breaker seed plus a parent summary with a `search_progress` class.
+- A 59 counts only after a fresh process re-reads the persisted child artifact and both oracles
+  plus the pinned upstream verifier accept it. A smoke always records `record_claim: false`.
+- Seeds `64..127` are reserved; the controller refuses them.
+
+| Iteration | Run | Seeds | Gate | Verified 59s | Closest approach | Repair (attempts / exhausted / deepest) | Search progress |
+|---|---|---|---|---|---|---|---|
+| 1: single-point tabu swaps | `418e67a9-dca8-4d0d-ac3d-1b5355bf6a45` | 1000..1007 | passed | 0 | 2 triples, at swap 0 | n/a | none |
+| 2: destroy 4 / repair 5, 20000 nodes | `ff52f29c-b4e5-4620-993d-5236b324991e` | 1100..1107 | passed | 0 | 2 triples, at swap 0 | 80 / 80 / 4 of 5 | no progress |
+| 3: destroy 8 / repair 9, 200000 nodes | `e46d5be6-98e0-43ae-848b-3a439246c249` | 1200..1207 | passed | 0 | 2 triples, at swap 0 | 80 / 80 / 8 of 9 | **no progress — stopped** |
+
+Iteration 3 detail: all 80 destroy-eight attempts enumerated their whole search space (27078 nodes
+in total; the 200000-node cap was never reached) and none reached depth 9. After removing eight
+points the zero-cost pool held only 8 to 10 cells: the eight removed points and at most two
+others. Every trial returned the unchanged 58-point source, and the swap fallback never improved
+on the two-violation state it starts from.
+
+What this does and does not show: the from-scratch 58s are locally rigid under these operators
+(single swaps, and 80 sampled removals each of four and of eight points). It is not a proof that
+no 59 exists, and "exhausted" is the solver's own report rather than an independently checked
+enumeration.
+
+Earlier solver versions are kept unchanged in `solver/rejected/` (`symmetry_breaker_iter1.c`,
+`symmetry_breaker_iter2.c`); their SHA-256 hashes match the ones recorded in runs `418e67a9` and
+`ff52f29c`. Replaying those runs byte-for-byte needs those sources, because the command line and
+output schema changed between iterations.

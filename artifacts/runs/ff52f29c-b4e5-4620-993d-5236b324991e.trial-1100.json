@@ -1,0 +1,674 @@
+{
+  "best_state_origin": "swap",
+  "candidate_sha256": "203d5103442d52995d806aa01848b12c48621118d9fc04ba139b4e9f3df24431",
+  "claimed_score": 58,
+  "closest_approach": {
+    "claimed_violations": 2,
+    "label": "lowest-violation working state; NOT an accepted candidate unless 0",
+    "oracle_bisector_valid": false,
+    "oracle_distance_valid": false,
+    "points": [
+      [
+        0,
+        4
+      ],
+      [
+        0,
+        5
+      ],
+      [
+        0,
+        26
+      ],
+      [
+        0,
+        27
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        29
+      ],
+      [
+        3,
+        0
+      ],
+      [
+        3,
+        11
+      ],
+      [
+        3,
+        20
+      ],
+      [
+        3,
+        31
+      ],
+      [
+        6,
+        0
+      ],
+      [
+        6,
+        11
+      ],
+      [
+        6,
+        20
+      ],
+      [
+        6,
+        31
+      ],
+      [
+        7,
+        0
+      ],
+      [
+        7,
+        11
+      ],
+      [
+        7,
+        20
+      ],
+      [
+        7,
+        31
+      ],
+      [
+        8,
+        1
+      ],
+      [
+        8,
+        30
+      ],
+      [
+        9,
+        1
+      ],
+      [
+        9,
+        30
+      ],
+      [
+        11,
+        4
+      ],
+      [
+        11,
+        5
+      ],
+      [
+        11,
+        8
+      ],
+      [
+        11,
+        23
+      ],
+      [
+        11,
+        26
+      ],
+      [
+        11,
+        27
+      ],
+      [
+        12,
+        1
+      ],
+      [
+        12,
+        30
+      ],
+      [
+        19,
+        1
+      ],
+      [
+        19,
+        30
+      ],
+      [
+        20,
+        4
+      ],
+      [
+        20,
+        5
+      ],
+      [
+        20,
+        8
+      ],
+      [
+        20,
+        23
+      ],
+      [
+        20,
+        26
+      ],
+      [
+        20,
+        27
+      ],
+      [
+        22,
+        1
+      ],
+      [
+        22,
+        30
+      ],
+      [
+        23,
+        1
+      ],
+      [
+        23,
+        30
+      ],
+      [
+        24,
+        0
+      ],
+      [
+        24,
+        11
+      ],
+      [
+        24,
+        20
+      ],
+      [
+        24,
+        31
+      ],
+      [
+        25,
+        0
+      ],
+      [
+        25,
+        11
+      ],
+      [
+        25,
+        20
+      ],
+      [
+        25,
+        31
+      ],
+      [
+        28,
+        0
+      ],
+      [
+        28,
+        11
+      ],
+      [
+        28,
+        20
+      ],
+      [
+        28,
+        31
+      ],
+      [
+        30,
+        29
+      ],
+      [
+        31,
+        4
+      ],
+      [
+        31,
+        5
+      ],
+      [
+        31,
+        26
+      ],
+      [
+        31,
+        27
+      ]
+    ],
+    "recounted_violations": 2
+  },
+  "command": [
+    "<symmetry-breaker>",
+    "--seed",
+    "1100",
+    "--iters",
+    "200000",
+    "--target",
+    "59",
+    "--repair-nodes",
+    "20000"
+  ],
+  "completed_at": "2026-11-15T21:39:12.045866+00:00",
+  "config": {
+    "destroy_size": 4,
+    "gate_label": "p1-development-smoke",
+    "grid_size": 32,
+    "iters": 200000,
+    "max_stdout_bytes": 1048576,
+    "repair_attempt_schedule": "once at startup and after each stall restart",
+    "repair_nodes_per_attempt": 20000,
+    "seeds": [
+      1100,
+      1101,
+      1102,
+      1103,
+      1104,
+      1105,
+      1106,
+      1107
+    ],
+    "source_policy": "round-robin across distinct P0 candidates, ordered by lowest P0 seed",
+    "target_score": 59,
+    "timeout_seconds": 600.0,
+    "trial_definition": "one seeded symmetry-breaker invocation on one verified P0 candidate",
+    "workers": 8
+  },
+  "config_sha256": "1e5e5d3616a49c908bfb2205ce99e6499f01258c13514a4834a4abe0ecd2eb70",
+  "cost_usd": 0.0,
+  "cpu_seconds": 1.422979,
+  "detail": "",
+  "exit_code": 0,
+  "experiment_id": "02",
+  "failure_class": null,
+  "file_sha256": {
+    "benchmarks/no_isosceles_n32.json": "9bebfc52de362e80efc91d5455f2e20a103e766f191af8f665ee276907feb509",
+    "benchmarks/upstream/PROVENANCE.json": "f959a6a364c807b3e4f1bad76c38df85d58dcfaddb2adf011c7d15583993af6f",
+    "benchmarks/upstream/verify_construction.py.txt": "226370ddce5130a4e247ac1b1718bb4b120218d231507b1249137fd10e4eceaf",
+    "docs/P1_SYMMETRY_BREAKING_PLAN.md": "2b39b13841155907af757cfd8ac768ead6616144b089e0dd5714424c8a7be040",
+    "experiment/manifest.json": "dcccbacb40c9e2502b1eae7e4db4723bdfcb89fa841ca96dd76a88433eb0a0bc",
+    "project.yaml": "ef5a4edeb2fde7a0ef6c332c01aca379750c97b8f6698e0c4bc11681e67ef9ad",
+    "solver/solver.c": "ab141274701608a6841eed4f98c0ddf12e8135baeb4de2227b0b41b4758d471c",
+    "solver/symmetry_breaker.c": "95e9dc3e9e1c2932efcf98df67e57bc57bf0ce41608993e3c7824ffab25616ec",
+    "src/tripathy_experiment/baseline.py": "df0da847bc1184b34912fce2ec8ae0cd739f0060adbd8dcb6db54712b2e738d4",
+    "src/tripathy_experiment/cli.py": "20b72069809cdc8841c5e723e456ebf6a9c61e6aeb5b93be1f49f9dcaefcd76b",
+    "src/tripathy_experiment/no_isosceles.py": "4843790a2b7aa64502d4f580f356412f1d1e9247a260ce28377b1f3708ebf1ae",
+    "src/tripathy_experiment/perpendicular_bisector_oracle.py": "c8c8dc944d924267ce62acb9ec2eca448bad277baed88b33103d8242efb2113f",
+    "src/tripathy_experiment/symmetry_breaking.py": "7ef7fe2860723e05ba95334bd826c6da8b3750f2e9344217db3d2d9b2a6ab23a"
+  },
+  "git": {
+    "dirty": true,
+    "dirty_paths": 19,
+    "head": "29147943bd20726ee2dcd3237edeb4e297f748bf"
+  },
+  "grid_size": 32,
+  "initialization": "dual-verified from-scratch P0 candidates passed on stdin; the public certificate is never read",
+  "iters": 200000,
+  "kind": "p1-smoke-trial",
+  "linear_issue": "TRI-19",
+  "min_working_violations": 2,
+  "oracle_bisector": {
+    "reason": "bisector oracle passed",
+    "score": 58,
+    "valid": true,
+    "witness": null
+  },
+  "oracle_distance": {
+    "reason": "exact verifier passed",
+    "score": 58,
+    "valid": true,
+    "witness": null
+  },
+  "oracles_agree": true,
+  "output_equals_source": true,
+  "points": [
+    [
+      0,
+      4
+    ],
+    [
+      0,
+      5
+    ],
+    [
+      0,
+      26
+    ],
+    [
+      0,
+      27
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      29
+    ],
+    [
+      3,
+      0
+    ],
+    [
+      3,
+      11
+    ],
+    [
+      3,
+      20
+    ],
+    [
+      3,
+      31
+    ],
+    [
+      6,
+      0
+    ],
+    [
+      6,
+      11
+    ],
+    [
+      6,
+      20
+    ],
+    [
+      6,
+      31
+    ],
+    [
+      7,
+      0
+    ],
+    [
+      7,
+      11
+    ],
+    [
+      7,
+      20
+    ],
+    [
+      7,
+      31
+    ],
+    [
+      8,
+      1
+    ],
+    [
+      8,
+      30
+    ],
+    [
+      9,
+      1
+    ],
+    [
+      9,
+      30
+    ],
+    [
+      11,
+      4
+    ],
+    [
+      11,
+      5
+    ],
+    [
+      11,
+      8
+    ],
+    [
+      11,
+      23
+    ],
+    [
+      11,
+      26
+    ],
+    [
+      11,
+      27
+    ],
+    [
+      12,
+      1
+    ],
+    [
+      12,
+      30
+    ],
+    [
+      19,
+      1
+    ],
+    [
+      19,
+      30
+    ],
+    [
+      20,
+      4
+    ],
+    [
+      20,
+      5
+    ],
+    [
+      20,
+      8
+    ],
+    [
+      20,
+      23
+    ],
+    [
+      20,
+      26
+    ],
+    [
+      20,
+      27
+    ],
+    [
+      22,
+      1
+    ],
+    [
+      22,
+      30
+    ],
+    [
+      23,
+      1
+    ],
+    [
+      23,
+      30
+    ],
+    [
+      24,
+      0
+    ],
+    [
+      24,
+      11
+    ],
+    [
+      24,
+      20
+    ],
+    [
+      24,
+      31
+    ],
+    [
+      25,
+      0
+    ],
+    [
+      25,
+      11
+    ],
+    [
+      25,
+      20
+    ],
+    [
+      25,
+      31
+    ],
+    [
+      28,
+      0
+    ],
+    [
+      28,
+      11
+    ],
+    [
+      28,
+      20
+    ],
+    [
+      28,
+      31
+    ],
+    [
+      31,
+      4
+    ],
+    [
+      31,
+      5
+    ],
+    [
+      31,
+      26
+    ],
+    [
+      31,
+      27
+    ]
+  ],
+  "record_claim": false,
+  "repair": {
+    "attempts": 10,
+    "attempts_exhausted": 10,
+    "destroy_size": 4,
+    "max_depth": 4,
+    "node_cap": 20000,
+    "nodes": 191,
+    "pool_max": 5,
+    "pool_min": 4
+  },
+  "repair_node_cap": 20000,
+  "run_id": "ff52f29c-b4e5-4620-993d-5236b324991e",
+  "runtime": {
+    "compiler": [
+      "Apple clang version 21.0.0 (clang-2100.1.1.101)"
+    ],
+    "cpu_brand": "Apple M5 Max",
+    "cpu_count": 18,
+    "machine": "arm64",
+    "platform": "macOS-26.5-arm64-arm-64bit",
+    "python": "3.12.13"
+  },
+  "schema_version": 2,
+  "score": 58,
+  "seed": 1100,
+  "solver_build": {
+    "binary": "/Users/shubhankar/Documents/OpenAlex/type_classification/iterate-ai-hackathon/tripathy-experiment-02/build/symmetry_breaker-95e9dc3e9e1c2932",
+    "binary_sha256": "853c05694ff3868a552d994b320c74670e8277db01f7ba3bbd83022f85afb9ca",
+    "compile_command": [
+      "cc",
+      "-O2",
+      "-std=c99",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-o",
+      "<binary>",
+      "solver/symmetry_breaker.c"
+    ],
+    "source": "solver/symmetry_breaker.c",
+    "source_sha256": "95e9dc3e9e1c2932efcf98df67e57bc57bf0ce41608993e3c7824ffab25616ec"
+  },
+  "solver_counters": {
+    "aspirations": 2,
+    "brute_force_checks": 12,
+    "final_working_points": 59,
+    "final_working_violations": 11,
+    "min_working_violations": 2,
+    "min_working_violations_at_swap": 0,
+    "point_adds": 200010,
+    "point_removes": 200000,
+    "repair_attempts": 10,
+    "repair_attempts_exhausted": 10,
+    "repair_destroy_size": 4,
+    "repair_max_depth": 4,
+    "repair_nodes": 191,
+    "repair_pool_max": 5,
+    "repair_pool_min": 4,
+    "restarts": 9,
+    "swaps": 200000
+  },
+  "solver_termination_reason": "iterations_exhausted",
+  "solver_version": "evohive-symbreak-c99-2 noise=20 tabu=3+rand10 stall=20000 destroy=4",
+  "source": {
+    "artifact": "artifacts/runs/bb6b15b0-c0b9-426f-a67d-464cdce1a551.trial-0004.json",
+    "artifact_sha256": "5e0fbe9697dbab168f07a922f1dc91f7c8affe966e7b1de75e93ad62cc37f208",
+    "candidate_sha256": "203d5103442d52995d806aa01848b12c48621118d9fc04ba139b4e9f3df24431",
+    "p0_seed": 4,
+    "p0_trial_id": "bb6b15b0-c0b9-426f-a67d-464cdce1a551.trial-0004",
+    "p0_trial_ids": [
+      "bb6b15b0-c0b9-426f-a67d-464cdce1a551.trial-0004"
+    ]
+  },
+  "source_reverification": {
+    "accepted": true,
+    "oracle_bisector": {
+      "reason": "bisector oracle passed",
+      "score": 58,
+      "valid": true,
+      "witness": null
+    },
+    "oracle_distance": {
+      "reason": "exact verifier passed",
+      "score": 58,
+      "valid": true,
+      "witness": null
+    },
+    "oracles_agree": true
+  },
+  "source_run": {
+    "artifact": "artifacts/runs/bb6b15b0-c0b9-426f-a67d-464cdce1a551.json",
+    "artifact_sha256": "874f05a75b9900af0cfbbac8dd1b922b8b31b957b9d0f0654533a3c7cadf346c",
+    "git": {
+      "dirty": true,
+      "dirty_paths": 28,
+      "head": "cc69b3953b8c5f29580bc903c1fc9373a28f94d2"
+    },
+    "initialization": "empty state; the public 58-point certificate is never read",
+    "run_id": "bb6b15b0-c0b9-426f-a67d-464cdce1a551"
+  },
+  "started_at": "2026-11-15T21:39:10.269273+00:00",
+  "stdout_bytes": 1568,
+  "stdout_sha256": "615d4de5ac147c29536bfd05c9a52dcdc912df2d1fc8d0310aae68eaabcc97e4",
+  "target": 59,
+  "trial_id": "ff52f29c-b4e5-4620-993d-5236b324991e.trial-1100",
+  "wall_seconds": 1.7765539579559118
+}

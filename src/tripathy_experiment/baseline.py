@@ -23,7 +23,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import UTC, datetime
 from math import comb
 from pathlib import Path
-from typing import Any
+from typing import IO, Any
 from uuid import uuid4
 
 from . import no_isosceles, perpendicular_bisector_oracle
@@ -139,11 +139,13 @@ def runtime_fingerprint() -> dict[str, object]:
     }
 
 
-def build_solver(root: Path, build_dir: Path) -> dict[str, object]:
-    """Compile the solver to a path keyed by its source hash, or reuse it."""
-    source = root / SOLVER_SOURCE
+def build_solver(
+    root: Path, build_dir: Path, source_path: Path = SOLVER_SOURCE
+) -> dict[str, object]:
+    """Compile a solver to a path keyed by its source hash, or reuse it."""
+    source = root / source_path
     source_hash = sha256_file(source)
-    binary = (build_dir / f"solver-{source_hash[:16]}").resolve()
+    binary = (build_dir / f"{source_path.stem}-{source_hash[:16]}").resolve()
     if not binary.exists():
         build_dir.mkdir(parents=True, exist_ok=True)
         command = ["cc", *COMPILE_FLAGS, "-o", str(binary), str(source)]
@@ -151,11 +153,11 @@ def build_solver(root: Path, build_dir: Path) -> dict[str, object]:
         if completed.returncode != 0:
             raise RuntimeError(f"solver build failed: {completed.stderr[-2000:]}")
     return {
-        "source": str(SOLVER_SOURCE),
+        "source": str(source_path),
         "source_sha256": source_hash,
         "binary": str(binary),
         "binary_sha256": sha256_file(binary),
-        "compile_command": ["cc", *COMPILE_FLAGS, "-o", "<binary>", str(SOLVER_SOURCE)],
+        "compile_command": ["cc", *COMPILE_FLAGS, "-o", "<binary>", str(source_path)],
     }
 
 
@@ -187,25 +189,24 @@ def parse_candidate(stdout: bytes, seed: int, iters: int) -> dict[str, Any]:
     return payload
 
 
-def run_trial(binary: str, seed: int, iters: int, timeout_seconds: float) -> dict[str, Any]:
-    """Run one isolated solver process and classify the outcome. Never raises."""
-    command = [binary, "--seed", str(seed), "--iters", str(iters)]
+def _input_file(data: bytes) -> IO[bytes]:
+    handle = tempfile.TemporaryFile()  # noqa: SIM115 - the caller's with block closes it
+    handle.write(data)
+    handle.seek(0)
+    return handle
+
+
+def run_process(
+    command: list[str], timeout_seconds: float, stdin_bytes: bytes = b""
+) -> tuple[dict[str, Any], bytes]:
+    """Run one isolated process: empty environment, scratch cwd, bounded stdout.
+
+    Returns the process-level record fields and the size-limited stdout.
+    ``failure_class`` is crash, timeout, output_too_large or None. Never raises.
+    """
     record: dict[str, Any] = {
-        "seed": seed,
-        "iters": iters,
-        "command": ["<solver>", *command[1:]],
         "started_at": datetime.now(UTC).isoformat(),
         "failure_class": None,
-        "score": None,
-        "claimed_score": None,
-        "points": None,
-        "candidate_sha256": None,
-        "oracle_distance": None,
-        "oracle_bisector": None,
-        "oracles_agree": None,
-        "solver_termination_reason": None,
-        "solver_counters": None,
-        "solver_version": None,
         "cpu_seconds": None,
         "exit_code": None,
         "detail": "",
@@ -217,9 +218,10 @@ def run_trial(binary: str, seed: int, iters: int, timeout_seconds: float) -> dic
         with (
             tempfile.TemporaryDirectory(prefix="evohive-trial-") as scratch,
             tempfile.TemporaryFile() as stderr_file,
+            _input_file(stdin_bytes) as stdin_file,
             subprocess.Popen(
                 command,
-                stdin=subprocess.DEVNULL,
+                stdin=stdin_file,
                 stdout=subprocess.PIPE,
                 stderr=stderr_file,
                 cwd=scratch,
@@ -261,6 +263,29 @@ def run_trial(binary: str, seed: int, iters: int, timeout_seconds: float) -> dic
             record["failure_class"] = "output_too_large"
         elif record["exit_code"] != 0:
             record["failure_class"] = "crash"
+    return record, stdout
+
+
+def run_trial(binary: str, seed: int, iters: int, timeout_seconds: float) -> dict[str, Any]:
+    """Run one isolated solver process and classify the outcome. Never raises."""
+    command = [binary, "--seed", str(seed), "--iters", str(iters)]
+    record: dict[str, Any] = {
+        "seed": seed,
+        "iters": iters,
+        "command": ["<solver>", *command[1:]],
+        "score": None,
+        "claimed_score": None,
+        "points": None,
+        "candidate_sha256": None,
+        "oracle_distance": None,
+        "oracle_bisector": None,
+        "oracles_agree": None,
+        "solver_termination_reason": None,
+        "solver_counters": None,
+        "solver_version": None,
+    }
+    process, stdout = run_process(command, timeout_seconds)
+    record.update(process)
     if record["failure_class"] is not None:
         return record
 

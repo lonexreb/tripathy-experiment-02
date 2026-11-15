@@ -21,5 +21,7 @@ jobs:
       - run: ruff check .
       - run: mypy
       - run: pytest
-      - name: Verify the placeholder start gate remains closed
-        run: python -m tripathy_experiment.cli validate && exit 1 || test $? -eq 2
+      - name: Validate the active experiment manifest
+        run: python -m tripathy_experiment.cli validate
+      - name: Verify the pinned public benchmark with both local oracles
+        run: python -m tripathy_experiment.cli verify benchmarks/no_isosceles_n32.json

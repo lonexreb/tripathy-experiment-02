@@ -3,17 +3,19 @@
   "experiment_id": "02",
   "linear_issue": "TRI-19",
   "status": "running",
-  "phase": "P0 reproducibility gate",
-  "question": "Can a deterministic compiled local search that starts from an empty 32 x 32 grid reproduce the public 58-point no-isosceles result for AlphaEvolve Problem 59 under a fixed, declared iteration budget, with every result accepted only by two structurally independent exact oracles?",
-  "hypothesis": "At a fixed budget of 1000000 ruin/repair iterations per trial, at least one of the 64 from-scratch trials with seeds 0..63 of the mirror-symmetric baseline solver (solver/solver.c) reaches a dual-verified 58-point set, with zero oracle disagreements. The hypothesis is rejected if 0 of 64 trials reach 58.",
-  "primary_metric": "number of the 64 trials whose dual-verified cardinality reaches 58, reported with a 95% exact binomial interval; secondary metrics are best dual-verified cardinality, score distribution, wall and CPU seconds per trial, failure classes, and oracle disagreement count",
-  "baseline": "From-scratch deterministic C99 solver (solver/solver.c), symmetric under y -> 31-y, one seeded invocation per trial. The public 58-point certificate from google-deepmind/alphaevolve_repository_of_problems issue 10 is the external target only and is never used as solver initialization.",
-  "trial_definition": "One trial is one from-scratch seeded solver invocation in its own subprocess. Inner ruin/repair iterations are counted separately and are not trials.",
+  "phase": "P1 symmetry-breaking development iteration 3: final large-neighborhood test (destroy-eight / exact-repair-nine)",
+  "plan": "docs/P1_SYMMETRY_BREAKING_PLAN.md",
+  "question": "Does enlarging the destroy/exact-repair neighbourhood from four to eight removed points (nine exact additions, 200000 nodes per attempt) let the search leave the rigid neighbourhood of a from-scratch P0 58, reaching either a valid 59 or a one-violation 59-point working state?",
+  "hypothesis": "In the preregistered iteration-3 smoke (breaker seeds 1200..1207, 200000 fallback swaps per seed, destroy size 8, repair target 9 additions, 200000 exact-repair nodes per attempt, one attempt at startup and one after each 20000-swap stall restart, 8 workers, the same P0 parent bb6b15b0-c0b9-426f-a67d-464cdce1a551 and round-robin source policy), the infrastructure gate passes under the unchanged rules, with --destroy-size an explicit, validated and artifacted argument. The search hypothesis is that at least one trial reaches a persisted, dual- and upstream-verified 59 (development record candidate) or a working state with fewer than two violations (operator progress). It is rejected if no 59 is found and the minimum working violations remains 2.",
+  "primary_metric": "infrastructure gate status of the eight-trial smoke and the search-progress class (record candidate / operator progress / no progress); supporting metrics are verified 59 count, best valid score, minimum working violations per trial (recounted by the controller), exact-repair attempts, exhausted attempts, nodes, zero-cost pool sizes and deepest repair depth, the origin of each trial's best state (exact repair or swap), failure classes, oracle disagreements, wall and CPU seconds, and cost",
+  "baseline": "Immutable P0 baseline: Git commit 2914794, run bb6b15b0-c0b9-426f-a67d-464cdce1a551 (10 of 64 from-scratch trials reached a dual-verified 58 with solver/solver.c). P1 inputs are only that run's verified 58-point child artifacts, re-verified by both oracles before every breaker invocation. The public 58-point certificate is never read by the breaker or the controller.",
+  "trial_definition": "One trial is one seeded symmetry-breaker invocation on one verified P0 candidate in its own subprocess. Inner swaps are counted separately and are not trials.",
   "budget_usd": 20,
-  "p0_cost_usd": 0.0,
-  "cost_model": "P0 runs only on the local machine with no provider calls, so its marginal cost is 0.0 USD. The 20 USD figure is the ceiling for the whole experiment; none of it is authorized in P0.",
-  "stop_condition": "P0 stops after the single 64-trial gate. If the solver fails deterministic replay or the two oracles disagree, stop before the gate and preserve the failing fixture. If 0 of 64 trials reach 58, record a failed reproduction gate and stop without tuning on seeds 0..63. If at least one trial reaches 58, record a passed gate and stop; no 59-point record search is part of P0. If the gate would exceed 15 minutes of wall-clock time, lower the iteration budget and label the run a screening gate.",
-  "dual_verification_gate": "A candidate is accepted only when the per-apex distance oracle (src/tripathy_experiment/no_isosceles.py) and the perpendicular-bisector oracle (src/tripathy_experiment/perpendicular_bisector_oracle.py) both accept it in the controller. Any disagreement is an infrastructure failure that is written to an artifact and makes the run exit nonzero.",
+  "p1_smoke_cost_usd": 0.0,
+  "cost_model": "The P1 development smoke runs only on the local machine with no provider calls, so its marginal cost is 0.0 USD. The 20 USD figure is the ceiling for the whole experiment; none of it is authorized in this tranche.",
+  "stop_condition": "Run the eight-seed iteration-3 smoke once; do not tune after seeing results. Iteration 3 is the stopping boundary for the destroy/repair operator family: if the minimum working violations remains 2 and no 59 is verified, the family is closed as stopped, no further budget or parameter change is proposed for it, and no confirmatory seed is spent on it. A one-violation state would only justify a separately preregistered follow-up. Stop before the smoke if the breaker's incremental state disagrees with brute force; stop and preserve the artifact on any oracle disagreement. Seeds 64..127 stay untouched. record_claim stays false even if a 59 is verified. Both earlier P1 runs and every earlier artifact stay byte-for-byte unchanged. No sponsor integration or Modal run is part of this tranche.",
+  "dual_verification_gate": "A candidate is accepted only when the per-apex distance oracle (src/tripathy_experiment/no_isosceles.py) and the perpendicular-bisector oracle (src/tripathy_experiment/perpendicular_bisector_oracle.py) both accept it in the controller. Any disagreement is an infrastructure failure that is written to an artifact and makes the run exit nonzero. In P1 a 59 additionally counts only after a fresh process re-reads the persisted child artifact and both oracles plus the pinned upstream verify_construction accept it.",
+  "record_claim": false,
   "dataset": {
     "name": "AlphaEvolve repository Problem 59: no isosceles triangles",
     "version": "upstream commit 8f447457957deac61e28bf1676746f0753b3b2f8; public 58-point set_a from issue 10",
@@ -21,22 +23,125 @@
     "license": "Apache-2.0 upstream; provenance and hashes in benchmarks/upstream/PROVENANCE.json"
   },
   "reproducibility": {
-    "command": "python -m tripathy_experiment.cli baseline --seeds 0-63 --iters 1000000 --workers 8 --artifact-dir artifacts/runs",
-    "random_seeds": "0..63",
-    "iteration_budget": 1000000,
-    "iteration_budget_calibration": "Chosen on off-gate seeds 1000..1015 only: about 13 seconds per trial with 8 workers on an Apple M5 Max. Wall time is measured per trial as a secondary quantity.",
+    "command": "python -m tripathy_experiment.cli p1-smoke --parent-run bb6b15b0-c0b9-426f-a67d-464cdce1a551 --seeds 1200-1207 --iters 200000 --repair-nodes 200000 --destroy-size 8 --workers 8 --artifact-dir artifacts/runs",
+    "random_seeds": "1200..1207 (breaker seeds, development only; iterations 1 and 2 used 1000..1007 and 1100..1107)",
+    "reserved_confirmatory_seeds": "64..127 (untouched; the controller refuses them)",
+    "iteration_budget": 200000,
     "workers": 8,
     "per_trial_timeout_seconds": 600,
+    "source_policy": "round-robin across distinct P0 58-point candidates, ordered by lowest P0 seed",
+    "search_parameters": "noise 20%, tabu 3 plus rand 10, restart after 20000 swaps without a new best (unchanged since iteration 1); destroy size 8 and node cap 200000 preregistered in docs/P1_SYMMETRY_BREAKING_PLAN.md iteration 3 before execution; nothing tuned on any seed. Before the smoke, one off-smoke determinism pair (seed 2201, 30000 swaps, published 58 as stdin) checked the build, timing and byte-identical replay; no parameter or code path was changed in response.",
     "artifact_directory": "artifacts/runs",
     "git": {
-      "head": "cc69b3953b8c5f29580bc903c1fc9373a28f94d2",
+      "head": "29147943bd20726ee2dcd3237edeb4e297f748bf",
       "dirty": true,
-      "note": "The tree is not clean and nothing in this tranche is committed. Each run artifact records HEAD, the dirty marker and SHA-256 hashes of the solver, oracles, controller, manifest and benchmark files as they were at run time."
+      "note": "P0 is committed at 2914794. All three P1 iterations are uncommitted (committing was not authorized), so each P1 artifact records HEAD, the dirty marker and SHA-256 hashes of the breaker, controller, oracles, manifest, plan and benchmark files as they were at run time."
     },
     "pinned_sha256": {
       "benchmarks/no_isosceles_n32.json": "9bebfc52de362e80efc91d5455f2e20a103e766f191af8f665ee276907feb509",
       "benchmarks/upstream/verify_construction.py.txt": "226370ddce5130a4e247ac1b1718bb4b120218d231507b1249137fd10e4eceaf",
       "src/tripathy_experiment/no_isosceles.py": "4843790a2b7aa64502d4f580f356412f1d1e9247a260ce28377b1f3708ebf1ae"
+    },
+    "repair_nodes_per_attempt": 200000,
+    "destroy_size": 8,
+    "repair_additions": 9,
+    "repair_attempt_schedule": "once at startup and after each 20000-swap stall restart"
+  },
+  "completed_phases": {
+    "p0": {
+      "phase": "P0 reproducibility gate",
+      "question": "Can a deterministic compiled local search that starts from an empty 32 x 32 grid reproduce the public 58-point no-isosceles result for AlphaEvolve Problem 59 under a fixed, declared iteration budget, with every result accepted only by two structurally independent exact oracles?",
+      "hypothesis": "At a fixed budget of 1000000 ruin/repair iterations per trial, at least one of the 64 from-scratch trials with seeds 0..63 of the mirror-symmetric baseline solver (solver/solver.c) reaches a dual-verified 58-point set, with zero oracle disagreements. The hypothesis is rejected if 0 of 64 trials reach 58.",
+      "primary_metric": "number of the 64 trials whose dual-verified cardinality reaches 58, reported with a 95% exact binomial interval; secondary metrics are best dual-verified cardinality, score distribution, wall and CPU seconds per trial, failure classes, and oracle disagreement count",
+      "baseline": "From-scratch deterministic C99 solver (solver/solver.c), symmetric under y -> 31-y, one seeded invocation per trial. The public 58-point certificate from google-deepmind/alphaevolve_repository_of_problems issue 10 is the external target only and is never used as solver initialization.",
+      "trial_definition": "One trial is one from-scratch seeded solver invocation in its own subprocess. Inner ruin/repair iterations are counted separately and are not trials.",
+      "p0_cost_usd": 0.0,
+      "cost_model": "P0 runs only on the local machine with no provider calls, so its marginal cost is 0.0 USD. The 20 USD figure is the ceiling for the whole experiment; none of it is authorized in P0.",
+      "stop_condition": "P0 stops after the single 64-trial gate. If the solver fails deterministic replay or the two oracles disagree, stop before the gate and preserve the failing fixture. If 0 of 64 trials reach 58, record a failed reproduction gate and stop without tuning on seeds 0..63. If at least one trial reaches 58, record a passed gate and stop; no 59-point record search is part of P0. If the gate would exceed 15 minutes of wall-clock time, lower the iteration budget and label the run a screening gate.",
+      "reproducibility": {
+        "command": "python -m tripathy_experiment.cli baseline --seeds 0-63 --iters 1000000 --workers 8 --artifact-dir artifacts/runs",
+        "random_seeds": "0..63",
+        "iteration_budget": 1000000,
+        "iteration_budget_calibration": "Chosen on off-gate seeds 1000..1015 only: about 13 seconds per trial with 8 workers on an Apple M5 Max. Wall time is measured per trial as a secondary quantity.",
+        "workers": 8,
+        "per_trial_timeout_seconds": 600,
+        "artifact_directory": "artifacts/runs",
+        "git": {
+          "head": "cc69b3953b8c5f29580bc903c1fc9373a28f94d2",
+          "dirty": true,
+          "note": "The tree is not clean and nothing in this tranche is committed. Each run artifact records HEAD, the dirty marker and SHA-256 hashes of the solver, oracles, controller, manifest and benchmark files as they were at run time."
+        },
+        "pinned_sha256": {
+          "benchmarks/no_isosceles_n32.json": "9bebfc52de362e80efc91d5455f2e20a103e766f191af8f665ee276907feb509",
+          "benchmarks/upstream/verify_construction.py.txt": "226370ddce5130a4e247ac1b1718bb4b120218d231507b1249137fd10e4eceaf",
+          "src/tripathy_experiment/no_isosceles.py": "4843790a2b7aa64502d4f580f356412f1d1e9247a260ce28377b1f3708ebf1ae"
+        }
+      },
+      "result": "passed: run bb6b15b0-c0b9-426f-a67d-464cdce1a551, 10 of 64 trials reached a dual-verified 58, 0 oracle disagreements; committed at 2914794"
+    },
+    "p1_iteration_1": {
+      "phase": "P1 symmetry-breaking development smoke",
+      "question": "Starting from a dual-verified 58-point set that the frozen P0 solver produced from scratch, can conflict-guided single-point swaps at fixed cardinality 59 on arbitrary (non-mirror) point sets run with an exact incremental conflict invariant, emit only dual-verified candidates, and end in either a verified 59 or an auditable negative result with its closest approach?",
+      "hypothesis": "In the preregistered development smoke (breaker seeds 1000..1007, 200000 swaps per seed, 8 workers, sources round-robin across the distinct 58-point candidates of P0 run bb6b15b0-c0b9-426f-a67d-464cdce1a551), solver/symmetry_breaker.c compiles cleanly, replays byte-identically, all eight trials produce artifacts, both oracles agree on every emitted set, and there are zero false accepts, crashes, timeouts or malformed outputs, with every trial reporting a controller-recounted closest approach. The infrastructure hypothesis is rejected if any of these fails. Finding a 59 is a search success that is not required; not finding one is reported as a negative result.",
+      "primary_metric": "infrastructure gate status of the eight-trial smoke; search metrics are the count of 59-point sets accepted by both local oracles and the pinned upstream verifier from the persisted artifact in a fresh process, the best valid score, and the minimum number of isosceles triples reached at working cardinality 59 per trial (recounted by the controller); secondary metrics are failure classes, oracle disagreements, wall and CPU seconds, and cost",
+      "trial_definition": "One trial is one seeded symmetry-breaker invocation on one verified P0 candidate in its own subprocess. Inner swaps are counted separately and are not trials.",
+      "stop_condition": "Run the eight-seed smoke once. Stop before the smoke if the breaker's incremental state disagrees with brute force. Stop and preserve the artifact on any oracle disagreement. Do not tune on, or run, confirmatory seeds 64..127 in this tranche. Do not claim a record from the smoke: record_claim stays false even if a 59 is verified. No sponsor integration or Modal run is part of this tranche.",
+      "reproducibility": {
+        "command": "python -m tripathy_experiment.cli p1-smoke --parent-run bb6b15b0-c0b9-426f-a67d-464cdce1a551 --seeds 1000-1007 --iters 200000 --workers 8 --artifact-dir artifacts/runs",
+        "random_seeds": "1000..1007 (breaker seeds, development only)",
+        "reserved_confirmatory_seeds": "64..127 (untouched; the controller refuses them)",
+        "iteration_budget": 200000,
+        "workers": 8,
+        "per_trial_timeout_seconds": 600,
+        "source_policy": "round-robin across distinct P0 58-point candidates, ordered by lowest P0 seed",
+        "search_parameters": "noise 20%, tabu 3 plus rand 10, restart after 20000 swaps without a new best; fixed a priori from the P0 solver and not tuned on any seed. One off-smoke sanity invocation (seed 2000, 60000 swaps, published 58 as input) was made during development to check the build and timing; its output changed no parameter.",
+        "artifact_directory": "artifacts/runs",
+        "git": {
+          "head": "29147943bd20726ee2dcd3237edeb4e297f748bf",
+          "dirty": true,
+          "note": "P0 is committed at 2914794. The P1 tranche is uncommitted (committing was not authorized), so each P1 artifact records HEAD, the dirty marker and SHA-256 hashes of the breaker, controller, oracles, manifest, plan and benchmark files as they were at run time."
+        },
+        "pinned_sha256": {
+          "benchmarks/no_isosceles_n32.json": "9bebfc52de362e80efc91d5455f2e20a103e766f191af8f665ee276907feb509",
+          "benchmarks/upstream/verify_construction.py.txt": "226370ddce5130a4e247ac1b1718bb4b120218d231507b1249137fd10e4eceaf",
+          "src/tripathy_experiment/no_isosceles.py": "4843790a2b7aa64502d4f580f356412f1d1e9247a260ce28377b1f3708ebf1ae"
+        }
+      },
+      "result": "infrastructure gate passed, no 59 found: run 418e67a9-dca8-4d0d-ac3d-1b5355bf6a45, 8 of 8 trials returned the unchanged 58-point source; minimum working violations 2 in every trial, reached at swap 0 and never improved. The single-swap operator was rejected as not ready for confirmation. Its source is kept in solver/rejected/symmetry_breaker_iter1.c (SHA-256 6ed3f2ff57c69dace2c0671da1735ceb4488a4036664b2a84e052b633dbbdfd9, as recorded in the run's artifacts)."
+    },
+    "p1_iteration_2": {
+      "phase": "P1 symmetry-breaking development iteration 2: bounded destroy-four / exact-repair-five",
+      "question": "Starting from a dual-verified 58-point set that the frozen P0 solver produced from scratch, does removing four seeded-random points and exactly searching (depth-first, bounded by a node cap) for five mutually compatible zero-cost additions reach a valid 59, or improve on iteration 1's closest approach of two isosceles triples, with the single-swap search kept as a fallback?",
+      "hypothesis": "In the preregistered iteration-2 smoke (breaker seeds 1100..1107, 200000 fallback swaps per seed, destroy size 4, repair target 5 additions, 20000 exact-repair nodes per attempt, one attempt at startup and one after each 20000-swap stall restart, 8 workers, the same P0 parent bb6b15b0-c0b9-426f-a67d-464cdce1a551 and round-robin source policy), the infrastructure gate passes under the iteration-1 rules and the new repair counters are reported and validated for every trial. Search progress is then classified, without any tuning after seeing results, as record candidate (a persisted 59 accepted by both oracles and the pinned upstream verifier), operator progress (minimum working violations below 2, or exact repair reaches depth 5), or no progress (no 59 and minimum working violations stays 2). No record claim is made from development data in any case.",
+      "primary_metric": "infrastructure gate status of the eight-trial smoke and the search-progress class (record candidate / operator progress / no progress); supporting metrics are verified 59 count, best valid score, minimum working violations per trial (recounted by the controller), exact-repair attempts, exhausted attempts, nodes, zero-cost pool sizes and deepest repair depth, the origin of each trial's best state (exact repair or swap), failure classes, oracle disagreements, wall and CPU seconds, and cost",
+      "trial_definition": "One trial is one seeded symmetry-breaker invocation on one verified P0 candidate in its own subprocess. Inner swaps are counted separately and are not trials.",
+      "stop_condition": "Run the eight-seed iteration-2 smoke once. Stop before the smoke if the breaker's incremental state disagrees with brute force. Stop and preserve the artifact on any oracle disagreement. Do not tune after seeing results. Do not run or tune on confirmatory seeds 64..127. record_claim stays false even if a 59 is verified. Run 418e67a9-dca8-4d0d-ac3d-1b5355bf6a45 and every earlier artifact stay byte-for-byte unchanged. No sponsor integration or Modal run is part of this tranche.",
+      "reproducibility": {
+        "command": "python -m tripathy_experiment.cli p1-smoke --parent-run bb6b15b0-c0b9-426f-a67d-464cdce1a551 --seeds 1100-1107 --iters 200000 --repair-nodes 20000 --workers 8 --artifact-dir artifacts/runs",
+        "random_seeds": "1100..1107 (breaker seeds, development only; iteration 1 used 1000..1007)",
+        "reserved_confirmatory_seeds": "64..127 (untouched; the controller refuses them)",
+        "iteration_budget": 200000,
+        "workers": 8,
+        "per_trial_timeout_seconds": 600,
+        "source_policy": "round-robin across distinct P0 58-point candidates, ordered by lowest P0 seed",
+        "search_parameters": "noise 20%, tabu 3 plus rand 10, restart after 20000 swaps without a new best (unchanged from iteration 1); destroy size 4 and node cap 20000 preregistered in docs/P1_SYMMETRY_BREAKING_PLAN.md before execution; nothing tuned on any seed. Before the smoke, off-smoke invocations with the published 58 as stdin (seed 2100 at 60000 swaps, plus a determinism pair) checked the build, timing and determinism; no parameter or code path was changed in response.",
+        "artifact_directory": "artifacts/runs",
+        "git": {
+          "head": "29147943bd20726ee2dcd3237edeb4e297f748bf",
+          "dirty": true,
+          "note": "P0 is committed at 2914794. All three P1 iterations are uncommitted (committing was not authorized), so each P1 artifact records HEAD, the dirty marker and SHA-256 hashes of the breaker, controller, oracles, manifest, plan and benchmark files as they were at run time."
+        },
+        "pinned_sha256": {
+          "benchmarks/no_isosceles_n32.json": "9bebfc52de362e80efc91d5455f2e20a103e766f191af8f665ee276907feb509",
+          "benchmarks/upstream/verify_construction.py.txt": "226370ddce5130a4e247ac1b1718bb4b120218d231507b1249137fd10e4eceaf",
+          "src/tripathy_experiment/no_isosceles.py": "4843790a2b7aa64502d4f580f356412f1d1e9247a260ce28377b1f3708ebf1ae"
+        },
+        "repair_nodes_per_attempt": 20000,
+        "destroy_size": 4,
+        "repair_additions": 5,
+        "repair_attempt_schedule": "once at startup and after each 20000-swap stall restart"
+      },
+      "result": "infrastructure gate passed, search progress 'no progress': run ff52f29c-b4e5-4620-993d-5236b324991e, 0 verified 59s, minimum working violations 2 in every trial; all 80 destroy-four attempts enumerated their whole space (1398 nodes, cap never reached), deepest depth 4 of 5, zero-cost pools of 4 or 5 cells. Its source is kept in solver/rejected/symmetry_breaker_iter2.c (SHA-256 95e9dc3e9e1c2932efcf98df67e57bc57bf0ce41608993e3c7824ffab25616ec, as recorded in the run's artifacts)."
     }
   }
 }

@@ -3,10 +3,10 @@
   "experiment_id": "02",
   "status": "running",
   "active_linear_issue": "TRI-19",
-  "git_sha": "cc69b3953b8c5f29580bc903c1fc9373a28f94d2",
+  "git_sha": "29147943bd20726ee2dcd3237edeb4e297f748bf",
   "git_dirty": true,
-  "git_note": "Nothing in this tranche is committed. Evidence is tied to HEAD plus a dirty marker and the SHA-256 file hashes stored in every run artifact, not to a clean commit.",
-  "objective": "TRI-19 P0: replace the public-certificate replay with a from-scratch, deterministic, dual-verified baseline for AlphaEvolve Problem 59 and record one 64-trial reproduction gate",
+  "git_note": "P0 is committed at 2914794. All three P1 iterations are uncommitted (committing was not authorized), so P1 evidence is tied to HEAD 2914794 plus a dirty marker and the SHA-256 file hashes stored in every P1 run artifact, not to a clean commit.",
+  "objective": "TRI-19 outcome: preserve the dual-verified P0 reproduction and close the P1 local destroy/repair family after its preregistered negative stopping boundary",
   "subagents": [],
   "runs": [
     {
@@ -78,6 +78,262 @@
       "evidence": "artifacts/runs/bb6b15b0-c0b9-426f-a67d-464cdce1a551.json",
       "child_evidence_pattern": "artifacts/runs/bb6b15b0-c0b9-426f-a67d-464cdce1a551.trial-<seed>.json",
       "parent_artifact_sha256": "874f05a75b9900af0cfbbac8dd1b922b8b31b957b9d0f0654533a3c7cadf346c"
+    },
+    {
+      "run_id": "418e67a9-dca8-4d0d-ac3d-1b5355bf6a45",
+      "mode": "p1-symmetry-breaking-development-smoke",
+      "linear_issue": "TRI-19",
+      "git_sha": "29147943bd20726ee2dcd3237edeb4e297f748bf",
+      "git_dirty": true,
+      "gate_label": "p1-development-smoke",
+      "gate_status": "passed",
+      "search_outcome": "no_target_found",
+      "source_run_id": "bb6b15b0-c0b9-426f-a67d-464cdce1a551",
+      "trials": 8,
+      "child_artifacts": 8,
+      "seeds": "1000..1007",
+      "iters_per_trial": 200000,
+      "workers": 8,
+      "target": 59,
+      "best_score": 58,
+      "best_score_note": "58 is the unchanged P0 source returned by every trial, not a new set",
+      "score_counts": {
+        "58": 8
+      },
+      "verified_59_count": 0,
+      "min_working_violations": 2,
+      "min_working_violations_by_seed": {
+        "1000": 2,
+        "1001": 2,
+        "1002": 2,
+        "1003": 2,
+        "1004": 2,
+        "1005": 2,
+        "1006": 2,
+        "1007": 2
+      },
+      "min_reached_at_swap": "0 in all 8 trials (the forced-entry state; no swap ever improved on it)",
+      "restarts_per_trial": 9,
+      "distinct_sources": [
+        {
+          "candidate_sha256": "203d5103442d52995d806aa01848b12c48621118d9fc04ba139b4e9f3df24431",
+          "p0_trial_ids": [
+            "bb6b15b0-c0b9-426f-a67d-464cdce1a551.trial-0004"
+          ]
+        },
+        {
+          "candidate_sha256": "c086dac1df87e4ddb2092ffda3373a393db0281d2035cf60136a33f2f366fa0e",
+          "p0_trial_ids": [
+            "bb6b15b0-c0b9-426f-a67d-464cdce1a551.trial-0005",
+            "bb6b15b0-c0b9-426f-a67d-464cdce1a551.trial-0022"
+          ]
+        },
+        {
+          "candidate_sha256": "32f4587ec2c06989faede39911b3081653f91a6d93b87f4bb8f6191d83bdb5ec",
+          "p0_trial_ids": [
+            "bb6b15b0-c0b9-426f-a67d-464cdce1a551.trial-0010",
+            "bb6b15b0-c0b9-426f-a67d-464cdce1a551.trial-0018",
+            "bb6b15b0-c0b9-426f-a67d-464cdce1a551.trial-0041",
+            "bb6b15b0-c0b9-426f-a67d-464cdce1a551.trial-0044",
+            "bb6b15b0-c0b9-426f-a67d-464cdce1a551.trial-0061"
+          ]
+        },
+        {
+          "candidate_sha256": "08268a26c6b1b9706fce0ca70ab3b2069f04013242d8dfb259a11871d9c4d81b",
+          "p0_trial_ids": [
+            "bb6b15b0-c0b9-426f-a67d-464cdce1a551.trial-0029",
+            "bb6b15b0-c0b9-426f-a67d-464cdce1a551.trial-0053"
+          ]
+        }
+      ],
+      "failure_counts": {},
+      "oracle_disagreements": 0,
+      "determinism_replay": {
+        "identical": true,
+        "replay_stdout_sha256": "22c8a062b0fb2e34e4811bd555687dcf3e7c73653429440fdb9b8357f7adb66b",
+        "seed": 1000,
+        "stdout_sha256": "22c8a062b0fb2e34e4811bd555687dcf3e7c73653429440fdb9b8357f7adb66b"
+      },
+      "latency_seconds": 2.86320524988696,
+      "cpu_seconds_total": 9.5983,
+      "cost_usd": 0.0,
+      "record_claim": false,
+      "evidence": "artifacts/runs/418e67a9-dca8-4d0d-ac3d-1b5355bf6a45.json",
+      "child_evidence_pattern": "artifacts/runs/418e67a9-dca8-4d0d-ac3d-1b5355bf6a45.trial-<seed>.json",
+      "parent_artifact_sha256": "837dbe2b3ba66d55287480957da3f9532f07cabc95b1f8d74e891a78705a1565"
+    },
+    {
+      "run_id": "ff52f29c-b4e5-4620-993d-5236b324991e",
+      "mode": "p1-development-iteration-2-destroy-four-exact-repair-five",
+      "linear_issue": "TRI-19",
+      "git_sha": "29147943bd20726ee2dcd3237edeb4e297f748bf",
+      "git_dirty": true,
+      "gate_label": "p1-development-smoke",
+      "gate_status": "passed",
+      "search_outcome": "no_target_found",
+      "search_progress": "no_progress",
+      "source_run_id": "bb6b15b0-c0b9-426f-a67d-464cdce1a551",
+      "trials": 8,
+      "child_artifacts": 8,
+      "seeds": "1100..1107",
+      "iters_per_trial": 200000,
+      "repair_nodes_per_attempt": 20000,
+      "destroy_size": 4,
+      "workers": 8,
+      "target": 59,
+      "best_score": 58,
+      "best_score_note": "58 is the unchanged P0 source returned by every trial, not a new set",
+      "score_counts": {
+        "58": 8
+      },
+      "verified_59_count": 0,
+      "min_working_violations": 2,
+      "min_working_violations_by_seed": {
+        "1100": 2,
+        "1101": 2,
+        "1102": 2,
+        "1103": 2,
+        "1104": 2,
+        "1105": 2,
+        "1106": 2,
+        "1107": 2
+      },
+      "min_reached_at_swap": "0 in all 8 trials (the forced-entry state; no swap improved on it)",
+      "repair": {
+        "attempts": 80,
+        "attempts_exhausted": 80,
+        "destroy_size": 4,
+        "full_depth": 5,
+        "max_depth": 4,
+        "max_depth_by_seed": {
+          "1100": 4,
+          "1101": 4,
+          "1102": 4,
+          "1103": 4,
+          "1104": 4,
+          "1105": 4,
+          "1106": 4,
+          "1107": 4
+        },
+        "node_cap_per_attempt": 20000,
+        "nodes": 1398,
+        "pool_max": 5,
+        "pool_min": 4
+      },
+      "best_state_origin_by_seed": {
+        "1100": "swap",
+        "1101": "swap",
+        "1102": "swap",
+        "1103": "swap",
+        "1104": "swap",
+        "1105": "swap",
+        "1106": "swap",
+        "1107": "swap"
+      },
+      "restarts_per_trial": 9,
+      "failure_counts": {},
+      "oracle_disagreements": 0,
+      "determinism_replay": {
+        "identical": true,
+        "replay_stdout_sha256": "615d4de5ac147c29536bfd05c9a52dcdc912df2d1fc8d0310aae68eaabcc97e4",
+        "seed": 1100,
+        "stdout_sha256": "615d4de5ac147c29536bfd05c9a52dcdc912df2d1fc8d0310aae68eaabcc97e4"
+      },
+      "latency_seconds": 3.6837269170209765,
+      "cpu_seconds_total": 11.347633,
+      "cost_usd": 0.0,
+      "record_claim": false,
+      "evidence": "artifacts/runs/ff52f29c-b4e5-4620-993d-5236b324991e.json",
+      "child_evidence_pattern": "artifacts/runs/ff52f29c-b4e5-4620-993d-5236b324991e.trial-<seed>.json",
+      "parent_artifact_sha256": "1ec6c9095def04ef6c893967fde60e63e4d25b267d40cdd97c6addd376361580"
+    },
+    {
+      "run_id": "e46d5be6-98e0-43ae-848b-3a439246c249",
+      "mode": "p1-development-iteration-3-destroy-eight-exact-repair-nine",
+      "linear_issue": "TRI-19",
+      "git_sha": "29147943bd20726ee2dcd3237edeb4e297f748bf",
+      "git_dirty": true,
+      "gate_label": "p1-development-smoke",
+      "gate_status": "passed",
+      "search_outcome": "no_target_found",
+      "search_progress": "no_progress",
+      "operator_family_decision": "stopped",
+      "source_run_id": "bb6b15b0-c0b9-426f-a67d-464cdce1a551",
+      "trials": 8,
+      "child_artifacts": 8,
+      "seeds": "1200..1207",
+      "iters_per_trial": 200000,
+      "repair_nodes_per_attempt": 200000,
+      "destroy_size": 8,
+      "repair_additions": 9,
+      "workers": 8,
+      "target": 59,
+      "best_score": 58,
+      "best_score_note": "58 is the unchanged P0 source returned by every trial, not a new set",
+      "score_counts": {
+        "58": 8
+      },
+      "verified_59_count": 0,
+      "min_working_violations": 2,
+      "min_working_violations_by_seed": {
+        "1200": 2,
+        "1201": 2,
+        "1202": 2,
+        "1203": 2,
+        "1204": 2,
+        "1205": 2,
+        "1206": 2,
+        "1207": 2
+      },
+      "min_reached_at_swap": "0 in all 8 trials (the forced-entry state; no swap improved on it)",
+      "repair": {
+        "attempts": 80,
+        "attempts_capped": 0,
+        "attempts_exhausted": 80,
+        "destroy_size": 8,
+        "full_depth": 9,
+        "max_depth": 8,
+        "max_depth_by_seed": {
+          "1200": 8,
+          "1201": 8,
+          "1202": 8,
+          "1203": 8,
+          "1204": 8,
+          "1205": 8,
+          "1206": 8,
+          "1207": 8
+        },
+        "node_cap_per_attempt": 200000,
+        "nodes": 27078,
+        "pool_max": 10,
+        "pool_min": 8
+      },
+      "best_state_origin_by_seed": {
+        "1200": "swap",
+        "1201": "swap",
+        "1202": "swap",
+        "1203": "swap",
+        "1204": "swap",
+        "1205": "swap",
+        "1206": "swap",
+        "1207": "swap"
+      },
+      "restarts_per_trial": 9,
+      "failure_counts": {},
+      "oracle_disagreements": 0,
+      "determinism_replay": {
+        "identical": true,
+        "replay_stdout_sha256": "1d641415b6d118cea1844c2acea798034da5e373dceba7e60d271d1cccfe69ff",
+        "seed": 1200,
+        "stdout_sha256": "1d641415b6d118cea1844c2acea798034da5e373dceba7e60d271d1cccfe69ff"
+      },
+      "latency_seconds": 3.0725109172053635,
+      "cpu_seconds_total": 10.124535,
+      "cost_usd": 0.0,
+      "record_claim": false,
+      "evidence": "artifacts/runs/e46d5be6-98e0-43ae-848b-3a439246c249.json",
+      "child_evidence_pattern": "artifacts/runs/e46d5be6-98e0-43ae-848b-3a439246c249.trial-<seed>.json",
+      "parent_artifact_sha256": "5296e7e7de204bb3fc3d7b86aa056d88d5959292242b0f2d1323287f3b876fe1"
     }
   ],
   "implementation": {
@@ -193,23 +449,311 @@
     "record_claim": false,
     "upstream_verifier_pinned": true,
     "degenerate_collinear_triples_rejected_upstream": true,
-    "tests_passed": 31,
+    "tests_passed": 38,
     "cross_agent_memory_observed": "earlier claim withdrawn as evidence: the swarm sets inherited_from_agent whenever another agent has an equal-or-better entry, so it was true by construction",
-    "modal_sandbox_agreed_with_trusted_verifier": "earlier claim qualified: same-algorithm agreement only, not independent verification"
+    "modal_sandbox_agreed_with_trusted_verifier": "earlier claim qualified: same-algorithm agreement only, not independent verification",
+    "p1_smoke": {
+      "run_id": "418e67a9-dca8-4d0d-ac3d-1b5355bf6a45",
+      "infrastructure_gate": "passed",
+      "search_outcome": "no_target_found",
+      "verified_59_count": 0,
+      "best_valid_score": 58,
+      "best_valid_score_is_new_construction": false,
+      "min_working_violations": 2,
+      "finding": "Negative result. In all 8 trials the fewest isosceles triples at cardinality 59 was 2, and it was the state immediately after forcing one point into the source 58 (swap 0). 200000 swaps and 9 restarts per trial never reached 1 or 0. The smoke shows the infrastructure works; it gives no evidence that this operator makes progress toward 59.",
+      "oracle_disagreement_count": 0,
+      "record_claim": false
+    },
+    "p1_iteration_2": {
+      "run_id": "ff52f29c-b4e5-4620-993d-5236b324991e",
+      "infrastructure_gate": "passed",
+      "search_progress": "no_progress",
+      "search_outcome": "no_target_found",
+      "verified_59_count": 0,
+      "best_valid_score": 58,
+      "best_valid_score_is_new_construction": false,
+      "min_working_violations": 2,
+      "repair_max_depth": 4,
+      "repair_full_depth": 5,
+      "repair_attempts": 80,
+      "repair_attempts_exhausted": 80,
+      "repair_nodes_total": 1398,
+      "repair_zero_cost_pool_range": [
+        4,
+        5
+      ],
+      "finding": "Negative result. None of the 80 destroy-four attempts reached depth 5, and all 80 ended by enumerating their whole search space far below the 20000-node cap. After removing four points only 4 or 5 cells had zero add cost: the four removed points and at most one other. The destroy-four neighbourhood of these 58-point sets is therefore almost rigid, and the node cap was never the limit. The swap fallback again stayed at 2 violations from swap 0. Under the plan's classification this is 'no progress'.",
+      "oracle_disagreement_count": 0,
+      "record_claim": false
+    },
+    "p1_iteration_3": {
+      "run_id": "e46d5be6-98e0-43ae-848b-3a439246c249",
+      "infrastructure_gate": "passed",
+      "search_progress": "no_progress",
+      "search_outcome": "no_target_found",
+      "verified_59_count": 0,
+      "best_valid_score": 58,
+      "best_valid_score_is_new_construction": false,
+      "min_working_violations": 2,
+      "repair_max_depth": 8,
+      "repair_full_depth": 9,
+      "repair_attempts": 80,
+      "repair_attempts_exhausted": 80,
+      "repair_attempts_capped": 0,
+      "repair_nodes_total": 27078,
+      "repair_zero_cost_pool_range": [
+        8,
+        10
+      ],
+      "finding": "Negative result. None of the 80 destroy-eight attempts reached depth 9, and all 80 enumerated their whole search space far below the 200000-node cap. After removing eight points only 8 to 10 cells had zero add cost: the eight removed points and at most two others. The swap fallback again stayed at 2 violations from swap 0. The search hypothesis of iteration 3 is rejected.",
+      "oracle_disagreement_count": 0,
+      "record_claim": false
+    },
+    "p1_operator_family": {
+      "decision": "stopped",
+      "decided_by": "the stop rule preregistered in docs/P1_SYMMETRY_BREAKING_PLAN.md iteration 3: minimum working violations remained 2 and no 59 was verified",
+      "scope": "single-point tabu swaps and bounded destroy / exact-repair started from a from-scratch P0 58 (solver/symmetry_breaker.c)",
+      "evidence_runs": [
+        "418e67a9-dca8-4d0d-ac3d-1b5355bf6a45",
+        "ff52f29c-b4e5-4620-993d-5236b324991e",
+        "e46d5be6-98e0-43ae-848b-3a439246c249"
+      ],
+      "consequences": [
+        "no further budget, node cap, destroy size or parameter change is proposed for this family",
+        "confirmatory seeds 64..127 were never used and are not spent on it",
+        "the confirmatory protocol in the plan is not started",
+        "58 remains the best dual-verified result, a reproduction of the public sets and not a discovery"
+      ],
+      "not_shown": "This is not evidence that no 59 exists; it covers 24 trials on 4 source sets in 2 symmetry classes and 160 sampled removals.",
+      "independent_primary_agent_audit": {
+        "audited_at": "2026-11-15T13:46:20-08:00",
+        "checks": [
+          "38 tests passed independently",
+          "Ruff and mypy passed independently",
+          "manifest validation and warnings-as-errors C99 compilation passed independently",
+          "the P0 solver, both oracle modules, benchmark files and all earlier artifacts match their protected versions",
+          "all eight iteration-3 emitted sets are valid and all eight 59-point near misses are rejected by both local oracles",
+          "the independent controller recount equals two forbidden triples for every near miss",
+          "destroy size, repair counters, determinism replay and parent summary metrics agree with the child artifacts"
+        ],
+        "disposition": "accept negative P1 evidence and enforce the preregistered stop rule"
+      }
+    }
   },
   "cost_usd": 0.0,
   "cost_note": "The P0 tranche made no provider calls. The earlier Modal smoke run's cost was never recorded and is not included.",
-  "latency_seconds": 109.31379354093224,
+  "latency_seconds": 3.0725109172053635,
   "blockers": [
-    "No commit exists for this work, so no clean Git SHA can be cited; committing was not authorized in this tranche.",
-    "The solver parameters (20% noise, tabu 3 plus rand 10) and the 1000000-iteration budget were calibrated on off-gate seeds 1000..1015; those calibration runs were not saved as artifacts.",
-    "The public method's source and budget are not pinned, so solver/solver.c is an independent implementation and the 10 of 64 rate is not budget-matched to the public 15 of 200.",
-    "The mirror-symmetric baseline only reaches even cardinalities; it cannot output 59 until a symmetry-breaking operator exists.",
-    "The public point list comes from a mutable GitHub issue; only its retrieved content hash is pinned. The second public 58-point set is not stored under benchmarks/.",
-    "The older swarm path is unchanged: it still seeds from the public certificate, hardcodes TRI-18 in its artifacts, and uses same-algorithm sandbox verification.",
-    ".github/workflows/ci.yml still expects validate to fail and has no C compiler step for the new solver test beyond the runner default; it was not edited.",
-    "Exa, past.dev and Modal remain untested and were not called."
+    "The P1 destroy/repair operator family is closed as stopped with no 59 found; there is no candidate algorithm to freeze, so the confirmatory run has nothing to confirm.",
+    "All three P1 iterations are uncommitted (not authorized), so runs 418e67a9, ff52f29c and e46d5be6 cite HEAD 2914794 with dirty=true plus file hashes rather than a clean SHA. The iteration-1 and iteration-2 breaker sources survive only as uncommitted copies in solver/rejected/.",
+    "The 'exhausted' repair claim is the solver's own report; no independent enumerator cross-checks it.",
+    "The P0 solver parameters and 1000000-iteration budget were calibrated on off-gate seeds 1000..1015 and those runs were not saved.",
+    "The public method's source and budget are not pinned; the public point list comes from a mutable GitHub issue and only its retrieved hash is pinned.",
+    "The older swarm path is unchanged: it still seeds from the public certificate, hardcodes TRI-18, and uses same-algorithm sandbox verification.",
+    "CI configuration has been corrected locally but has not yet run on the remote P1 commit.",
+    "Local interpreter is Python 3.12.13 while pyproject targets 3.11.",
+    "Exa, past.dev and Modal remain untested and were not called. No Linear or Slack update was posted (external writes were not authorized)."
   ],
-  "next_decision": "Decide whether to commit this tranche so later evidence can cite a clean SHA. Then choose one bounded P1 step: a symmetry-breaking destroy/repair operator started from from-scratch 58-point sets, preregistered on fresh seeds (not 0..63) with a fixed iteration budget, compared against this baseline as an exploratory two-arm run. No 59-point search has been started.",
-  "updated_at": "2026-11-15T13:20:11-08:00"
+  "next_decision": "Commit and push the three audited P1 iterations. Then close TRI-19 with 58 as the reproduced, dual-verified result and a documented negative P1. Any further 59 search must be a structurally different approach that does not start from a P0 58 and must receive a new preregistered objective before seeds 64..127 are used.",
+  "updated_at": "2026-11-15T13:46:20-08:00",
+  "p0_objective": "TRI-19 P0: replace the public-certificate replay with a from-scratch, deterministic, dual-verified baseline for AlphaEvolve Problem 59 and record one 64-trial reproduction gate (passed, committed at 2914794)",
+  "p1_implementation": {
+    "files_added": [
+      "solver/symmetry_breaker.c",
+      "src/tripathy_experiment/symmetry_breaking.py",
+      "tests/test_symmetry_breaking.py",
+      "docs/P1_SYMMETRY_BREAKING_PLAN.md (pre-existing untracked plan, not edited)"
+    ],
+    "files_changed": [
+      "src/tripathy_experiment/baseline.py (process runner extracted as run_process with optional stdin; build_solver takes a source path; P0 behaviour and tests unchanged)",
+      "src/tripathy_experiment/cli.py (p1-smoke command)",
+      "experiment/manifest.json (top level now defines the P1 smoke; P0 statement kept verbatim under completed_phases.p0)",
+      "README.md",
+      "artifacts/session-summary.json"
+    ],
+    "preserved_byte_for_byte": "solver/solver.c, both oracle modules, benchmarks/ (3 files) and all 68 pre-existing files under artifacts/runs: 74 SHA-256 hashes taken before any edit all match after the smoke",
+    "file_sha256_at_smoke": {
+      "benchmarks/no_isosceles_n32.json": "9bebfc52de362e80efc91d5455f2e20a103e766f191af8f665ee276907feb509",
+      "benchmarks/upstream/PROVENANCE.json": "f959a6a364c807b3e4f1bad76c38df85d58dcfaddb2adf011c7d15583993af6f",
+      "benchmarks/upstream/verify_construction.py.txt": "226370ddce5130a4e247ac1b1718bb4b120218d231507b1249137fd10e4eceaf",
+      "docs/P1_SYMMETRY_BREAKING_PLAN.md": "4eec580fde117ec829fa25969415e6f6ae474bd04203d780810452905c2e9e3c",
+      "experiment/manifest.json": "abe1e413d908d68b15b93e57f641e00c9ab350f9bc8342222e070637e73681f7",
+      "project.yaml": "ef5a4edeb2fde7a0ef6c332c01aca379750c97b8f6698e0c4bc11681e67ef9ad",
+      "solver/solver.c": "ab141274701608a6841eed4f98c0ddf12e8135baeb4de2227b0b41b4758d471c",
+      "solver/symmetry_breaker.c": "6ed3f2ff57c69dace2c0671da1735ceb4488a4036664b2a84e052b633dbbdfd9",
+      "src/tripathy_experiment/baseline.py": "df0da847bc1184b34912fce2ec8ae0cd739f0060adbd8dcb6db54712b2e738d4",
+      "src/tripathy_experiment/cli.py": "ed2d4e307b5a99c78526a0c9adf933b7de9b1535099f5e682a3fd8de11ee05c7",
+      "src/tripathy_experiment/no_isosceles.py": "4843790a2b7aa64502d4f580f356412f1d1e9247a260ce28377b1f3708ebf1ae",
+      "src/tripathy_experiment/perpendicular_bisector_oracle.py": "c8c8dc944d924267ce62acb9ec2eca448bad277baed88b33103d8242efb2113f",
+      "src/tripathy_experiment/symmetry_breaking.py": "181aacd7a03dd525435e2a6a2778ca4199648d97394cee277cf3db667b126439"
+    },
+    "breaker_binary_sha256": "fe48efa382a3cf598a6d9f6d926e789505488134d4e9a171dffa7ad109d0ba85",
+    "checks": [
+      {
+        "command": ".venv/bin/python -m pytest -q",
+        "outcome": "37 passed (31 existing + 6 new)"
+      },
+      {
+        "command": ".venv/bin/python -m ruff check .",
+        "outcome": "All checks passed"
+      },
+      {
+        "command": ".venv/bin/python -m mypy",
+        "outcome": "no issues in 11 source files"
+      },
+      {
+        "command": ".venv/bin/python -m tripathy_experiment.cli validate",
+        "outcome": "valid, exit 0"
+      },
+      {
+        "command": ".venv/bin/python -m tripathy_experiment.cli verify benchmarks/no_isosceles_n32.json",
+        "outcome": "accepted, exit 0"
+      },
+      {
+        "command": "cc -O2 -std=c99 -Wall -Wextra -Werror -o build/symmetry_breaker solver/symmetry_breaker.c",
+        "outcome": "exit 0, no warnings"
+      },
+      {
+        "command": "./build/symmetry_breaker --seed 2001 --iters 30000 --target 59 < published 58 (twice) and cmp",
+        "outcome": "byte-identical"
+      },
+      {
+        "command": ".venv/bin/python -m tripathy_experiment.cli p1-smoke --parent-run bb6b15b0-c0b9-426f-a67d-464cdce1a551 --seeds 1000-1007 --iters 200000 --workers 8 --artifact-dir artifacts/runs",
+        "outcome": "exit 0, infrastructure gate passed, no 59 found; run once"
+      }
+    ],
+    "post_smoke_audit": "All 8 child artifacts were reloaded in a fresh process: both local oracles and the pinned upstream verify_construction accept every emitted set (each is the unchanged 58-point source); both oracles reject every 59-point closest-approach state and an independent recount equals the breaker's claimed 2 in all 8; 0 failures, 0 oracle disagreements; seed 1000 replayed to an identical stdout hash.",
+    "development_disclosure": "Two off-smoke breaker invocations were made before the smoke with the published 58 as stdin (seed 2000 at 60000 swaps, seed 2001 at 30000 swaps twice) to check the build, timing and determinism. No parameter was changed after seeing any output. The unit test also uses the published 58 as stdin data with seeds 7 and 8."
+  },
+  "latency_note": "latency_seconds is the iteration-3 smoke wall time; iterations 1 and 2 took 2.86 s and 3.68 s and the P0 gate 109.31 s (see runs).",
+  "p1_iteration_1_objective": "TRI-19 P1 development iteration 1: separate symmetry-breaking solver and provider-independent controller on top of the frozen P0 baseline; smoke 418e67a9 passed as infrastructure and found no 59",
+  "p1_iteration_2_implementation": {
+    "files_added": [
+      "solver/rejected/symmetry_breaker_iter1.c (unchanged copy of the iteration-1 breaker, SHA-256 6ed3f2ff57c69dace2c0671da1735ceb4488a4036664b2a84e052b633dbbdfd9 as recorded in run 418e67a9; kept because that source was never committed)"
+    ],
+    "files_changed": [
+      "solver/symmetry_breaker.c (bounded destroy-four / exact-repair-five at startup and after each restart; required --repair-nodes; new counters and best_state_origin)",
+      "src/tripathy_experiment/symmetry_breaking.py (passes and validates the repair counters; repair_counter_mismatch failure class; search_progress classification)",
+      "src/tripathy_experiment/cli.py (--repair-nodes, required for p1-smoke)",
+      "tests/test_symmetry_breaking.py",
+      "experiment/manifest.json (top level defines iteration 2; iteration 1 kept verbatim under completed_phases.p1_iteration_1)",
+      "README.md",
+      "artifacts/session-summary.json"
+    ],
+    "preserved_byte_for_byte": "solver/solver.c, both oracle modules, benchmarks/ (3 files) and all 77 pre-existing files under artifacts/runs, including the 9 of run 418e67a9: 83 SHA-256 hashes taken before any edit all match after the smoke",
+    "file_sha256_at_smoke": {
+      "benchmarks/no_isosceles_n32.json": "9bebfc52de362e80efc91d5455f2e20a103e766f191af8f665ee276907feb509",
+      "benchmarks/upstream/PROVENANCE.json": "f959a6a364c807b3e4f1bad76c38df85d58dcfaddb2adf011c7d15583993af6f",
+      "benchmarks/upstream/verify_construction.py.txt": "226370ddce5130a4e247ac1b1718bb4b120218d231507b1249137fd10e4eceaf",
+      "docs/P1_SYMMETRY_BREAKING_PLAN.md": "2b39b13841155907af757cfd8ac768ead6616144b089e0dd5714424c8a7be040",
+      "experiment/manifest.json": "dcccbacb40c9e2502b1eae7e4db4723bdfcb89fa841ca96dd76a88433eb0a0bc",
+      "project.yaml": "ef5a4edeb2fde7a0ef6c332c01aca379750c97b8f6698e0c4bc11681e67ef9ad",
+      "solver/solver.c": "ab141274701608a6841eed4f98c0ddf12e8135baeb4de2227b0b41b4758d471c",
+      "solver/symmetry_breaker.c": "95e9dc3e9e1c2932efcf98df67e57bc57bf0ce41608993e3c7824ffab25616ec",
+      "src/tripathy_experiment/baseline.py": "df0da847bc1184b34912fce2ec8ae0cd739f0060adbd8dcb6db54712b2e738d4",
+      "src/tripathy_experiment/cli.py": "20b72069809cdc8841c5e723e456ebf6a9c61e6aeb5b93be1f49f9dcaefcd76b",
+      "src/tripathy_experiment/no_isosceles.py": "4843790a2b7aa64502d4f580f356412f1d1e9247a260ce28377b1f3708ebf1ae",
+      "src/tripathy_experiment/perpendicular_bisector_oracle.py": "c8c8dc944d924267ce62acb9ec2eca448bad277baed88b33103d8242efb2113f",
+      "src/tripathy_experiment/symmetry_breaking.py": "7ef7fe2860723e05ba95334bd826c6da8b3750f2e9344217db3d2d9b2a6ab23a"
+    },
+    "breaker_binary_sha256": "853c05694ff3868a552d994b320c74670e8277db01f7ba3bbd83022f85afb9ca",
+    "checks": [
+      {
+        "command": ".venv/bin/python -m pytest -q",
+        "outcome": "38 passed"
+      },
+      {
+        "command": ".venv/bin/python -m ruff check .",
+        "outcome": "All checks passed"
+      },
+      {
+        "command": ".venv/bin/python -m mypy",
+        "outcome": "no issues in 11 source files"
+      },
+      {
+        "command": ".venv/bin/python -m tripathy_experiment.cli validate",
+        "outcome": "valid, exit 0"
+      },
+      {
+        "command": "cc -O2 -std=c99 -Wall -Wextra -Werror -o build/symmetry_breaker solver/symmetry_breaker.c",
+        "outcome": "exit 0, no warnings"
+      },
+      {
+        "command": "./build/symmetry_breaker --seed 2101 --iters 30000 --target 59 --repair-nodes 20000 < published 58 (twice) and cmp",
+        "outcome": "byte-identical"
+      },
+      {
+        "command": ".venv/bin/python -m tripathy_experiment.cli p1-smoke --parent-run bb6b15b0-c0b9-426f-a67d-464cdce1a551 --seeds 1100-1107 --iters 200000 --repair-nodes 20000 --workers 8 --artifact-dir artifacts/runs",
+        "outcome": "exit 0, infrastructure gate passed, search_progress no_progress; run once"
+      }
+    ],
+    "post_smoke_audit": "All 8 child artifacts were reloaded in a fresh process: both local oracles and the pinned upstream verify_construction accept every emitted set (each is the unchanged 58-point source); both oracles reject every 59-point closest-approach state and an independent recount equals the claimed 2 in all 8; repair attempts equal restarts + 1 and every attempt is exhausted in all 8; 0 failures, 0 oracle disagreements; seed 1100 replayed to an identical stdout hash.",
+    "development_disclosure": "Before the smoke, off-smoke breaker invocations used the published 58 as stdin: seed 2100 at 60000 swaps and seed 2101 at 30000 swaps twice (build, timing, determinism), plus small 3-point inputs. The seed-2100 output already showed a zero-cost pool of exactly 4 cells in each of its 3 attempts, which predicted the smoke's outcome. Nothing was changed in response: destroy size, node cap, schedule and seeds are exactly as preregistered.",
+    "limits_of_the_evidence": "Completeness of the depth-first enumeration is established by code reading and by the solver's internal invariant checks, not by an independent enumerator; the controller cannot re-derive the destroyed bases from the output, so 'exhausted' is the solver's own report."
+  },
+  "p1_iteration_2_objective": "TRI-19 P1 development iteration 2 (docs/P1_SYMMETRY_BREAKING_PLAN.md): add bounded destroy-four / exact-repair-five to the symmetry breaker, validate its counters in the controller, and run the preregistered eight-seed smoke on seeds 1100..1107 once",
+  "p1_iteration_3_implementation": {
+    "files_added": [
+      "solver/rejected/symmetry_breaker_iter2.c (unchanged copy of the iteration-2 breaker, SHA-256 95e9dc3e9e1c2932efcf98df67e57bc57bf0ce41608993e3c7824ffab25616ec as recorded in run ff52f29c; kept because that source was never committed)"
+    ],
+    "files_changed": [
+      "solver/symmetry_breaker.c (required --destroy-size, rejected unless 1..input count; echoed as destroy_size; the compiled-in destroy size is gone)",
+      "src/tripathy_experiment/symmetry_breaking.py (destroy_size parameter, rejected unless 1..target-1; recorded in config and every child; echo and counter validated; attempts_capped in the summary)",
+      "src/tripathy_experiment/cli.py (--destroy-size, required for p1-smoke)",
+      "tests/test_symmetry_breaking.py",
+      "experiment/manifest.json (top level defines iteration 3 and its stop rule; iteration 2 kept verbatim under completed_phases.p1_iteration_2)",
+      "README.md",
+      "artifacts/session-summary.json"
+    ],
+    "preserved_byte_for_byte": "solver/solver.c, solver/rejected/symmetry_breaker_iter1.c, both oracle modules, benchmarks/ (3 files) and all 86 pre-existing files under artifacts/runs, including the 9 each of runs 418e67a9 and ff52f29c: 93 SHA-256 hashes taken before any edit all match after the smoke",
+    "file_sha256_at_smoke": {
+      "benchmarks/no_isosceles_n32.json": "9bebfc52de362e80efc91d5455f2e20a103e766f191af8f665ee276907feb509",
+      "benchmarks/upstream/PROVENANCE.json": "f959a6a364c807b3e4f1bad76c38df85d58dcfaddb2adf011c7d15583993af6f",
+      "benchmarks/upstream/verify_construction.py.txt": "226370ddce5130a4e247ac1b1718bb4b120218d231507b1249137fd10e4eceaf",
+      "docs/P1_SYMMETRY_BREAKING_PLAN.md": "81c9b2ea2c3574a2db30983aa84d40456412f7c683c64b803f8564a10afa776a",
+      "experiment/manifest.json": "32c853693af605270b730be7cc507bccb2f5fa0f054672516843661ff4abd676",
+      "project.yaml": "ef5a4edeb2fde7a0ef6c332c01aca379750c97b8f6698e0c4bc11681e67ef9ad",
+      "solver/solver.c": "ab141274701608a6841eed4f98c0ddf12e8135baeb4de2227b0b41b4758d471c",
+      "solver/symmetry_breaker.c": "ee9ee3e516d9a691af3b22e3e05d1e8f7d74ae0ff9ac902d0b382e81b45a19dc",
+      "src/tripathy_experiment/baseline.py": "df0da847bc1184b34912fce2ec8ae0cd739f0060adbd8dcb6db54712b2e738d4",
+      "src/tripathy_experiment/cli.py": "1b2d01fe4e332cf29e506d6cab44c435699b8c6ca00d29c405fa8fb21a16edbc",
+      "src/tripathy_experiment/no_isosceles.py": "4843790a2b7aa64502d4f580f356412f1d1e9247a260ce28377b1f3708ebf1ae",
+      "src/tripathy_experiment/perpendicular_bisector_oracle.py": "c8c8dc944d924267ce62acb9ec2eca448bad277baed88b33103d8242efb2113f",
+      "src/tripathy_experiment/symmetry_breaking.py": "50cb7be1193367ce20a16d18c17ccc8f204f97c9cd5d89aa589bdb040ab52fae"
+    },
+    "breaker_binary_sha256": "5285c0430fe3f47b44001641b6867f8c2e8fdbb39314bbd0634d64ad8bcfce86",
+    "checks": [
+      {
+        "command": ".venv/bin/python -m pytest -q",
+        "outcome": "38 passed"
+      },
+      {
+        "command": ".venv/bin/python -m ruff check .",
+        "outcome": "All checks passed"
+      },
+      {
+        "command": ".venv/bin/python -m mypy",
+        "outcome": "no issues in 11 source files"
+      },
+      {
+        "command": ".venv/bin/python -m tripathy_experiment.cli validate",
+        "outcome": "valid, exit 0"
+      },
+      {
+        "command": "cc -O2 -std=c99 -Wall -Wextra -Werror -o build/symmetry_breaker solver/symmetry_breaker.c",
+        "outcome": "exit 0, no warnings"
+      },
+      {
+        "command": "./build/symmetry_breaker --seed 2201 --iters 30000 --target 59 --repair-nodes 200000 --destroy-size 8 < published 58 (twice) and cmp",
+        "outcome": "byte-identical"
+      },
+      {
+        "command": ".venv/bin/python -m tripathy_experiment.cli p1-smoke --parent-run bb6b15b0-c0b9-426f-a67d-464cdce1a551 --seeds 1200-1207 --iters 200000 --repair-nodes 200000 --destroy-size 8 --workers 8 --artifact-dir artifacts/runs",
+        "outcome": "exit 0, infrastructure gate passed, search_progress no_progress; run once"
+      }
+    ],
+    "post_smoke_audit": "All 8 child artifacts were reloaded in a fresh process: both local oracles and the pinned upstream verify_construction accept every emitted set (each is the unchanged 58-point source); both oracles reject every 59-point closest-approach state and an independent recount equals the claimed 2 in all 8; every child records destroy_size 8 in its command, echo and counters; repair attempts equal restarts + 1 in all 8; 0 failures, 0 oracle disagreements; seed 1200 replayed to an identical stdout hash.",
+    "development_disclosure": "Before the smoke, one off-smoke determinism pair (seed 2201, 30000 swaps, destroy size 8, published 58 as stdin) checked the build, timing and replay, plus small 3-point inputs in the tests. Its output already showed pools of 8 or 9 cells and depth 8. Nothing was changed in response: destroy size, node cap, schedule and seeds are exactly as preregistered.",
+    "limits_of_the_evidence": "Completeness of the depth-first enumeration rests on code reading and the solver's internal invariant checks, not on an independent enumerator; the controller cannot re-derive the destroyed bases from the output, so 'exhausted' is the solver's own report."
+  }
 }

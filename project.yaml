@@ -21,14 +21,26 @@ experiment:
     - Exa
     - past.dev
     - Modal
-  phase: P0 reproducibility gate
-  trial_definition: one from-scratch seeded solver invocation
-  baseline_seeds: 0..63
-  iteration_budget: 1000000
-  external_target: public 58-point certificate, never used as solver initialization
+  phase: P1 local symmetry-breaking development closed by preregistered stop rule
+  trial_definition: one seeded symmetry-breaker invocation on one dual-verified P0 candidate
+  development_seeds:
+    - 1000..1007
+    - 1100..1107
+    - 1200..1207
+  reserved_confirmatory_seeds: 64..127 (untouched)
+  external_target: public 58-point certificate; target 59 not reached
+  best_dual_verified_score: 58
   p0_cost_usd: 0.0
+  p1_cost_usd: 0.0
   dual_verification_gate: distance oracle and perpendicular-bisector oracle must both accept
-  stop_condition: one 64-trial gate; stop on oracle disagreement, replay failure, or 0 of 64 reaching 58
+  operator_family: single-point swaps plus bounded destroy/exact-repair from a P0 58
+  operator_family_status: stopped after three negative development iterations
+  evidence_runs:
+    - 418e67a9-dca8-4d0d-ac3d-1b5355bf6a45
+    - ff52f29c-b4e5-4620-993d-5236b324991e
+    - e46d5be6-98e0-43ae-848b-3a439246c249
+  stop_condition: met; no verified 59 and minimum working violations remained 2
   git:
-    head: cc69b3953b8c5f29580bc903c1fc9373a28f94d2
+    base_head: 29147943bd20726ee2dcd3237edeb4e297f748bf
     dirty: true
+    note: P1 evidence is pending the user-authorized commit and push

@@ -18,6 +18,7 @@ from .model import ExperimentManifest, ValidationError
 from .no_isosceles import Candidate, greedy_seed, load_public_baseline, verify
 from .runner import ExperimentRunner, run_evohive
 from .swarm import SwarmConfig
+from .symmetry_breaking import run_smoke
 
 
 def load_manifest(path: Path) -> ExperimentManifest:
@@ -57,11 +58,16 @@ def verify_benchmark(path: Path | None) -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="EvoHive verification-first autoresearch runner")
-    parser.add_argument("command", choices=("validate", "run", "verify", "baseline"))
+    parser.add_argument("command", choices=("validate", "run", "verify", "baseline", "p1-smoke")
+    )
     parser.add_argument("benchmark", nargs="?", type=Path, help="benchmark JSON for verify")
     parser.add_argument("--seeds", default="0-63", help="baseline seeds, e.g. 0-63")
     parser.add_argument("--iters", type=int, help="baseline: fixed ruin/repair iterations")
     parser.add_argument("--workers", type=int, default=8)
+    parser.add_argument("--parent-run", help="p1-smoke: run ID of the passed P0 baseline")
+    parser.add_argument("--target", type=int, default=59, help="p1-smoke: target cardinality")
+    parser.add_argument("--repair-nodes", type=int, help="p1-smoke: exact-repair node cap")
+    parser.add_argument("--destroy-size", type=int, help="p1-smoke: points removed per repair")
     parser.add_argument("--timeout-seconds", type=float, default=600.0)
     parser.add_argument("--gate-label", choices=("reproduction", "screening"), default=None)
     parser.add_argument("--manifest", type=Path, default=Path("experiment/manifest.json"))
@@ -106,6 +112,38 @@ def main() -> int:
                 "oracle_disagreements", "wall_seconds", "cost_usd",
             )
             report = {key: summary.get(key, summary["config"].get(key)) for key in keys}
+            print(json.dumps({**report, "artifact": str(summary_path)}, sort_keys=True))
+            return 2 if summary["gate_status"] == "infrastructure_failure" else 0
+
+        if args.command == "p1-smoke":
+            manifest.validate()
+            required = (args.iters, args.parent_run, args.repair_nodes, args.destroy_size)
+            if any(value is None for value in required):
+                raise ValidationError(
+                    "p1-smoke requires --parent-run, --iters, --repair-nodes and --destroy-size"
+                )
+            summary, summary_path = run_smoke(
+                parent_run_id=args.parent_run,
+                seeds=parse_seeds(args.seeds),
+                iters=args.iters,
+                workers=args.workers,
+                artifact_dir=args.artifact_dir,
+                timeout_seconds=args.timeout_seconds,
+                linear_issue=manifest.linear_issue,
+                experiment_id=manifest.experiment_id,
+                target=args.target,
+                repair_nodes=args.repair_nodes,
+                destroy_size=args.destroy_size,
+            )
+            smoke_keys = (
+                "run_id", "gate_status", "search_outcome", "search_progress", "repair",
+                "best_state_origin_by_seed", "trials", "score_counts",
+                "failure_counts", "best_score", "verified_target_count",
+                "min_working_violations", "min_working_violations_by_seed",
+                "oracle_disagreements", "determinism_replay", "wall_seconds",
+                "cpu_seconds_total", "cost_usd", "record_claim",
+            )
+            report = {key: summary[key] for key in smoke_keys}
             print(json.dumps({**report, "artifact": str(summary_path)}, sort_keys=True))
             return 2 if summary["gate_status"] == "infrastructure_failure" else 0
 
